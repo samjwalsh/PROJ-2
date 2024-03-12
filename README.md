@@ -2,3 +2,4 @@
 
 List of members:
 Sam Walsh
+Ciara O'Brien
