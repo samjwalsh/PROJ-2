@@ -3,4 +3,4 @@
 List of members:
 Sam Walsh
 Ciara O'Brien
-Mitchell Ashmore
+
