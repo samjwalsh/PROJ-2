@@ -5,3 +5,4 @@ List of members:
 - Ciara O'Brien
 - Ciara Quinn
 - Mitchell Ashmore
+- Michael Murphy
