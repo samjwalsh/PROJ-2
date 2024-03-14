@@ -52,7 +52,7 @@ class DataPoint {
     this.schedArrTime = schedArrTime;
     this.arrTime = arrTime;
     this.cancelled = cancelled;
-    this.diverted = diverted;
+    this.delayed = diverted;
     this.distance = distance;
   }
   String getFlightDate () {
@@ -109,6 +109,21 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
+   void printAllData(String dataString){
+    System.out.println(dataString);
+  }
+  
+  void stringToText(String dataString){
+    PFont font;
+    font = createFont("AppleSDGothicNeo-Medium-18", 128);
+    textFont(font);
+    size(400, 400);
+    textSize(18);
+    text(dataString, 40, 120); 
+  }
+}
+
+
 
   String toString() {
     String longString = "";
