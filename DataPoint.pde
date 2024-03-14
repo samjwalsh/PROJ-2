@@ -109,6 +109,7 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
+  
    void printAllData(String dataString){
     System.out.println(dataString);
   }
