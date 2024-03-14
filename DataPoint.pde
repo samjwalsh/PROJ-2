@@ -1,3 +1,5 @@
+// S. Walsh, Created class for storing flight information, 13:00, 14/03/2024
+
 class DataPoint {
   String flightDate;
   String airlineCode;
