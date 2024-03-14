@@ -10,10 +10,10 @@ class DataPoint {
   String destCity;
   String destState;
   int destWAC;
-  String schedDeptTime;
-  String deptTime;
-  String schedArrTime;
-  String arrTime;
+  int schedDeptTime;
+  int deptTime;
+  int schedArrTime;
+  int arrTime;
   boolean cancelled;
   boolean diverted;
   int distance;
@@ -28,10 +28,10 @@ class DataPoint {
     String destCity,
     String destState,
     int destWAC,
-    String schedDeptTime,
-    String deptTime,
-    String schedArrTime,
-    String arrTime,
+    int schedDeptTime,
+    int deptTime,
+    int schedArrTime,
+    int arrTime,
     boolean cancelled,
     boolean diverted,
     int distance) {
@@ -51,7 +51,7 @@ class DataPoint {
     this.schedArrTime = schedArrTime;
     this.arrTime = arrTime;
     this.cancelled = cancelled;
-    this.delayed = diverted;
+    this.diverted = diverted;
     this.distance = distance;
   }
   String getFlightDate () {
@@ -87,23 +87,23 @@ class DataPoint {
   int getDestWAC () {
     return destWAC;
   }
-  String getSchedDeptTime () {
+  int getSchedDeptTime () {
     return schedDeptTime;
   }
-  String getDeptTime () {
+  int getDeptTime () {
     return deptTime;
   }
-  String getSchedArrTime () {
+  int getSchedArrTime () {
     return schedArrTime;
   }
-  String getArrTime () {
+  int getArrTime () {
     return arrTime;
   }
   boolean getCancelled () {
     return cancelled;
   }
-  boolean getDelayed () {
-    return delayed;
+  boolean getDiverted () {
+    return diverted;
   }
   int getDistance () {
     return distance;

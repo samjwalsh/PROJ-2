@@ -20,7 +20,6 @@ class DataReader {
         }
       }
     }
-    println(data[0]);
     return filteredData;
   }
 
@@ -29,32 +28,33 @@ class DataReader {
     for (int valIndex = 0; valIndex < data.length; valIndex++) {
       println(data[valIndex]);
     }
-  // String flightDate = data[0].split;
-
-  String airlineCode;
-  int flightNum;
-  String originAirport;
-  String originCity;
-  String originState;
-  int originWAC;
-  String destAirport;
-  String destCity;
-  String destState;
-  int destWAC;
-  int schedDeptTime;
-  int deptTime;
-  int schedArrTime;
-  int arrTime;
-  boolean cancelled;
-  boolean delayed;
-  int distance;
+    String flightDate = null;
+    
+    String airlineCode;
+    int flightNum;
+    String originAirport;
+    String originCity;
+    String originState;
+    int originWAC;
+    String destAirport;
+    String destCity;
+    String destState;
+    int destWAC;
+    String schedDeptTime;
+    String deptTime;
+    String schedArrTime;
+    String arrTime;
+    boolean cancelled;
+    boolean delayed;
+    int distance;
     return new DataPoint( "test",
       "test",
       7, "test", "test",
       "test", 7,
       "test", "test",
       "test", 7,
-      7,7,7,7, false,
+      "test", "test",
+      "test", "test", false,
       false, 7);
   }
 
