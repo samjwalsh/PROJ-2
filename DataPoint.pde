@@ -108,4 +108,17 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
+
+  String toLongString(String flightDate, String airlineCode, int flightNum, String originAirport, String originCity, 
+    String originState, int originWAC, String destAirport, String destCity, String destState, int destWAC, String schedDeptTime, 
+    String deptTime, String schedArrTime, String arrTime, boolean cancelled, boolean delayed, int distance)
+  {
+    String longString = "";
+    longString = "Flight Date: "+flightDate+", Airline: "+airlineCode+", Flight Number"+String.valueOf(flightNum)+
+    "\nOrigin Airport: "+originAirport+", Origin City: "+originCity+", Origin State"+originState+", Origin WAC: "+
+    String.valueOf(originWAC)+"\nDestination Airport: "+destAirport+", Destination City:"+destCity+", Destination State:"+
+    destState+", Destination WAC:"+String.valueOf(destWAC)+"\nScheduled Departure Time:" + schedDeptTim+", Departure Time: "+ 
+    deptTime+", Scheduled Arrival: "+schedArrTime+", Arrival Time: "+arrTime+"\nFlight Cancelled: "+
+    cancelled+ ", Flight Delayed: "+delayed+", Flight Distance"+String.valueOf(distance)+"\n";
+
 }
