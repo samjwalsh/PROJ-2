@@ -20,7 +20,6 @@ class DataReader {
         }
       }
     }
-    println(data[0]);
     return filteredData;
   }
 
