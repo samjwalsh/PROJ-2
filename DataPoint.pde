@@ -15,7 +15,7 @@ class DataPoint {
   String schedArrTime;
   String arrTime;
   boolean cancelled;
-  boolean delayed;
+  boolean diverted;
   int distance;
   DataPoint(  String flightDate,
     String airlineCode,
@@ -33,7 +33,7 @@ class DataPoint {
     String schedArrTime,
     String arrTime,
     boolean cancelled,
-    boolean delayed,
+    boolean diverted,
     int distance) {
     this.flightDate = flightDate;
     this.airlineCode = airlineCode;
@@ -51,7 +51,7 @@ class DataPoint {
     this.schedArrTime = schedArrTime;
     this.arrTime = arrTime;
     this.cancelled = cancelled;
-    this.delayed = delayed;
+    this.delayed = diverted;
     this.distance = distance;
   }
   String getFlightDate () {
