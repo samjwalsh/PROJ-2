@@ -4,13 +4,13 @@ class DataReader {
   DataReader(String filePath) {
     String[] data = loadStrings(filePath);
     for (int line = 0; line < data.length; line++) {
-      println(data[line]);
+      //println(data[line]);
     }
   }
   ArrayList<DataPoint> filterData(String queryName) {
-    ArrayList<DataPoint> filteredData;
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
     // Add and remove an item from the ArrayList to initialise it
-    filteredData.add(new DataPoint());
+    // filteredData.add(new DataPoint());
     switch (queryName) {
       default: {
         break;
@@ -19,7 +19,7 @@ class DataReader {
     return filteredData;
   }
   
-  DataPoint lineToDP(String line) {
+  //DataPoint lineToDP(String line) {
     
-  }
+  //}
 }
