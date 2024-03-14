@@ -1,11 +1,14 @@
 boolean isMenu = true, isFlightInfo = false;
 PImage map;
+PImage backgroundimage;
 
 void setup() {
   noStroke();
   rectMode(CENTER);
   size(2360/4, 1640/4);
   map = loadImage("map.png");
+  backgroundimage =  loadImage("background2.png");
+  backgroundimage.resize(2360/4, 1640/4);
 }
 
 void draw() {
@@ -18,7 +21,9 @@ void draw() {
 
 
 void menuScreen() {
-  background(#F0BDEF);
+  //background(#F0BDEF);
+ //C. O'Brien, Added Background Image, 11:40, 14/3/2024.
+  background(backgroundimage);
   fill(#C6C6C6);
   rect(100, 300, 100, 50);
   fill(255);
