@@ -1,9 +1,11 @@
 boolean isMenu = true, isFlightInfo = false;
+PImage map;
 
 void setup() {
   noStroke();
   rectMode(CENTER);
   size(2360/4, 1640/4);
+  map = loadImage("map.png");
 }
 
 void draw() {
@@ -31,6 +33,31 @@ void flightInfoScreen() {
   fill(255);
   textSize(10);
   text("Back to menu", 40, 370);
+  fill(#88CBED);
+  rect(410,127,320,195);
+  image(map, 250, 30,320,200);
+  
+  //JFK
+  drawPin(539,92);
+  //LAX
+  drawPin(259,104);
+  //ORD
+  drawPin(458,102);
+  //SEA
+  drawPin(282,45);
+  //FLL
+  drawPin(515,189);
+  //HNL
+  drawPin(338,192);
+  //DCA
+  drawPin(520,117);
+}
+
+void drawPin(int x, int y){
+  fill(0);
+  triangle(x,y,x+3,y-15,x-3,y-15);
+  fill(255,0,0);
+  ellipse(x,y-15,10,10);
 }
 
 void mousePressed() {
