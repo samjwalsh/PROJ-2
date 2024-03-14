@@ -1,7 +1,7 @@
 boolean isMenu = true, isFlightInfo = false;
 PImage map;
 PImage backgroundimage;
-String destination = "";
+String destination = "Select destination";
 
 void setup() {
   noStroke();
