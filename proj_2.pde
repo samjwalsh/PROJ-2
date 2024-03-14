@@ -13,4 +13,11 @@ void draw() {
     dataPoint.printAllData(longString);
     dataPoint.stringToText(longString);
     print(dataPoint.getFlightDate());
+    
+    
+    
+    
+    
+    
+    
 }

@@ -1,4 +1,5 @@
 // toString created by Ben and Michael
+// Ben Bryce, Created function to convert String to print, and another to do string to text to output, 10:00, 14/03/2024
 class DataPoint {
   String flightDate;
   String airlineCode;
@@ -109,13 +110,13 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
-   // Ben Bryce, Created function to convert String to print to output, 10:00, 14/03/2024
+   
    void printAllData(String dataString){
     System.out.println(dataString);
   }
   
   
-  // Ben Bryce, Created function to convert String to text, 10:30, 14/03/2024
+
   void stringToText(String dataString){
     PFont font;
     font = createFont("AppleSDGothicNeo-Medium-18", 128);
