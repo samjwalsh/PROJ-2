@@ -27,41 +27,41 @@ class DataReader {
   DataPoint lineToDP(String line) {
     String[] data = line.split(",");
     for (int valIndex = 0; valIndex < data.length; valIndex++) {
-      println(data[valIndex]);
+      //println(data[valIndex]);
     }
-  // String flightDate = data[0].split;
+    // String flightDate = data[0].split;
 
-  String airlineCode;
-  int flightNum;
-  String originAirport;
-  String originCity;
-  String originState;
-  int originWAC;
-  String destAirport;
-  String destCity;
-  String destState;
-  int destWAC;
-  int schedDeptTime;
-  int deptTime;
-  int schedArrTime;
-  int arrTime;
-  boolean cancelled;
-  boolean delayed;
-  int distance;
+    String airlineCode;
+    int flightNum;
+    String originAirport;
+    String originCity;
+    String originState;
+    int originWAC;
+    String destAirport;
+    String destCity;
+    String destState;
+    int destWAC;
+    int schedDeptTime;
+    int deptTime;
+    int schedArrTime;
+    int arrTime;
+    boolean cancelled;
+    boolean delayed;
+    int distance;
     return new DataPoint( "test",
       "test",
       7, "test", "test",
       "test", 7,
       "test", "test",
       "test", 7,
-      7,7,7,7, false,
+      7, 7, 7, 7, false,
       false, 7);
   }
 
-  void printData(String[] data) {
-    for (int lineIndex = 0; lineIndex < data.length; lineIndex++) {
-      String line = data[lineIndex];
-      println(line);
-    }
-  }
+  //void printData(String[] data) {
+  //  for (int lineIndex = 0; lineIndex < data.length; lineIndex++) {
+  //    String line = data[lineIndex];
+  //    println(line);
+  //}
+  //}
 }

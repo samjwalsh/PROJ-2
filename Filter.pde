@@ -1,5 +1,5 @@
+// Mitchell Ashmore created the Filter class, Thursday 14/3/2024, 9:00-11:00
 class Filter {
-
   boolean isCancelled(DataPoint dataPoint) {
     if (dataPoint.getCancelled() == true) {
       return true;
