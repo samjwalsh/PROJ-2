@@ -66,10 +66,10 @@ class DataReader {
       distance);
   }
 
-  void printData(String[] data) {
-    for (int lineIndex = 0; lineIndex < data.length; lineIndex++) {
-      String line = data[lineIndex];
-      println(line);
-    }
-  }
+  //void printData(String[] data) {
+  //  for (int lineIndex = 0; lineIndex < data.length; lineIndex++) {
+  //    String line = data[lineIndex];
+  //    println(line);
+  //}
+  //}
 }
