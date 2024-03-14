@@ -9,8 +9,8 @@ void setup() {
 
 void draw() {
     rect(50,50,50,50);    
-    //String longString = dataPoint.toString();
-    //print(longString);
-    
-    //print(dataPoint.getFlightDate());
+    String longString = dataPoint.toString();
+    dataPoint.printAllData(longString);
+    dataPoint.stringToText(longString);
+    print(dataPoint.getFlightDate());
 }

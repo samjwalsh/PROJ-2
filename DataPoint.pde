@@ -52,7 +52,7 @@ class DataPoint {
     this.schedArrTime = schedArrTime;
     this.arrTime = arrTime;
     this.cancelled = cancelled;
-    this.delayed = diverted;
+    this.diverted = diverted;
     this.distance = distance;
   }
   String getFlightDate () {
@@ -109,20 +109,22 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
-  
+   // Ben Bryce, Created function to convert String to print to output, 10:00, 14/03/2024
    void printAllData(String dataString){
     System.out.println(dataString);
   }
   
+  
+  // Ben Bryce, Created function to convert String to text, 10:30, 14/03/2024
   void stringToText(String dataString){
     PFont font;
     font = createFont("AppleSDGothicNeo-Medium-18", 128);
     textFont(font);
-    size(400, 400);
-    textSize(18);
+    //size(100, 100);
+    textSize(15);
     text(dataString, 40, 120); 
   }
-}
+
 
 
 
@@ -136,5 +138,5 @@ class DataPoint {
     "\nFlight Cancelled: "+cancelled+ ", Flight Diverted: "+diverted+", Flight Distance: "+String.valueOf(distance)+"\n";
     return longString;
   }
-
+  
 }
