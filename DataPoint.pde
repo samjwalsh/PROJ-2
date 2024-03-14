@@ -12,10 +12,10 @@ class DataPoint {
   String destCity;
   String destState;
   int destWAC;
-  String schedDeptTime;
-  String deptTime;
-  String schedArrTime;
-  String arrTime;
+  int schedDeptTime;
+  int deptTime;
+  int schedArrTime;
+  int arrTime;
   boolean cancelled;
   boolean diverted;
   int distance;
@@ -30,10 +30,10 @@ class DataPoint {
     String destCity,
     String destState,
     int destWAC,
-    String schedDeptTime,
-    String deptTime,
-    String schedArrTime,
-    String arrTime,
+    int schedDeptTime,
+    int deptTime,
+    int schedArrTime,
+    int arrTime,
     boolean cancelled,
     boolean diverted,
     int distance) {
@@ -89,16 +89,16 @@ class DataPoint {
   int getDestWAC () {
     return destWAC;
   }
-  String getSchedDeptTime () {
+  int getSchedDeptTime () {
     return schedDeptTime;
   }
-  String getDeptTime () {
+  int getDeptTime () {
     return deptTime;
   }
-  String getSchedArrTime () {
+  int getSchedArrTime () {
     return schedArrTime;
   }
-  String getArrTime () {
+  int getArrTime () {
     return arrTime;
   }
   boolean getCancelled () {

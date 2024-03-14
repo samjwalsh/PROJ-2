@@ -1,4 +1,5 @@
 DataPoint dataPoint;
+Filter newFilter;
 void setup() {
     size(800,600);
     DataReader dataReader = new DataReader("flights2k.csv");
