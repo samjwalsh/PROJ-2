@@ -4,8 +4,7 @@ PImage map;
 PImage backgroundimage;
 String destination = "Select destination", selectedFilters = "";
 StringList filters;
-int destinationWeight = 0;
-int originWeight = 0;
+int destinationWeight = 0,originWeight = 0,airlineWeight = 0;
 
 void setup() {
   filters = new StringList();
@@ -70,6 +69,7 @@ void flightInfoScreen() {
   text("Back to menu", 70, 370);
   drawFilterButton(100, 100, "Origin",originWeight);
   drawFilterButton(250, 100, "Destination",destinationWeight);
+  drawFilterButton(400, 100, "Airline",airlineWeight);
 }
 
 void drawPin(int x, int y) {
@@ -116,23 +116,34 @@ void mousePressed() {
   //origin filter
   if (isFlightInfo && (selectedFilters.indexOf("origin")<0)&&(mouseX>(100-50) && mouseX<(100+50) &&
     mouseY>(100-25) && mouseY<(100+25))) {
-    selectedFilters +="origin ";
+    selectedFilters +="origin, ";
     originWeight = 4;
   } else if (isFlightInfo && (selectedFilters.indexOf("origin")>=0)&&(mouseX>(100-50) && mouseX<(100+50) &&
     mouseY>(100-25) && mouseY<(100+25))) {
-    selectedFilters =selectedFilters.replace("origin ", "");
+    selectedFilters =selectedFilters.replace("origin, ", "");
     originWeight = 0;
   }
   
   //destination filter
   if (isFlightInfo && (selectedFilters.indexOf("destination")<0)&&(mouseX>(250-50) && mouseX<(250+50) &&
     mouseY>(100-25) && mouseY<(100+25))) {
-    selectedFilters +="destination ";
+    selectedFilters +="destination, ";
     destinationWeight = 4;
   } else if (isFlightInfo && (selectedFilters.indexOf("destination")>=0)&&(mouseX>(250-50) && mouseX<(250+50) &&
     mouseY>(100-25) && mouseY<(100+25))) {
-    selectedFilters = selectedFilters.replace("destination ", "");
+    selectedFilters = selectedFilters.replace("destination, ", "");
     destinationWeight = 0;
+  }
+  
+  //airline filter
+  if (isFlightInfo && (selectedFilters.indexOf("airline")<0)&&(mouseX>(400-50) && mouseX<(400+50) &&
+    mouseY>(100-25) && mouseY<(100+25))) {
+    selectedFilters +="airline, ";
+    airlineWeight = 4;
+  } else if (isFlightInfo && (selectedFilters.indexOf("airline")>=0)&&(mouseX>(400-50) && mouseX<(400+50) &&
+    mouseY>(100-25) && mouseY<(100+25))) {
+    selectedFilters = selectedFilters.replace("airline, ", "");
+    airlineWeight = 0;
   }
 }
 // C. Quinn, added function to draw map and pins, 1pm, 15/03/2024
