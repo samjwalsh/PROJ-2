@@ -52,7 +52,7 @@ class DataPoint {
     this.schedArrTime = schedArrTime;
     this.arrTime = arrTime;
     this.cancelled = cancelled;
-    this.delayed = diverted;
+    this.diverted = diverted;
     this.distance = distance;
   }
   String getFlightDate () {
@@ -121,7 +121,7 @@ class DataPoint {
     textSize(18);
     text(dataString, 40, 120); 
   }
-}
+  
 
 
 
