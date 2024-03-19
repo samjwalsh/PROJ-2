@@ -1,4 +1,5 @@
 // toString created by Ben and Michael
+// Ben Bryce, Created function to convert String to print, and another to do string to text to output, 10:00, 14/03/2024
 class DataPoint {
   String flightDate;
   String airlineCode;
@@ -11,10 +12,10 @@ class DataPoint {
   String destCity;
   String destState;
   int destWAC;
-  String schedDeptTime;
-  String deptTime;
-  String schedArrTime;
-  String arrTime;
+  int schedDeptTime;
+  int deptTime;
+  int schedArrTime;
+  int arrTime;
   boolean cancelled;
   boolean diverted;
   int distance;
@@ -29,10 +30,10 @@ class DataPoint {
     String destCity,
     String destState,
     int destWAC,
-    String schedDeptTime,
-    String deptTime,
-    String schedArrTime,
-    String arrTime,
+    int schedDeptTime,
+    int deptTime,
+    int schedArrTime,
+    int arrTime,
     boolean cancelled,
     boolean diverted,
     int distance) {
@@ -52,6 +53,7 @@ class DataPoint {
     this.schedArrTime = schedArrTime;
     this.arrTime = arrTime;
     this.cancelled = cancelled;
+    this.diverted = diverted;
     this.diverted = diverted;
     this.distance = distance;
   }
@@ -88,16 +90,16 @@ class DataPoint {
   int getDestWAC () {
     return destWAC;
   }
-  String getSchedDeptTime () {
+  int getSchedDeptTime () {
     return schedDeptTime;
   }
-  String getDeptTime () {
+  int getDeptTime () {
     return deptTime;
   }
-  String getSchedArrTime () {
+  int getSchedArrTime () {
     return schedArrTime;
   }
-  String getArrTime () {
+  int getArrTime () {
     return arrTime;
   }
   boolean getCancelled () {
@@ -109,17 +111,22 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
+   
    void printAllData(String dataString){
     System.out.println(dataString);
   }
   
+  
+
   void stringToText(String dataString){
     PFont font;
     font = createFont("AppleSDGothicNeo-Medium-18", 128);
     textFont(font);
-    size(400, 400);
-    textSize(18);
+    //size(100, 100);
+    textSize(15);
     text(dataString, 40, 120); 
+  }
+
   }
   
 
@@ -135,5 +142,5 @@ class DataPoint {
     "\nFlight Cancelled: "+cancelled+ ", Flight Diverted: "+diverted+", Flight Distance: "+String.valueOf(distance)+"\n";
     return longString;
   }
-
+  
 }

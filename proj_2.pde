@@ -1,4 +1,5 @@
 DataPoint dataPoint;
+Filter newFilter;
 void setup() {
     size(800,600);
     DataReader dataReader = new DataReader("flights2k.csv");
@@ -9,8 +10,15 @@ void setup() {
 
 void draw() {
     rect(50,50,50,50);    
-    //String longString = dataPoint.toString();
-    //print(longString);
+    String longString = dataPoint.toString();
+    dataPoint.printAllData(longString);
+    dataPoint.stringToText(longString);
+    print(dataPoint.getFlightDate());
     
-    //print(dataPoint.getFlightDate());
+    
+    
+    
+    
+    
+    
 }
