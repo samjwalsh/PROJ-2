@@ -7,20 +7,12 @@ class DataReader {
     //printData(data);
   }
 
-  ArrayList<DataPoint> filterData(String queryName) {
-    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
-
-    for (int currDPIndex = 1; currDPIndex < data.length; currDPIndex++) {
-      String currDP = data[currDPIndex];
-      switch (queryName) {
-      default:
-        {
-          filteredData.add(lineToDP(currDP));
-          break;
-        }
-      }
+  ArrayList<DataPoint> readFile() {
+    ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
+    for (String currDP : data) {
+      dataList.add(lineToDP(currDP));
     }
-    return filteredData;
+    return dataList;
   }
 
   DataPoint lineToDP(String line) {

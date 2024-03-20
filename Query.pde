@@ -27,6 +27,8 @@ class Query {
     this.WN = WN;
   }
   void marketShare(DataPoint dataPoint) {
+    
+    
     if (dataPoint.getAirlineCode() == "AA") {
       AA++;
     }
@@ -68,4 +70,4 @@ class Query {
     println(UA);
     println(WN);
   }
-}
+}}
