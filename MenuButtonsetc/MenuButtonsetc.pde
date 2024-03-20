@@ -1,5 +1,5 @@
 // C. Quinn, created processing sketch for UI, 10am, 14/03/2024
-boolean isMenu = true, isFlightInfo = false;
+boolean isMenu = true, isFlightInfo = false, isDropDown = false, isHideSelection = false;;
 PImage map;
 PImage backgroundimage;
 String destination = "Select destination", selectedFilters = "";
@@ -23,6 +23,21 @@ void draw() {
   } else if (isFlightInfo) {
     flightInfoScreen();
   }
+   if(isDropDown){
+      dropDownOnScreen();
+    }
+}
+void dropDownOnScreen() {
+  fill(#C6C6C6);
+  rect(50, 170, 100, 250);
+  fill(255);
+  rect(52, 172, 80, 230);
+  fill(0);
+   fill(#C6C6C6);
+  rect(50, 50, 100, 20);
+  fill(255);
+  textSize(10);
+  text("Hide selection", 20, 50);
 }
 
 
@@ -31,13 +46,14 @@ void menuScreen() {
   //C. O'Brien, Added Background Image, 11:40, 14/3/2024.
   background(backgroundimage);
 
+ //C. O'Brien, Moved Buttons, 21:10, 20/3/2024.
   fill(#C6C6C6);
-  rect(100, 300, 100, 50);
+  rect(190, 180, 100, 50);
   fill(255);
   textSize(10);
-  text("Press me for flight info!", 100, 300);
-  if (mouseX>(100-50) && mouseX<(100+50) &&
-    mouseY>(300-25) && mouseY<(300+25)) {
+  text("Press me for flight info!", 190, 180);
+  if (mouseX>(190-50) && mouseX<(190+50) &&
+    mouseY>(180-25) && mouseY<(180+25)) {
     strokeWeight(4);
     stroke(255);
   } else {
@@ -102,8 +118,8 @@ void drawFilterButton(int x, int y, String displayMessage,int weighting) {
 
 void mousePressed() {
   // C. Quinn, made buttons for screen, 11am, 14/03/2024
-  if (isMenu &&(mouseX>(100-50) && mouseX<(100+50) &&
-    mouseY>(300-25) && mouseY<(300+25))) {
+  if (isMenu &&(mouseX>(190-50) && mouseX<(190+50) &&
+    mouseY>(180-25) && mouseY<(180+25))) {
     isMenu = false;
     isFlightInfo = true;
   } else if (isFlightInfo && (mouseX>(70-50) && mouseX<(70+50) &&
@@ -111,6 +127,15 @@ void mousePressed() {
     isMenu = true;
     isFlightInfo = false;
   }
+  //C. O'Brien, made dropdown menu buttons, 12am, 18/3/2024.
+  if (isFlightInfo &&(mouseX>(100-50) && (mouseX<(100+50)&&
+    mouseY>(100-25) && mouseY<(100+25)))){
+      isDropDown=true;
+    }
+   if (isFlightInfo &&(mouseX>(50-50) && (mouseX<(50+50)&&
+    mouseY>(50-25) && mouseY<(50+25)))){
+      isDropDown=false;
+ }
   
   // C. Quinn, made filter buttons, 1pm, 15/03/2024
   //origin filter
