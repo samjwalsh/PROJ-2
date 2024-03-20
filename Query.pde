@@ -70,4 +70,14 @@ class Query {
     println(UA);
     println(WN);
   }
-}}
+}
+
+Table flightsByDoW (ArrayList<DataPoint> data) {
+    Table table = new Table();
+    table.addColumn("Day of Week");
+    table.addColumn("No. Flights");
+    
+    return table;
+}
+
+}
