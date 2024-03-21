@@ -1,5 +1,16 @@
 // S. Walsh, skeleton for bar chart class, 11:00, 21/03/2024
 
+// Table argument must be in following format
+/* 
+Day,Flights
+Mon,401
+Tue,339
+Wed,339
+Thu,191
+Fri,0
+Sat,336
+Sun,393
+*/
 class BarChart {
   int x;
   int y;
