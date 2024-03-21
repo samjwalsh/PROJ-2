@@ -73,3 +73,4 @@ class Filter {
     }
     return filteredData;
   }
+}
