@@ -5,16 +5,21 @@ class DataReader {
   Table csv;
   DataReader(String filePath) {
     data = loadStrings(filePath);
-    csv = loadTable(filePath);
+
+    csv = loadTable(filePath, "header" );
     //printData(data);
   }
 
   ArrayList<DataPoint> readFile() {
     ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
 
-    for (int rowIndex = 1; rowIndex < csv.getRowCount(); rowIndex++) {
+
+    for (int rowIndex = 0; rowIndex < csv.getRowCount(); rowIndex++) {
       TableRow row = csv.getRow(rowIndex);
-      dataList.add(rowToDP(row));
+      DataPoint newDP = rowToDP(row);
+      dataList.add(newDP);
+      println("\n");
+      println(newDP);
     }
 
 
@@ -28,7 +33,23 @@ class DataReader {
   DataPoint rowToDP(TableRow row) {
     String flightDate = row.getString("FL_DATE").split(" ")[0];
     String airlineCode = row.getString("MKT_CARRIER");
-
+    int flightNum = row.getInt("MKT_CARRIER_FL_NUM");
+    String originAirport = row.getString("ORIGIN");
+    String originCity = row.getString("ORIGIN_CITY_NAME").split(",")[0];
+    String originState = row.getString("ORIGIN_STATE_ABR");
+    int originWAC = row.getInt("ORIGIN_WAC");
+    String destAirport = row.getString("DEST");
+    String destCity = row.getString("DEST_CITY_NAME").split(",")[0];
+    String destState = row.getString("DEST_STATE_ABR");
+    int destWAC = row.getInt("DEST_WAC");
+    int schedDeptTime = row.getInt("CRS_DEP_TIME");
+    int deptTime = row.getInt("DEP_TIME");
+    int schedArrTime = row.getInt("CRS_ARR_TIME");
+    int arrTime = row.getInt("ARR_TIME");
+    boolean cancelled = row.getInt("CANCELLED") == 1 ? true : false;
+    boolean diverted = row.getInt("DIVERTED") == 1 ? true : false;
+    int distance = row.getInt("DISTANCE");
+    
     return new DataPoint(  flightDate,
       airlineCode,
       flightNum,

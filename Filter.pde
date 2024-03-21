@@ -1,46 +1,76 @@
 // Mitchell Ashmore created the Filter class, Thursday 14/3/2024, 9:00-11:00
+// S. Walsh modified filter class to accept DataPoint array lists as inputs and outputs 20/03/2024, 16:30
 class Filter {
-  boolean isCancelled(DataPoint dataPoint) {
-    if (dataPoint.getCancelled() == true) {
-      return true;
+
+  ArrayList<DataPoint> isCancelled(ArrayList<DataPoint> data) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (dataPoint.getCancelled() == true) {
+        filteredData.add(dataPoint);
+      }
     }
-    return false;
+    return filteredData;
   }
 
-  boolean distanceGreaterThan(DataPoint dataPoint, int distance) {
-    if (dataPoint.getDistance() >= distance) {
-      return true;
+  //ArrayList<DataPoint> FILTERNAME(ArrayList<DataPoint> data, EXTRAPARAMS) {
+  //  ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+  //  for (DataPoint dataPoint : data) {
+  //    if (CONDITION) {
+  //      filteredData.add(dataPoint);
+  //    }
+  //  }
+  //  return filteredData;
+  //}
+
+  ArrayList<DataPoint> distanceGreaterThan(ArrayList<DataPoint> data, int distance) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (dataPoint.getDistance() >= distance) {
+        filteredData.add(dataPoint);
+      }
     }
-    return false;
+    return filteredData;
   }
 
-  boolean isLateArrival(DataPoint dataPoint) {
-    int difference = dataPoint.getArrTime() - dataPoint.getSchedArrTime();
-    if (difference < 0) {
-      return true;      // true = delayed
+  ArrayList<DataPoint> isLateArrival(ArrayList<DataPoint> data) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      int difference = dataPoint.getArrTime() - dataPoint.getSchedArrTime();
+      if (difference < 0) {
+        filteredData.add(dataPoint);
+      }
     }
-    return false;       // false = early
+    return filteredData;
   }
 
-  boolean isLateLeaving(DataPoint dataPoint) {
-    int difference = dataPoint.getDeptTime() - dataPoint.getSchedDeptTime();
-    if (difference < 0) {
-      return false;    // false = early leaving
+  ArrayList<DataPoint> isLateLeaving(ArrayList<DataPoint> data) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      int difference = dataPoint.getDeptTime() - dataPoint.getSchedDeptTime();
+      if (difference < 0) {
+        filteredData.add(dataPoint);
+      }
     }
-    return true;       // true = late leaving
+    return filteredData;
   }
 
-  boolean isDiverted(DataPoint dataPoint) {
-    if (dataPoint.getDiverted() == true) {
-      return true;     // true = flight was diverted
+  ArrayList<DataPoint> isDiverted(ArrayList<DataPoint> data) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (dataPoint.getDiverted()) {
+        filteredData.add(dataPoint);
+      }
     }
-    return false;      // false = flight stayed on path
+    return filteredData;
   }
 
-  boolean isInternal(DataPoint dataPoint) {
-    if (dataPoint.getOriginState() == dataPoint.getDestState()) {
-      return true;        // true = internal state flight
+  ArrayList<DataPoint> isInternal(ArrayList<DataPoint> data) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (dataPoint.getOriginState() == dataPoint.getDestState()) {
+        filteredData.add(dataPoint);
+      }
     }
-    return false;         // false = state to state flight
+    return filteredData;
   }
 }
