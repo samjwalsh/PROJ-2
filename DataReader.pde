@@ -5,12 +5,14 @@ class DataReader {
   Table csv;
   DataReader(String filePath) {
     data = loadStrings(filePath);
+
     csv = loadTable(filePath, "header" );
     //printData(data);
   }
 
   ArrayList<DataPoint> readFile() {
     ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
+
 
     for (int rowIndex = 0; rowIndex < csv.getRowCount(); rowIndex++) {
       TableRow row = csv.getRow(rowIndex);
@@ -48,7 +50,6 @@ class DataReader {
     boolean diverted = row.getInt("DIVERTED") == 1 ? true : false;
     int distance = row.getInt("DISTANCE");
     
-
     return new DataPoint(  flightDate,
       airlineCode,
       flightNum,
