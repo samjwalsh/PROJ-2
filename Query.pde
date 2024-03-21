@@ -1,9 +1,6 @@
 // S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
 // Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
-//Make a query based off marketShare using " MKT_CARRIER "
-// Each MKT_CARRIER has a 2 digit abbreviation, find out abbreviation and match to carrier
-//Pie chart ?? showing this data
 
 class Query {
 
@@ -170,7 +167,7 @@ class Query {
 
     Table tableTwo = new Table();
     tableTwo.addColumn("Airline");
-    tableTwo.addColumn(" No. Flights ");
+    tableTwo.addColumn("No. Flights");
 
     TableRow AARow = tableTwo.addRow();
     AARow.setString("Airline", "American Airlines");

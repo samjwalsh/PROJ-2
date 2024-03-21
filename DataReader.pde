@@ -1,4 +1,5 @@
 // S. Walsh, Created class for reading data from .csv file, 15:30, 13/03/2024
+// S. Walsh, Edited class to make use of Processing's built in Table data type, 14:00, 21/03/2024
 
 class DataReader {
   String[] data;
