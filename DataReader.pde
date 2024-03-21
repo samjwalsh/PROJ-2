@@ -2,49 +2,33 @@
 
 class DataReader {
   String[] data;
+  Table csv;
   DataReader(String filePath) {
     data = loadStrings(filePath);
+    csv = loadTable(filePath);
     //printData(data);
   }
 
-  ArrayList<DataPoint> filterData(String queryName) {
-    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+  ArrayList<DataPoint> readFile() {
+    ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
 
-    for (int currDPIndex = 1; currDPIndex < data.length; currDPIndex++) {
-      String currDP = data[currDPIndex];
-      switch (queryName) {
-      default:
-        {
-          filteredData.add(lineToDP(currDP));
-          break;
-        }
-      }
+    for (int rowIndex = 1; rowIndex < csv.getRowCount(); rowIndex++) {
+      TableRow row = csv.getRow(rowIndex);
+      dataList.add(rowToDP(row));
     }
-    return filteredData;
+
+
+    //for (int dPIndex = 1; dPIndex < data.length ; dPIndex++ ) {
+    //  String currDP = data[dPIndex];
+    //  dataList.add(lineToDP(currDP));
+    //}
+    return dataList;
   }
 
-  DataPoint lineToDP(String line) {
-    String[] data = line.split(",");
-    for (int valIndex = 0; valIndex < data.length; valIndex++) {
-    }
-    String flightDate = data[0].split(" ")[0];
-    String airlineCode = data[1];
-    int flightNum = Integer.parseInt(data[2]);
-    String originAirport = data[3];
-    String originCity = data[4].substring(1);
-    String originState = data[6];
-    int originWAC = Integer.parseInt(data[7]);
-    String destAirport = data[8];
-    String destCity = data[9].substring(1);
-    String destState = data[11];
-    int destWAC = Integer.parseInt(data[12]);
-    int schedDeptTime = Integer.parseInt(data[13]);
-    int deptTime = data[14].length() > 0 ? Integer.parseInt(data[14]) : 2500;
-    int schedArrTime = Integer.parseInt(data[15]);
-    int arrTime = data[16].length() > 0 ? Integer.parseInt(data[16]) : 2500;
-    boolean cancelled = data[17] == "1" ? true : false;
-    boolean diverted = data[18] == "1" ? true : false;
-    int distance = Integer.parseInt(data[19]);
+  DataPoint rowToDP(TableRow row) {
+    String flightDate = row.getString("FL_DATE").split(" ")[0];
+    String airlineCode = row.getString("MKT_CARRIER");
+
     return new DataPoint(  flightDate,
       airlineCode,
       flightNum,
@@ -65,10 +49,46 @@ class DataReader {
       distance);
   }
 
-  //void printData(String[] data) {
-  //  for (int lineIndex = 0; lineIndex < data.length; lineIndex++) {
-  //    String line = data[lineIndex];
-  //    println(line);
-  //}
-  //}
+
+DataPoint lineToDP(String line) {
+  String[] data = line.split(",");
+  for (int valIndex = 0; valIndex < data.length; valIndex++) {
+  }
+  String flightDate = data[0].split(" ")[0];
+  String airlineCode = data[1];
+  int flightNum = Integer.parseInt(data[2]);
+  String originAirport = data[3];
+  String originCity = data[4].substring(1);
+  String originState = data[6];
+  int originWAC = Integer.parseInt(data[7]);
+  String destAirport = data[8];
+  String destCity = data[9].substring(1);
+  String destState = data[11];
+  int destWAC = Integer.parseInt(data[12]);
+  int schedDeptTime = Integer.parseInt(data[13]);
+  int deptTime = data[14].length() > 0 ? Integer.parseInt(data[14]) : 2500;
+  int schedArrTime = Integer.parseInt(data[15]);
+  int arrTime = data[16].length() > 0 ? Integer.parseInt(data[16]) : 2500;
+  boolean cancelled = data[17] == "1" ? true : false;
+  boolean diverted = data[18] == "1" ? true : false;
+  int distance = Integer.parseInt(data[19]);
+  return new DataPoint(  flightDate,
+    airlineCode,
+    flightNum,
+    originAirport,
+    originCity,
+    originState,
+    originWAC,
+    destAirport,
+    destCity,
+    destState,
+    destWAC,
+    schedDeptTime,
+    deptTime,
+    schedArrTime,
+    arrTime,
+    cancelled,
+    diverted,
+    distance);
+}
 }
