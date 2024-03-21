@@ -10,7 +10,7 @@ public GPointsArray samplePoints;
 Query query = new Query();
 Filter newFilter = new Filter();
 void setup() {
-    size(1000, 660);
+  size(1000, 660);
   DataReader dataReader = new DataReader("flights2k.csv");
   ArrayList<DataPoint> data = dataReader.readFile();
   println(data.size());
@@ -19,7 +19,9 @@ void setup() {
   data = newFilter.isLateLeaving(data);
   int[] flightDistances = query.flightDistances(data, airport);
   Table table = query.flightsByDoW(data);
+  Table tableTwo = query.marketShare(data);
   saveTable(table, "data/new.csv");
+  saveTable(tableTwo, "data/marketshare.csv");
 }
 
 void draw() {
