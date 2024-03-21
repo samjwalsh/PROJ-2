@@ -1,0 +1,21 @@
+// S. Walsh, skeleton for pie chart class, 11:00, 21/03/2024
+
+class PieChart {
+  int x;
+  int y;
+  int hWidth;
+  int hHeight;
+  int[] values;
+  int[] labels;
+  String chartTitle;
+  String xTitle;
+  String yTitle;
+  PieChart(int x, int y, int bWidth, int hHeight) {
+  }
+
+  void setData(Table table, String chartTitle) {
+  }
+  
+  void draw() {
+  }
+}
