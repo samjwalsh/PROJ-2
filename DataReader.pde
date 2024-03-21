@@ -7,6 +7,7 @@ class DataReader {
     //printData(data);
   }
 
+
   ArrayList<DataPoint> readFile() {
     ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
     for (int dPIndex = 1; dPIndex < data.length ; dPIndex++ ) {
