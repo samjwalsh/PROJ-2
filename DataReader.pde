@@ -18,8 +18,8 @@ class DataReader {
       TableRow row = csv.getRow(rowIndex);
       DataPoint newDP = rowToDP(row);
       dataList.add(newDP);
-      println("\n");
-      println(newDP);
+      //println("\n");
+      //println(newDP);
     }
 
 
