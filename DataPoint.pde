@@ -114,12 +114,6 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
-   
-   void printAllData(String dataString){
-    System.out.println(dataString);
-  }
-  
-  
 
   void stringToText(String dataString){
     PFont font;
@@ -130,17 +124,13 @@ class DataPoint {
     text(dataString, 40, 120); 
   }
 
-  }
-  
-
-
 
   String toString() {
     String longString = "";
-    longString = "Flight Date: "+flightDate+", Airline: "+airlineCode+", Flight Number`: "+
-    String.valueOf(flightNum)+"\nOrigin Airport: "+originAirport+", Origin City: "+originCity+", Origin State"+
-    originState+", Origin WAC: "+String.valueOf(originWAC)+"\nDestination Airport: "+destAirport+", Destination City:"+
-    destCity+", Destination State:"+destState+", Destination WAC:"+String.valueOf(destWAC)+"\nScheduled Departure Time:"+ 
+    longString = "Flight Date: "+flightDate+", Airline: "+airlineCode+", Flight Number: "+
+    String.valueOf(flightNum)+"\nOrigin Airport: "+originAirport+", Origin City: "+originCity+", Origin State: "+
+    originState+", Origin WAC: "+String.valueOf(originWAC)+"\nDestination Airport: "+destAirport+", Destination City: "+
+    destCity+", Destination State: "+destState+", Destination WAC: "+String.valueOf(destWAC)+"\nScheduled Departure Time: "+ 
     schedDeptTime+", Departure Time: "+deptTime+", Scheduled Arrival: "+schedArrTime+", Arrival Time: "+arrTime+
     "\nFlight Cancelled: "+cancelled+ ", Flight Diverted: "+diverted+", Flight Distance: "+String.valueOf(distance)+"\n";
     return longString;

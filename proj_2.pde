@@ -15,7 +15,7 @@ void setup() {
   println(data.size());
   //String airport = JOptionPane.showInputDialog("Enter Airport");
   String airport = "JFK";
-  data = newFilter.isLateLeaving(data);
+  //data = newFilter.isLateLeaving(data);
   int[] flightDistances = query.flightDistances(data, airport);
   Table table = query.flightsByDoW(data);
   saveTable(table, "data/new.csv");
