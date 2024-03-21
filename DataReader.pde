@@ -7,27 +7,18 @@ class DataReader {
     //printData(data);
   }
 
-  ArrayList<DataPoint> filterData(String queryName) {
-    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
-
-    for (int currDPIndex = 1; currDPIndex < data.length; currDPIndex++) {
-      String currDP = data[currDPIndex];
-      switch (queryName) {
-      default:
-        {
-          filteredData.add(lineToDP(currDP));
-          break;
-        }
-      }
+  ArrayList<DataPoint> readFile() {
+    ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
+    for (int dPIndex = 1; dPIndex < data.length ; dPIndex++ ) {
+      String currDP = data[dPIndex];
+      dataList.add(lineToDP(currDP));
     }
-    println(data[0]);
-    return filteredData;
+    return dataList;
   }
 
   DataPoint lineToDP(String line) {
     String[] data = line.split(",");
     for (int valIndex = 0; valIndex < data.length; valIndex++) {
-      //println(data[valIndex]);
     }
     String flightDate = data[0].split(" ")[0];
     String airlineCode = data[1];
@@ -66,11 +57,4 @@ class DataReader {
       diverted,
       distance);
   }
-
-  //void printData(String[] data) {
-  //  for (int lineIndex = 0; lineIndex < data.length; lineIndex++) {
-  //    String line = data[lineIndex];
-  //    println(line);
-  //}
-  //}
 }
