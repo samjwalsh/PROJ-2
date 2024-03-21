@@ -1,24 +1,25 @@
-DataPoint dataPoint;
-Filter newFilter;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import grafica.*;
+import java.util.Random;
+import javax.swing.JOptionPane;
+
+public GPlot histogram;
+public GPointsArray samplePoints;
+Query query = new Query();
+Filter newFilter = new Filter();
 void setup() {
-    size(800,600);
-    DataReader dataReader = new DataReader("flights2k.csv");
-    dataPoint = new DataPoint("01/01/2022","AA",1,"JFK","New York City","NY",22,"LAX","Los Angeles","CA",91,
-      "700","657","1029","1012",false,false,2475);
-    ArrayList<DataPoint> data = dataReader.filterData("");
+    size(1000, 660);
+  DataReader dataReader = new DataReader("flights2k.csv");
+  ArrayList<DataPoint> data = dataReader.readFile();
+  println(data.size());
+  //String airport = JOptionPane.showInputDialog("Enter Airport");
+  String airport = "JFK";
+  data = newFilter.isLateLeaving(data);
+  int[] flightDistances = query.flightDistances(data, airport);
+  Table table = query.flightsByDoW(data);
+  saveTable(table, "data/new.csv");
 }
 
 void draw() {
-    rect(50,50,50,50);    
-    String longString = dataPoint.toString();
-    dataPoint.printAllData(longString);
-    dataPoint.stringToText(longString);
-    print(dataPoint.getFlightDate());
-    
-    
-    
-    
-    
-    
-    
 }

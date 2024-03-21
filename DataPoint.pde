@@ -1,5 +1,8 @@
 // toString created by Ben and Michael
 // Ben Bryce, Created function to convert String to print, and another to do string to text to output, 10:00, 14/03/2024
+
+// S. Walsh, Created class for storing flight information, 13:00, 14/03/2024
+
 class DataPoint {
   String flightDate;
   String airlineCode;
