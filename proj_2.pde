@@ -4,8 +4,6 @@ import grafica.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
-public GPlot histogram;
-public GPointsArray samplePoints;
 Query query = new Query();
 Filter newFilter = new Filter();
 void setup() {
