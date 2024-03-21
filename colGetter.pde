@@ -56,14 +56,14 @@ class colGetter {
 
     for (int i = 0; i <= maxValue; i += maxValue / 10) {  // y axis
       float yPos = map(i, 0, maxValue, height - margin, margin);
-      text(i, margin - 30, yPos);
+      text(i, margin - 20, yPos);
       line(margin - 5, yPos, margin + 5, yPos);
     }
 
     int barWidth = (width - 2 * margin) / airportNames.size();
     int xPos = margin + 10;
 
-    for (int i = 1; i < airportNames.size(); i++) {      // bars / x axis
+    for (int i = 0; i < airportNames.size(); i++) {      // bars / x axis
       float yPos = map(airportCounts.get(i), 0, maxValue, height - margin, margin);
       rect(xPos, yPos, barWidth, height - margin - yPos);
       text(airportNames.get(i), xPos + barWidth / 2, height - margin + airportNameOffset);
