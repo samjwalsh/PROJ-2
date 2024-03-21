@@ -1,3 +1,4 @@
+
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import grafica.*;
@@ -19,9 +20,7 @@ void setup() {
   int[] flightDistances = query.flightDistances(data, airport);
   Table table = query.flightsByDoW(data);
   saveTable(table, "data/new.csv");
-  
 }
 
 void draw() {
-
 }
