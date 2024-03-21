@@ -1,4 +1,3 @@
-
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import grafica.*;
@@ -16,7 +15,7 @@ void setup() {
   println(data.size());
   //String airport = JOptionPane.showInputDialog("Enter Airport");
   String airport = "JFK";
-  data = newFilter.isLateLeaving(data);
+  //data = newFilter.isLateLeaving(data);
   int[] flightDistances = query.flightDistances(data, airport);
   Table table = query.flightsByDoW(data);
   Table tableTwo = query.marketShare(data);
