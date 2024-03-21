@@ -8,6 +8,7 @@ public GPlot histogram;
 public GPointsArray samplePoints;
 Query query = new Query();
 Filter newFilter = new Filter();
+BarChart testBarChart;
 void setup() {
     size(1000, 660);
   DataReader dataReader = new DataReader("flights2k.csv");
