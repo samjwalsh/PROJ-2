@@ -9,7 +9,8 @@ class DataReader {
 
   ArrayList<DataPoint> readFile() {
     ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
-    for (String currDP : data) {
+    for (int dPIndex = 1; dPIndex < data.length ; dPIndex++ ) {
+      String currDP = data[dPIndex];
       dataList.add(lineToDP(currDP));
     }
     return dataList;
@@ -56,11 +57,4 @@ class DataReader {
       diverted,
       distance);
   }
-
-  //void printData(String[] data) {
-  //  for (int lineIndex = 0; lineIndex < data.length; lineIndex++) {
-  //    String line = data[lineIndex];
-  //    println(line);
-  //}
-  //}
 }
