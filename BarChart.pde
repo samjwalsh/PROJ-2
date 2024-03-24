@@ -12,7 +12,7 @@ class BarChart {
   String yTitle;
   BarChart(int x, int y, int bWidth, int hHeight) {
   }
-
+  
   void setData(Table table, String chartTitle) {
   }
   

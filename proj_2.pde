@@ -21,6 +21,10 @@ void setup() {
   Table tableTwo = query.marketShare(data);
   saveTable(table, "data/new.csv");
   saveTable(tableTwo, "data/marketshare.csv");
+  
+  PieChart pieChart = new PieChart(height/2,width/2, 50,50);
+  pieChart.setData(tableTwo, "MarketShare");
+  //pieChart.draw();
 }
 
 void draw() {
