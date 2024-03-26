@@ -26,7 +26,7 @@ class Histogram {
     for(int i = 0; i<data.length; i++) {
       if(data[i]>max) max = data[i];
     }
-    max = (int)(Math.ceil(max/1000)*1000); //<>//
+    max = (int)(Math.ceil(max/1000)*1000);
     int buckets = 0;
     if((max/1000) % 2 == 1) buckets = 5;
     else buckets = 4;
