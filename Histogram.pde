@@ -13,12 +13,13 @@ class Histogram {
   String xTitle;
   String yTitle;
   
-  Histogram(int x, int y, int hWidth, int hHeight, GPlot histogram) {
+  Histogram(int x, int y, int hWidth, int hHeight, PApplet parent) {
     this.x = x;
     this.y = y;
     this.hWidth = hWidth;
     this.hHeight = hHeight;
-    this.histogram = histogram;
+    this.histogram = new GPlot(parent);
+
   }
   
   void setData(int[] data, String chartTitle, String xTitle, String yTitle) {
