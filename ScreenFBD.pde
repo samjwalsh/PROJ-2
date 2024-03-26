@@ -1,3 +1,5 @@
+// S. Walsh, Created screen class for showing flights by day of week, 22:00 26/03/2024
+
 class ScreenFBD extends Screen {
   String [][] airlines = new String[][]{{
     "AA", "AS", "B6", "DL", "F9", "G4", "HA", "NK", "UA", "WN"},

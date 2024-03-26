@@ -1,3 +1,4 @@
+// S. Walsh, Implemented screens and widgets in main file, 22:00 26/03/2024
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import grafica.*;

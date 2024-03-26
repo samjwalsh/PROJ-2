@@ -1,3 +1,5 @@
+// S. Walsh, Created class for reusable toggle UI element, 22:00 26/03/2024
+
 class ToggleBox extends Widget {
   color enabledColor;
   color disabledColor;

@@ -1,3 +1,5 @@
+// S. Walsh, Created screen class for showing flights by distance, 22:00 26/03/2024
+
 class ScreenFDist extends Screen {
   Histogram histogram;
   ScreenFDist(PApplet parent) {

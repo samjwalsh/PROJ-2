@@ -1,3 +1,5 @@
+// S. Walsh, Created reusable Screen class, 22:00 26/03/2024
+
 class Screen {
 
   ArrayList screenWidgets;

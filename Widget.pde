@@ -1,3 +1,5 @@
+// S. Walsh, Created class for buttons, 22:00 26/03/2024
+
 class Widget {
   int x, y, width, height;
   String label;

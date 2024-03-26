@@ -1,5 +1,6 @@
 // Mitchell Ashmore created the Filter class, Thursday 14/3/2024, 9:00-11:00
 // S. Walsh modified filter class to accept DataPoint array lists as inputs and outputs 20/03/2024, 16:30
+// S. Walsh, Created filter class to select only flights by specific airlines, 22:00 26/03/2024
 class Filter {
 
   ArrayList<DataPoint> isCancelled(ArrayList<DataPoint> data) {
