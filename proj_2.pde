@@ -12,6 +12,7 @@ ScreenHome screenHome = new ScreenHome();
 
 String currentScreen = "Home";
 
+BarChart testBarChart;
 void setup() {
   size(1000, 660);
   DataReader dataReader = new DataReader("flights2k.csv");
