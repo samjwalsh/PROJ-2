@@ -37,7 +37,7 @@ class Query {
     for (DataPoint dataPoint : data) {
       Calendar c = Calendar.getInstance();
       try {
-        c.setTime(new SimpleDateFormat("M/dd/yyyy").parse(dataPoint.getFlightDate()));
+        c.setTime(new SimpleDateFormat("mm/dd/yyyy").parse(dataPoint.getFlightDate()));
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
         switch(dayOfWeek) {

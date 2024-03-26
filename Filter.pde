@@ -22,6 +22,16 @@ class Filter {
   //  return filteredData;
   //}
 
+  ArrayList<DataPoint> onlySelectAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (airports.contains(dataPoint.getAirlineCode())) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
+
   ArrayList<DataPoint> distanceGreaterThan(ArrayList<DataPoint> data, int distance) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
     for (DataPoint dataPoint : data) {
