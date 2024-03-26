@@ -13,8 +13,6 @@ Sun,393
 
 
 //barchart class made by ben bryce 2:00 tuesday 26 march 26/03/2024
-import grafica.*;
-
 
 class BarChart {
   int x;
@@ -44,8 +42,8 @@ class BarChart {
     for (int i = 0; i < table.getRowCount(); i++)
     {
         TableRow row = table.getRow(i);
-        String category = row.getString(headerOne);
-        float value = row.getFloat(headerTwo);
+        String category = row.getString(row.getColumnTitle(0));
+        float value = row.getFloat(row.getColumnTitle(1));
         
         points.add(new GPoint(i, value, category));
     }
@@ -67,7 +65,7 @@ class BarChart {
       maxOfY = points.getY(i);
     }
     
-    plot.setYLim(0, maxOfY + 10);
+    plot.setYLim(0, maxOfY*1.1);
     plot.getYAxis().setAxisLabelText(headerTwo);
     plot.getXAxis().setAxisLabelText(headerOne);
    
@@ -87,4 +85,3 @@ class BarChart {
   plot.endDraw();
   }
 }
-
