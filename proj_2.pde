@@ -1,3 +1,5 @@
+import com.krab.lazy.*;
+
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import grafica.*;
@@ -6,11 +8,17 @@ import javax.swing.JOptionPane;
 
 Query query = new Query();
 Filter newFilter = new Filter();
+ScreenHome screenHome = new ScreenHome();
+
+String currentScreen = "Home";
+
 void setup() {
   size(1000, 660);
   DataReader dataReader = new DataReader("flights2k.csv");
   ArrayList<DataPoint> data = dataReader.readFile();
-  println(data.size());
+
+  
+    println(data.size());
   //String airport = JOptionPane.showInputDialog("Enter Airport");
   String airport = "JFK";
   //data = newFilter.isLateLeaving(data);
@@ -22,4 +30,16 @@ void setup() {
 }
 
 void draw() {
+  switch (currentScreen) {
+  case "Home":
+    {
+      screenHome.draw();
+      break;
+    }
+  default:
+    {
+      screenHome.draw();
+      break;
+    }
+  }
 }
