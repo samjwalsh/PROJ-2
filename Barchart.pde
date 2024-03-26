@@ -65,7 +65,7 @@ class BarChart {
       maxOfY = points.getY(i);
     }
     
-    plot.setYLim(0, maxOfY*1.1);
+    plot.setYLim(0, 1.1 * maxOfY);
     plot.getYAxis().setAxisLabelText(headerTwo);
     plot.getXAxis().setAxisLabelText(headerOne);
    
