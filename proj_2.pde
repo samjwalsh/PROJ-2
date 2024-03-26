@@ -19,6 +19,7 @@ void setup() {
   data = newFilter.isLateLeaving(data);
   int[] flightDistances = query.flightDistances(data, airport);
   Table table = query.flightsByDoW(data);
+  Table tableTwo = query.marketShare(data);
   saveTable(table, "data/new.csv");
   
   histogram = new GPlot(this);

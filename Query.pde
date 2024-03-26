@@ -1,9 +1,6 @@
 // S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
-
-//Make a query based off marketShare using " MKT_CARRIER "
-// Each MKT_CARRIER has a 2 digit abbreviation, find out abbreviation and match to carrier
-//Pie chart ?? showing this data
+// Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
 
 class Query {
 
@@ -26,8 +23,6 @@ class Query {
 
     return array;
   }
-
-
 
   Table flightsByDoW(ArrayList<DataPoint> data) {
 
@@ -89,7 +84,7 @@ class Query {
     tueRow.setInt("Flights", tue);
 
     TableRow wedRow = table.addRow();
-    wedRow.setString("Day", "Wed");
+    wedRow.setString("Day", "Wed");  // day  and flights = column title
     wedRow.setInt("Flights", wed);
 
     TableRow thuRow = table.addRow();
@@ -110,58 +105,110 @@ class Query {
 
     return table;
   }
-}
-void marketShare(DataPoint dataPoint) {
-  int AA=0;
-  int AS=0;
-  int B6=0;
-  int DL=0;
-  int F9=0;
-  int G4=0;
-  int HA=0;
-  int NK=0;
-  int UA=0;
-  int WN=0;
 
 
-  if (dataPoint.getAirlineCode() == "AA") {
-    AA++;
+  Table marketShare(ArrayList<DataPoint> data) {
+
+    int AA = 0;
+    int AS = 0;
+    int B6 = 0;
+    int DL = 0;
+    int F9 = 0;
+    int G4 = 0;
+    int HA = 0;
+    int NK = 0;
+    int UA = 0;
+    int WN = 0;
+
+    for (DataPoint dataPoint : data) {
+      //println("MARKET SHARE DATAPOINT:"+dataPoint.getAirlineCode());
+
+      if (dataPoint.getAirlineCode().equals("AA")) {
+        AA++;
+        //println(AA);
+      }
+      if (dataPoint.getAirlineCode().equals("AS")) {
+        AS++;
+        //println(AS);
+      }
+      if (dataPoint.getAirlineCode().equals("B6")) {
+        B6++;
+        //println(B6);
+      }
+      if (dataPoint.getAirlineCode().equals("DL")) {
+        DL++;
+        //println(DL);
+      }
+      if (dataPoint.getAirlineCode().equals("F9")) {
+        F9++;
+        //println(F9);
+      }
+      if (dataPoint.getAirlineCode().equals("G4")) {
+        G4++;
+        //println(G4);
+      }
+      if (dataPoint.getAirlineCode().equals("HA")) {
+        HA++;
+        //println(HA);
+      }
+      if (dataPoint.getAirlineCode().equals("NK")) {
+        NK++;
+        //println(NK);
+      }
+      if (dataPoint.getAirlineCode().equals("UA")) {
+        UA++;
+        //println(UA);
+      }
+      if (dataPoint.getAirlineCode().equals("WN")) {
+        WN++;
+        //println(WN);
+      }
+    }
+
+    Table tableTwo = new Table();
+    tableTwo.addColumn("Airline");
+    tableTwo.addColumn("No. Flights");
+
+    TableRow AARow = tableTwo.addRow();
+    AARow.setString("Airline", "American Airlines");
+    AARow.setInt("No. Flights", AA);
+
+    TableRow ASRow = tableTwo.addRow();
+    ASRow.setString("Airline", "Alaska Airlines");
+    ASRow.setInt("No. Flights", AS);
+
+    TableRow B6Row = tableTwo.addRow();
+    B6Row.setString("Airline", "Jet Blue");
+    B6Row.setInt("No. Flights", B6);
+
+    TableRow DLRow = tableTwo.addRow();
+    DLRow.setString("Airline", "Delta Airlines");
+    DLRow.setInt("No. Flights", DL);
+
+    TableRow F9Row = tableTwo.addRow();
+    F9Row.setString("Airline", "Frontier Airlines");
+    F9Row.setInt("No. Flights", F9);
+
+    TableRow G4Row = tableTwo.addRow();
+    G4Row.setString("Airline", "Allegiant Air");
+    G4Row.setInt("No. Flights", G4);
+
+    TableRow HARow = tableTwo.addRow();
+    HARow.setString("Airline", "Hawaiian Airlines");
+    HARow.setInt("No. Flights", HA);
+
+    TableRow NKRow = tableTwo.addRow();
+    NKRow.setString("Airline", "Spirit Airlines");
+    NKRow.setInt("No. Flights", NK);
+
+    TableRow UARow = tableTwo.addRow();
+    UARow.setString("Airline", "United Airlines");
+    UARow.setInt("No. Flights", UA);
+
+    TableRow WNRow = tableTwo.addRow();
+    WNRow.setString("Airline", "Southwest Airlines");
+    WNRow.setInt("No. Flights", WN);
+
+    return tableTwo;
   }
-  if (dataPoint.getAirlineCode() == "AS") {
-    AS++;
-  }
-  if (dataPoint.getAirlineCode() == "B6") {
-    B6++;
-  }
-  if (dataPoint.getAirlineCode() == "DL") {
-    DL++;
-  }
-  if (dataPoint.getAirlineCode() == "F9") {
-    F9++;
-  }
-  if (dataPoint.getAirlineCode() == "G4") {
-    G4++;
-  }
-  if (dataPoint.getAirlineCode() == "HA") {
-    HA++;
-  }
-  if (dataPoint.getAirlineCode() == "NK") {
-    NK++;
-  }
-  if (dataPoint.getAirlineCode() == "UA") {
-    UA++;
-  }
-  if (dataPoint.getAirlineCode() == "WN") {
-    WN++;
-  }
-  println(AA);
-  println(AS);
-  println(B6);
-  println(DL);
-  println(F9);
-  println(G4);
-  println(HA);
-  println(NK);
-  println(UA);
-  println(WN);
 }
