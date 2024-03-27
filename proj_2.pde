@@ -13,6 +13,8 @@ Query query = new Query();
 Filter Filter = new Filter();
 
 Movie movie;
+Boolean enableVideo = false;
+ToggleBox toggleVideo;
 
 String currentScreen = "Home";
 ScreenHome screenHome;
@@ -23,10 +25,6 @@ ScreenMShare screenMShare;
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
 void setup() {
-  movie = new Movie(this, "movie.mp4");
-  movie.loop();
-
-
   size(1000, 800);
   font = createFont("", 99);
   DataReader dataReader = new DataReader("flights10k.csv");
@@ -36,6 +34,11 @@ void setup() {
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
+
+  movie = new Movie(this, "movie.mp4");
+  movie.loop();
+  movie.volume(0);
+  toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
 }
 
 void draw() {
@@ -67,16 +70,27 @@ void draw() {
       break;
     }
   }
-    if (movie.available()) {
+  if (movie.available() && enableVideo) {
     movie.read();
   }
-  int movW = 200;
-  int movH = 356;
-  image(movie, width - movW,height - movH, movW, movH);
+  if (enableVideo) {
+    int movW = 200;
+    int movH = 356;
+    image(movie, width - movW, height - movH, movW, movH);
+  }
+  toggleVideo.draw();
 }
 
 void mousePressed() {
   String event;
+
+  if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
+    toggleVideo.toggle();
+    enableVideo = !enableVideo;
+    if (enableVideo) movie.volume(100);
+    else movie.volume(0);
+  }
+
   switch (currentScreen) {
   case "Home":
     {
@@ -91,10 +105,11 @@ void mousePressed() {
         case "FDist":
           currentScreen = "FDist";
           return;
-        case "MShare": {
-          currentScreen = "MShare";
-          return;
-        }
+        case "MShare":
+          {
+            currentScreen = "MShare";
+            return;
+          }
         default:
         }
       }
@@ -175,8 +190,7 @@ void mousePressed() {
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
         case "Home":
-        println("HB");
-          currentScreen = "Home";
+currentScreen = "Home";
           return;
         default:
         }
