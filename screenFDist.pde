@@ -8,7 +8,7 @@ class ScreenFDist extends Screen {
       "Home", color(255), font, "Home"));
 
     String airport = "HNL";
-    data = Filter.isLateLeaving(data);
+    //data = Filter.isLateLeaving(data);
     int[] flightDistances = query.flightDistances(data, airport);
     histogram = new Histogram(250, 10, 600, 600, parent);
     histogram.setData(flightDistances, "Flight From "+airport, "Distance Flown", "Number of Flights");

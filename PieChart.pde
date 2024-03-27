@@ -4,16 +4,16 @@ import java.util.Arrays;
 
 
 // Table argument must be in following format
-/* 
-Day,Flights
-Mon,401
-Tue,339
-Wed,339
-Thu,191
-Fri,0
-Sat,336
-Sun,393
-*/
+/*
+ Day,Flights
+ Mon,401
+ Tue,339
+ Wed,339
+ Thu,191
+ Fri,0
+ Sat,336
+ Sun,393
+ */
 
 class PieChart {
   int x;
@@ -22,6 +22,7 @@ class PieChart {
   int hHeight;
   float[] values;        // was int[]
   String[] labels;      // was int[]
+  float diameter;
   String chartTitle;
   String xTitle;
   String yTitle;
@@ -29,9 +30,11 @@ class PieChart {
   float legendHeight;
   float legendX;
   float legendY;
+  float totalVals;
   PieChart(int x, int y, int hWidth, int hHeight) {
     this.x = x;
     this.y = y;
+    this.diameter = x;
     this.hWidth = hWidth;
     this.hHeight = hHeight;
   }
@@ -41,22 +44,22 @@ class PieChart {
     labels = new String[table.getRowCount()];
     float degreesEach = (float(360) / float(2000));
     //println("degrees each"+degreesEach);
-
+    totalVals = 0;
     for (int i = 0; i < table.getRowCount(); i++) {
       values[i] = degreesEach * table.getInt(i, 1);
+      println(values[i]);
+      totalVals += values[i];
     }
     for (int i = 0; i < table.getRowCount(); i++) {
       labels[i] = table.getString(i, 0);
     }
-    println(Arrays.toString(values));
-    println(Arrays.toString(labels));
-
-    pieChart(500, values, labels);
+    //println(Arrays.toString(values));
+    //println(Arrays.toString(labels));
   }
 
-  void pieChart(float diameter, float[] flightCount, String[] airlines) {
+  void draw() {
     float legendWidth = 200;
-    float legendHeight = flightCount.length * 30;
+    float legendHeight = values.length * 30;
     float legendX = width - legendWidth - 100;
     float legendY = (height - legendHeight) / 2;
     background(255);
@@ -68,24 +71,51 @@ class PieChart {
 
 
     float lastAngle = 0;
-    for (int i = 0; i < flightCount.length; i++) {
+    color[] colours = genColors(values.length);
+    for (int i = 0; i < values.length; i++) {
       float currentR = random(255);
       float currentG = random(255);
       float currentB = random(255);
-      fill(currentR, currentG, currentB);
-      arc(width/2 - 100, height/2, diameter, diameter, lastAngle, lastAngle+radians(flightCount[i]));
+      color colour = colours[i];
+      fill(colour);
+      println(totalVals);
+      println(radians((values[i] * 360 )/(totalVals)));
+      float newAngle = radians((values[i] * 360 )/(totalVals));
+      arc(width/2 - 100, height/2, diameter, diameter, lastAngle, lastAngle + newAngle);
 
       textSize(12);
-      fill(currentR, currentG, currentB);
+      fill(colour);
       rect(legendX, legendY, 30, 30);
       fill(0);
-      text(airlines[i], legendX + 100, legendY + 20);
+      text(labels[i], legendX + 100, legendY + 20);
       legendY += 30;
-      lastAngle += radians(flightCount[i]);
+      lastAngle += newAngle;
     }
+    textAlign(LEFT);
   }
+  int[] genColors(int len)
+  {
+    color[] colors = new int[len];
+    for (int i=0; i<len; i++)
+    {
+      colors[i] = randomPastel(0.3+0.25*i);    // random linear gen I've found works well
+    }
+    return colors;
+  }
+  int randomPastel(float seed)
+  {
+    float r = 255*pow(sin(seed), 2);
+    float g = 255*pow(sin(seed+PI/3), 2);
+    float b = 255*pow(sin(seed+TAU/3), 2);
 
+    float gray = (float) min(r, g, b);
+    float saturation_amt = 0.8;
+    float rm = gray*saturation_amt;
 
-  void draw() {
+    return color(channelToPastel(r, rm), channelToPastel(g, rm), channelToPastel(b, rm));
+  }
+  int channelToPastel(float orig, float rm)
+  {
+    return (int)(orig-rm+255)/2;
   }
 }

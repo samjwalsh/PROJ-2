@@ -10,10 +10,11 @@ GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
 
-String currentScreen = "Home";
+String currentScreen = "MShare";
 ScreenHome screenHome;
 ScreenFBD screenFBD;
 ScreenFDist screenFDist;
+ScreenMShare screenMShare;
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
@@ -26,6 +27,7 @@ void setup() {
   screenHome = new ScreenHome(this);
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
+  screenMShare = new ScreenMShare(this);
 }
 
 void draw() {
@@ -41,8 +43,14 @@ void draw() {
       screenFBD.draw();
       break;
     }
-    case "FDist": {
+  case "FDist":
+    {
       screenFDist.draw();
+      break;
+    }
+  case "MShare":
+    {
+      screenMShare.draw();
       break;
     }
   default:
@@ -69,6 +77,10 @@ void mousePressed() {
         case "FDist":
           currentScreen = "FDist";
           return;
+        case "MShare": {
+          currentScreen = "MShare";
+          return;
+        }
         default:
         }
       }
@@ -135,6 +147,21 @@ void mousePressed() {
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
         case "Home":
+          currentScreen = "Home";
+          return;
+        default:
+        }
+      }
+    }
+  case "MShare":
+    {
+      ArrayList myWidgets = screenMShare.getWidgets();
+      for (int i = 0; i < myWidgets.size(); i++) {
+        Widget theWidget = (Widget)myWidgets.get(i);
+        event = theWidget.getEvent(mouseX, mouseY);
+        switch(event) {
+        case "Home":
+        println("HB");
           currentScreen = "Home";
           return;
         default:
