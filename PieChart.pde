@@ -1,7 +1,6 @@
 // S. Walsh, skeleton for pie chart class, 11:00, 21/03/2024
 // Mitchell Ashmore filled pie chart class 24/3/2024
 import java.util.Arrays;
-=======
 
 
 // Table argument must be in following format
