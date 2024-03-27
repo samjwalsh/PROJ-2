@@ -20,7 +20,7 @@ PFont font;
 void setup() {
   size(1000, 800);
   font = createFont("", 99);
-  DataReader dataReader = new DataReader("flights_full.csv");
+  DataReader dataReader = new DataReader("flights10k.csv");
   data = dataReader.readFile();
 
   screenHome = new ScreenHome(this);
