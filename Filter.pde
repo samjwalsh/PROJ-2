@@ -1,5 +1,6 @@
 // Mitchell Ashmore created the Filter class, Thursday 14/3/2024, 9:00-11:00
 // S. Walsh modified filter class to accept DataPoint array lists as inputs and outputs 20/03/2024, 16:30
+// S. Walsh, Created filter class to select only flights by specific airlines, 22:00 26/03/2024
 class Filter {
 
   ArrayList<DataPoint> isCancelled(ArrayList<DataPoint> data) {
@@ -21,6 +22,16 @@ class Filter {
   //  }
   //  return filteredData;
   //}
+
+  ArrayList<DataPoint> onlySelectAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (airports.contains(dataPoint.getAirlineCode())) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
 
   ArrayList<DataPoint> distanceGreaterThan(ArrayList<DataPoint> data, int distance) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();

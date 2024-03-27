@@ -1,8 +1,6 @@
 // S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
 // Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
-//Make a query based off marketShare using " MKT_CARRIER "
-
 
 class Query {
 
@@ -39,7 +37,7 @@ class Query {
     for (DataPoint dataPoint : data) {
       Calendar c = Calendar.getInstance();
       try {
-        c.setTime(new SimpleDateFormat("M/dd/yyyy").parse(dataPoint.getFlightDate()));
+        c.setTime(new SimpleDateFormat("mm/dd/yyyy").parse(dataPoint.getFlightDate()));
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
         switch(dayOfWeek) {
@@ -169,47 +167,47 @@ class Query {
 
     Table tableTwo = new Table();
     tableTwo.addColumn("Airline");
-    tableTwo.addColumn(" No. Flights ");
+    tableTwo.addColumn("No. Flights");
 
     TableRow AARow = tableTwo.addRow();
     AARow.setString("Airline", "American Airlines");
-    AARow.setInt(" No. Flights ", AA);
+    AARow.setInt("No. Flights", AA);
 
     TableRow ASRow = tableTwo.addRow();
     ASRow.setString("Airline", "Alaska Airlines");
-    ASRow.setInt(" No. Flights ", AS);
+    ASRow.setInt("No. Flights", AS);
 
     TableRow B6Row = tableTwo.addRow();
     B6Row.setString("Airline", "Jet Blue");
-    B6Row.setInt(" No. Flights ", B6);
+    B6Row.setInt("No. Flights", B6);
 
     TableRow DLRow = tableTwo.addRow();
     DLRow.setString("Airline", "Delta Airlines");
-    DLRow.setInt(" No. Flights ", DL);
+    DLRow.setInt("No. Flights", DL);
 
     TableRow F9Row = tableTwo.addRow();
     F9Row.setString("Airline", "Frontier Airlines");
-    F9Row.setInt(" No. Flights ", F9);
+    F9Row.setInt("No. Flights", F9);
 
     TableRow G4Row = tableTwo.addRow();
     G4Row.setString("Airline", "Allegiant Air");
-    G4Row.setInt(" No. Flights ", G4);
+    G4Row.setInt("No. Flights", G4);
 
     TableRow HARow = tableTwo.addRow();
     HARow.setString("Airline", "Hawaiian Airlines");
-    HARow.setInt(" No. Flights ", HA);
+    HARow.setInt("No. Flights", HA);
 
     TableRow NKRow = tableTwo.addRow();
     NKRow.setString("Airline", "Spirit Airlines");
-    NKRow.setInt(" No. Flights ", NK);
+    NKRow.setInt("No. Flights", NK);
 
     TableRow UARow = tableTwo.addRow();
     UARow.setString("Airline", "United Airlines");
-    UARow.setInt(" No. Flights ", UA);
+    UARow.setInt("No. Flights", UA);
 
     TableRow WNRow = tableTwo.addRow();
     WNRow.setString("Airline", "Southwest Airlines");
-    WNRow.setInt(" No. Flights ", WN);
+    WNRow.setInt("No. Flights", WN);
 
     return tableTwo;
   }

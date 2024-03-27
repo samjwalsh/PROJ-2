@@ -1,6 +1,21 @@
 // S. Walsh, skeleton for pie chart class, 11:00, 21/03/2024
 // Mitchell Ashmore filled pie chart class 24/3/2024
 import java.util.Arrays;
+=======
+
+
+// Table argument must be in following format
+/* 
+Day,Flights
+Mon,401
+Tue,339
+Wed,339
+Thu,191
+Fri,0
+Sat,336
+Sun,393
+*/
+
 class PieChart {
   int x;
   int y;
@@ -70,6 +85,7 @@ class PieChart {
       lastAngle += radians(flightCount[i]);
     }
   }
+
 
   void draw() {
   }
