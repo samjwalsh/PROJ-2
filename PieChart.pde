@@ -68,7 +68,8 @@ class PieChart {
     textSize(30);
     fill(0);
     text("Market Share per Airline", width/2, 30);
-
+    textAlign(LEFT);
+  
 
     float lastAngle = 0;
     color[] colours = genColors(values.length);
@@ -87,11 +88,10 @@ class PieChart {
       fill(colour);
       rect(legendX, legendY, 30, 30);
       fill(0);
-      text(labels[i], legendX + 100, legendY + 20);
+      text(labels[i], legendX + 45, legendY + 20);
       legendY += 30;
       lastAngle += newAngle;
     }
-    textAlign(LEFT);
   }
   int[] genColors(int len)
   {

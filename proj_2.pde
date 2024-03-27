@@ -5,12 +5,16 @@ import grafica.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
+import processing.video.*;
+
 Histogram theHistogram;
 GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
 
-String currentScreen = "MShare";
+Movie movie;
+
+String currentScreen = "Home";
 ScreenHome screenHome;
 ScreenFBD screenFBD;
 ScreenFDist screenFDist;
@@ -19,6 +23,10 @@ ScreenMShare screenMShare;
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
 void setup() {
+  movie = new Movie(this, "movie.mp4");
+  movie.loop();
+
+
   size(1000, 800);
   font = createFont("", 99);
   DataReader dataReader = new DataReader("flights10k.csv");
@@ -59,6 +67,12 @@ void draw() {
       break;
     }
   }
+    if (movie.available()) {
+    movie.read();
+  }
+  int movW = 200;
+  int movH = 356;
+  image(movie, width - movW,height - movH, movW, movH);
 }
 
 void mousePressed() {
