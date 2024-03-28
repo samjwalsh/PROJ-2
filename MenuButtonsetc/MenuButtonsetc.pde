@@ -4,14 +4,20 @@ PImage map;
 PImage backgroundimage;
 String destination = "Select destination", selectedFilters = "";
 StringList filters;
-int destinationWeight = 0,originWeight = 0,airlineWeight = 0;
+int destinationWeight = 0,originWeight = 0,airlineWeight = 0, SCREENX = 590, SCREENY = 410;
+boolean originFilter, destinationFilter, airlineFilter;
+
+
+void settings(){
+  size(SCREENX, SCREENY);
+}
 
 void setup() {
   filters = new StringList();
   noStroke();
   rectMode(CENTER);
   textAlign(CENTER);
-  size(2360/4, 1640/4);
+  
   map = loadImage("map.png");
   backgroundimage =  loadImage("background2.png");
   backgroundimage.resize(2360/4, 1640/4);
@@ -117,6 +123,7 @@ void flightInfoScreen() {
   drawFilterButton(100, 100, "Origin",originWeight);
   drawFilterButton(250, 100, "Destination",destinationWeight);
   drawFilterButton(400, 100, "Airline",airlineWeight);
+<<<<<<< HEAD
   
    fill(#C6C6C6);
   rect(400, 350, 100, 50); // Third Screen Button
@@ -130,6 +137,9 @@ void flightInfoScreen() {
   } else {
     strokeWeight(0);
   }
+=======
+  //drawFilterButton(400, 100, "Distance",airlineWeight);
+>>>>>>> 45ab8b6d39779759b20f5c6b3ad2aa7e29aa35cb
 }
 
 
@@ -196,10 +206,12 @@ void mousePressed() {
     mouseY>(100-25) && mouseY<(100+25))) {
     selectedFilters +="origin, ";
     originWeight = 4;
+    originFilter = true;
   } else if (isFlightInfo && (selectedFilters.indexOf("origin")>=0)&&(mouseX>(100-50) && mouseX<(100+50) &&
     mouseY>(100-25) && mouseY<(100+25))) {
     selectedFilters =selectedFilters.replace("origin, ", "");
     originWeight = 0;
+    originFilter = false;
   }
   
   //destination filter
@@ -207,10 +219,12 @@ void mousePressed() {
     mouseY>(100-25) && mouseY<(100+25))) {
     selectedFilters +="destination, ";
     destinationWeight = 4;
+    destinationFilter = true;
   } else if (isFlightInfo && (selectedFilters.indexOf("destination")>=0)&&(mouseX>(250-50) && mouseX<(250+50) &&
     mouseY>(100-25) && mouseY<(100+25))) {
     selectedFilters = selectedFilters.replace("destination, ", "");
     destinationWeight = 0;
+    destinationFilter = false;
   }
   
   //airline filter
@@ -218,10 +232,12 @@ void mousePressed() {
     mouseY>(100-25) && mouseY<(100+25))) {
     selectedFilters +="airline, ";
     airlineWeight = 4;
+    airlineFilter = true;
   } else if (isFlightInfo && (selectedFilters.indexOf("airline")>=0)&&(mouseX>(400-50) && mouseX<(400+50) &&
     mouseY>(100-25) && mouseY<(100+25))) {
     selectedFilters = selectedFilters.replace("airline, ", "");
     airlineWeight = 0;
+    airlineFilter = false;
   }
    if (isFlightInfo && mouseX > (400-50) && mouseX < (400+50) &&
       mouseY > (350-25) && mouseY < (350+25)) {
