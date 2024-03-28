@@ -11,6 +11,8 @@ Histogram theHistogram;
 GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
+HScrollbar scroll;
+boolean firstMousePress = false;
 
 Movie movie;
 Boolean enableVideo = false;
@@ -34,6 +36,8 @@ void setup() {
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
+  scroll = new HScrollbar(0, height/2-8, width, 16, 16);
+
 
   movie = new Movie(this, "movie.mp4");
   movie.loop();
@@ -113,6 +117,9 @@ void mousePressed() {
         default:
         }
       }
+      if (!firstMousePress) {
+        firstMousePress = true;
+      }
     }
   case "FBD" :
     {
@@ -190,7 +197,7 @@ void mousePressed() {
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
         case "Home":
-currentScreen = "Home";
+          currentScreen = "Home";
           return;
         default:
         }

@@ -12,5 +12,10 @@ class ScreenHome extends Screen {
   void draw() {
     background(120, 0, 255);
     drawWidgets();
+    scroll.update();
+    scroll.display();
+    if (firstMousePress) {
+      firstMousePress = false;
+    }
   }
 }
