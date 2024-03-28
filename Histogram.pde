@@ -44,7 +44,7 @@ class Histogram {
     }
     int maxBarHeight = 0;
     for(double i = 0; i < barHeights.length; i++) {
-      hPoints.add((int)(max*((i+(i+1.0))/(buckets*2))),barHeights[(int)i]);  
+      hPoints.add((int)(max*((i+(i+1.0))/(buckets*2))),barHeights[(int)i]);
     }
     for(int i= 0; i < buckets; i++) {
       if(barHeights[i] > maxBarHeight) maxBarHeight = barHeights[i];
@@ -53,7 +53,7 @@ class Histogram {
     histogram.setPos(x,y);
     histogram.setDim(hWidth,hHeight);
     histogram.setXLim(min,max);
-    histogram.setYLim(min,maxBarHeight);
+    histogram.setYLim(min,maxBarHeight+(int)maxBarHeight/10);
     histogram.getTitle().setText(chartTitle);
     histogram.getXAxis().getAxisLabel().setText(xTitle);
     histogram.getYAxis().getAxisLabel().setText(yTitle);    
