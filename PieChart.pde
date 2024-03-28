@@ -42,17 +42,19 @@ class PieChart {
   void setData(Table table, String chartTitle) {
     values = new float[table.getRowCount()];
     labels = new String[table.getRowCount()];
-    float degreesEach = (float(360) / float(2000));
-    //println("degrees each"+degreesEach);
+
+
+
     totalVals = 0;
     for (int i = 0; i < table.getRowCount(); i++) {
-      values[i] = degreesEach * table.getInt(i, 1);
-      println(values[i]);
+      values[i] = table.getFloat(i, 1);
       totalVals += values[i];
+      //println(totalVals);
     }
     for (int i = 0; i < table.getRowCount(); i++) {
       labels[i] = table.getString(i, 0);
     }
+
     //println(Arrays.toString(values));
     //println(Arrays.toString(labels));
   }
@@ -69,20 +71,25 @@ class PieChart {
     fill(0);
     text("Market Share per Airline", width/2, 30);
     textAlign(LEFT);
-  
+
 
     float lastAngle = 0;
     color[] colours = genColors(values.length);
+    float totalPercent = 0;
     for (int i = 0; i < values.length; i++) {
       float currentR = random(255);
       float currentG = random(255);
       float currentB = random(255);
       color colour = colours[i];
       fill(colour);
-      println(totalVals);
-      println(radians((values[i] * 360 )/(totalVals)));
-      float newAngle = radians((values[i] * 360 )/(totalVals));
-      arc(width/2 - 100, height/2, diameter, diameter, lastAngle, lastAngle + newAngle);
+      float percent = values[i] / totalVals;
+      totalPercent += percent;
+      println("This slice: " + percent + ", Total: " + totalPercent);
+
+      float newAngle = (values[i] * 360.0)/totalVals;
+      arc(width/2 - 100, height/2, diameter, diameter, radians(lastAngle), radians(lastAngle + newAngle));
+      lastAngle += newAngle;
+      println(lastAngle);
 
       textSize(12);
       fill(colour);
@@ -90,7 +97,6 @@ class PieChart {
       fill(0);
       text(labels[i], legendX + 45, legendY + 20);
       legendY += 30;
-      lastAngle += newAngle;
     }
   }
   int[] genColors(int len)
