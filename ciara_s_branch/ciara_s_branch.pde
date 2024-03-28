@@ -56,47 +56,50 @@ void drawUI() {
   fill(255); 
   text("NEXT", 500, 775);
   
-    stroke(150); 
-        line(62, 665, 535, 665); 
+  
+  
+        stroke(150); 
+        line(62, 485, 535, 485); 
         noStroke(); 
   
-     stroke(150); 
+        stroke(150); 
         line(62, 505, 535, 505); 
         noStroke(); 
   
-     stroke(150); 
+        stroke(150); 
         line(62, 525, 535, 525); 
         noStroke(); 
         
-   stroke(150); 
+        stroke(150); 
         line(62, 545, 535, 545);
         noStroke();
   
-   stroke(150);
+        stroke(150);
         line(62, 565, 535, 565);
         noStroke(); 
   
   
-   stroke(150); 
+        stroke(150); 
         line(62, 585, 535, 585); 
         noStroke(); 
   
-  stroke(150); 
+        stroke(150); 
         line(62, 605, 535, 605); 
         noStroke(); 
-        
-           stroke(150); 
+       
+        stroke(150); 
         line(62, 625, 535, 625); 
+        noStroke(); 
         
-           stroke(150); 
+        stroke(150); 
         line(62, 645, 535, 645); 
         noStroke();
         
-           stroke(150); 
+        stroke(150); 
         line(62, 665, 535, 665); 
         noStroke(); 
         
-          stroke(150); 
+        stroke(150); 
         line(62, 685, 535, 685);
         noStroke(); 
 }
