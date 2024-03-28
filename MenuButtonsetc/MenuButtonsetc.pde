@@ -1,5 +1,5 @@
 // C. Quinn, created processing sketch for UI, 10am, 14/03/2024
-boolean isMenu = true, isFlightInfo = false, isDropDown = false, isHideSelection = false;;
+boolean isMenu = true, isFlightInfo = false, isDropDown = false,isDropDown2 = false, isHideSelection = false, isThirdScreen = false;;;
 PImage map;
 PImage backgroundimage;
 String destination = "Select destination", selectedFilters = "";
@@ -23,23 +23,53 @@ void draw() {
   } else if (isFlightInfo) {
     flightInfoScreen();
   }
+  else if (isThirdScreen) {
+    thirdScreen();
+  }
    if(isDropDown){
+      dropDownOnScreen();
+    }
+    if(isDropDown2){
       dropDownOnScreen();
     }
 }
 void dropDownOnScreen() {
   fill(#C6C6C6);
-  rect(50, 170, 100, 250);
+  rect(80, 200, 100, 250);
   fill(255);
-  rect(52, 172, 80, 230);
+  rect(82, 202, 80, 230);
   fill(0);
    fill(#C6C6C6);
-  rect(50, 50, 100, 20);
+  rect(80, 80, 100, 20);
   fill(255);
   textSize(10);
-  text("Hide selection", 20, 50);
+  text("Hide selection", 80, 80);
 }
+void thirdScreen() {
+  background(255); // Set the background to white
+  
+  fill(#C6C6C6);
+  rect(100, 100, 80, 80); // Adjust position and size as necessary
+  fill(0);
+  textSize(10);
+  text("DROP DOWN", 100, 100);
 
+  
+
+  fill(#C6C6C6);
+  rect(70, 370, 160, 50); // Adjust position and size as necessary
+  fill(0);
+  textSize(10);
+  text("Back to Flight Info", 70, 370);
+
+  if (mouseX > (70-80) && mouseX < (70+80) &&
+      mouseY > (370-25) && mouseY < (370+25)) {
+    strokeWeight(4);
+    stroke(255);
+  } else {
+    strokeWeight(0);
+  }
+}
 
 void menuScreen() {
   //background(#F0BDEF);
@@ -60,6 +90,7 @@ void menuScreen() {
     strokeWeight(0);
   }
 }
+
 
 
 void flightInfoScreen() {
@@ -86,7 +117,21 @@ void flightInfoScreen() {
   drawFilterButton(100, 100, "Origin",originWeight);
   drawFilterButton(250, 100, "Destination",destinationWeight);
   drawFilterButton(400, 100, "Airline",airlineWeight);
+  
+   fill(#C6C6C6);
+  rect(400, 350, 100, 50); // Third Screen Button
+  fill(255);
+  textSize(10);
+  text("Next Page", 400, 350);
+  if (mouseX>(400-50) && mouseX<(400+50) &&
+      mouseY>(350-25) && mouseY<(350+25)) {
+    strokeWeight(4);
+    stroke(255);
+  } else {
+    strokeWeight(0);
+  }
 }
+
 
 void drawPin(int x, int y) {
   fill(0);
@@ -132,9 +177,17 @@ void mousePressed() {
     mouseY>(100-25) && mouseY<(100+25)))){
       isDropDown=true;
     }
-   if (isFlightInfo &&(mouseX>(50-50) && (mouseX<(50+50)&&
-    mouseY>(50-25) && mouseY<(50+25)))){
+   if (isFlightInfo &&(mouseX>(80-50) && (mouseX<(80+50)&&
+    mouseY>(80-25) && mouseY<(80+25)))){
       isDropDown=false;
+ }
+ if (isThirdScreen &&(mouseX>(90-80) && (mouseX<(90+80)&&
+    mouseY>(100-25) && mouseY<(100+25)))){
+      isDropDown2=true;
+    }
+   if (isThirdScreen &&(mouseX>(80-50) && (mouseX<(80+50)&&
+    mouseY>(80-25) && mouseY<(80+25)))){
+      isDropDown2=false;
  }
   
   // C. Quinn, made filter buttons, 1pm, 15/03/2024
@@ -170,6 +223,17 @@ void mousePressed() {
     selectedFilters = selectedFilters.replace("airline, ", "");
     airlineWeight = 0;
   }
+   if (isFlightInfo && mouseX > (400-50) && mouseX < (400+50) &&
+      mouseY > (350-25) && mouseY < (350+25)) {
+    isFlightInfo = false; // You might want to adjust which flags are set based on your UI flow
+    isThirdScreen = true;
+  }
+   if (isThirdScreen && mouseX > (70-80) && mouseX < (70+80) &&
+      mouseY > (370-25) && mouseY < (370+25)) {
+    isThirdScreen = false;
+    isFlightInfo = true; // Switch back to the Flight Info screen
+  }
+  
 }
 // C. Quinn, added function to draw map and pins, 1pm, 15/03/2024
 //void drawPinsOnMap() {
