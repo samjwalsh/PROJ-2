@@ -51,7 +51,8 @@ void dropDownOnScreen() {
   textSize(10);
   text("Hide selection", 80, 80);
 }
-void thirdScreen() {
+
+void thirdScreen() {// C.O'Brien made third screen, 11pm, 27/3/24
   background(255); // Set the background to white
   
   fill(#C6C6C6);
@@ -123,9 +124,7 @@ void flightInfoScreen() {
   drawFilterButton(100, 100, "Origin",originWeight);
   drawFilterButton(250, 100, "Destination",destinationWeight);
   drawFilterButton(400, 100, "Airline",airlineWeight);
-<<<<<<< HEAD
-  
-   fill(#C6C6C6);
+  fill(#C6C6C6);
   rect(400, 350, 100, 50); // Third Screen Button
   fill(255);
   textSize(10);
@@ -137,9 +136,9 @@ void flightInfoScreen() {
   } else {
     strokeWeight(0);
   }
-=======
+
   //drawFilterButton(400, 100, "Distance",airlineWeight);
->>>>>>> 45ab8b6d39779759b20f5c6b3ad2aa7e29aa35cb
+
 }
 
 
