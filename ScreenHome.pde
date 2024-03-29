@@ -8,14 +8,11 @@ class ScreenHome extends Screen {
       "Flights By Distance", color(255), font, "FDist"));
     add(new Widget(100, 140, 100, 40,
       "Marketshare", color(255), font, "MShare"));
+    add(new Widget(850, 750, 100, 40,
+      "Filters", color(255), font, "Filter"));
   }
   void draw() {
     background(120, 0, 255);
     drawWidgets();
-    scroll.update();
-    scroll.display();
-    if (firstMousePress) {
-      firstMousePress = false;
-    }
   }
 }

@@ -11,8 +11,9 @@ Histogram theHistogram;
 GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
-HScrollbar scroll;
-boolean firstMousePress = false;
+SliderWidget scroll;
+CheckBox checkBoxesAirlines;
+CheckBox checkBoxesDataSet;
 
 Movie movie;
 Boolean enableVideo = false;
@@ -23,12 +24,15 @@ ScreenHome screenHome;
 ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
+ScreenFilter screenFilter;
+String[] dataSets={"flights_full","flights_100k","flights10k","flights2k"};
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
 void setup() {
   size(1000, 800);
-  font = createFont("", 99);
+  font = createFont("AlTarikh-48.vlw", 15);
+  textFont(font);
   DataReader dataReader = new DataReader("flights10k.csv");
   data = dataReader.readFile();
 
@@ -36,8 +40,12 @@ void setup() {
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
-  scroll = new HScrollbar(0, height/2-8, width, 16, 16);
-
+  
+  
+  screenFilter = new ScreenFilter(this);
+  scroll = new SliderWidget(width-650, width-100, 80, color(#F29AE8), 31, 5095, "Distance");
+  checkBoxesAirlines = new CheckBox(50,50,10,color(#F29AE8),"Airlines",screenFBD.airlines[1],true);
+  checkBoxesDataSet = new CheckBox(width-400,400,4,color(#F29AE8),"Data Set",dataSets,false);
 
   movie = new Movie(this, "movie.mp4");
   movie.loop();
@@ -51,6 +59,11 @@ void draw() {
   case "Home":
     {
       screenHome.draw();
+      break;
+    }
+  case "Filter":
+    {
+      screenFilter.draw();
       break;
     }
   case "FBD":
@@ -103,6 +116,9 @@ void mousePressed() {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
+        case "Filter":
+          currentScreen = "Filter";
+          return;
         case "FBD":
           currentScreen = "FBD";
           return;
@@ -116,9 +132,6 @@ void mousePressed() {
           }
         default:
         }
-      }
-      if (!firstMousePress) {
-        firstMousePress = true;
       }
     }
   case "FBD" :
@@ -168,6 +181,20 @@ void mousePressed() {
           theWidget.toggle();
           screenFBD.toggleAirline(event);
           return;
+        case "Home":
+          currentScreen = "Home";
+          return;
+        default:
+        }
+      }
+    }
+  case "Filter":
+    {
+      ArrayList myWidgets = screenFilter.getWidgets();
+      for (int i = 0; i < myWidgets.size(); i++) {
+        Widget theWidget = (Widget)myWidgets.get(i);
+        event = theWidget.getEvent(mouseX, mouseY);
+        switch(event) {
         case "Home":
           currentScreen = "Home";
           return;
