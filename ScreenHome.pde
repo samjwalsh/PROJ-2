@@ -12,7 +12,7 @@ class ScreenHome extends Screen {
       "Filters", color(255), font, "Filter"));
   }
   void draw() {
-    background(120, 0, 255);
+    background(255, 212, 229);
     drawWidgets();
   }
 }
