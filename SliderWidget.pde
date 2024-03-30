@@ -7,13 +7,8 @@ class SliderWidget {
   float displayText1, displayText2, barY;
 
   SliderWidget (float barX1, float barX2, int barY, color hilightColour, int startRange, int endRange, String title) {
-    this.barX1 = barX1;
-    this.barX2 = barX2;
-    this.barY = barY;
-    this.hilightColour = hilightColour;
-    this.startRange = startRange;
-    this.endRange = endRange;
-    this.title = title;
+    this.barX1 = barX1; this.barX2 = barX2; this.barY = barY; this.hilightColour = hilightColour;
+    this.startRange = startRange; this.endRange = endRange; this.title = title;
     slider1Xpos = barX1;
     slider2Xpos = barX2;
     midpoint = barX1+((barX2-barX1)/2);
@@ -21,6 +16,15 @@ class SliderWidget {
   }
 
   void draw() {
+    // check if still holding slider
+    if (!mousePressed) {
+      hold1 = false;
+    }
+    if (!mousePressed) {
+      hold2 = false;
+    }
+
+    //set line with given x values and y
     line(barX1, barY, barX2, barY);
     //slide optns
     fill(hilightColour);
@@ -33,14 +37,30 @@ class SliderWidget {
     fill(0);
     text(title, midpoint-70, barY-25);
   }
+
   void update(int mx, int my) {
-    displayText1 = startRange+dist(barX1,barY,slider1Xpos,barY)*((endRange-startRange)/dist(barX1,barY,barX2,barY));
-    
-    displayText2 =startRange+dist(barX1,barY,slider2Xpos,barY)*((endRange-startRange)/dist(barX1,barY,barX2,barY));;
+    //find the distance value that corresponds to the slider
+    displayText1 = startRange+dist(barX1, barY, slider1Xpos, barY)*((endRange-startRange)/dist(barX1, barY, barX2, barY));
+    displayText2 =startRange+dist(barX1, barY, slider2Xpos, barY)*((endRange-startRange)/dist(barX1, barY, barX2, barY));
     textSize(10);
-    
+
     text(int(displayText1), slider1Xpos-5, barY+15);
     text(int(displayText2), slider2Xpos-5, barY+15);
+
+    if (hold1) {
+      slider1Xpos = constrain(mx, barX1, slider2Xpos-10);
+    }
+    if (hold2) {
+      slider2Xpos = constrain(mx, slider1Xpos+10, barX2);
+    }
+  }
+  float constrain(float val, float minv, float maxv) {
+    //constrain the sliders to the length of the slider
+    return min(max(val, minv), maxv);
+  }
+
+  void runMousePressed(int mx, int my) {
+    // check if each slider is being held
     if (dist(mx, my, slider1Xpos, barY)<5) {
       //stroke(255);
       if (mousePressed) {
@@ -49,14 +69,6 @@ class SliderWidget {
         hold1 = false;
       }
     }
-    if (slider1Xpos>slider2Xpos) {
-      slider1Xpos = slider2Xpos-5;
-    } else {
-      if (hold1) {
-        slider1Xpos = constrain(mx, barX1, slider2Xpos-10);
-      }
-    }
-
     if (dist(mx, my, slider2Xpos, barY)<5) {
       //stroke(255);
       if (mousePressed) {
@@ -65,15 +77,5 @@ class SliderWidget {
         hold2 = false;
       }
     }
-    if (slider2Xpos<slider1Xpos) {
-      slider2Xpos = slider1Xpos+5;
-    } else {
-      if (hold2) {
-        slider2Xpos = constrain(mx, slider1Xpos+10, barX2);
-      }
-    }
-  }
-  float constrain(float val, float minv, float maxv) {
-    return min(max(val, minv), maxv);
   }
 }

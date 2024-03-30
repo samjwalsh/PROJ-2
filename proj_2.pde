@@ -6,14 +6,21 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import processing.video.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import processing.data.Table;
+import processing.data.TableRow;
+import java.util.Collections;
 
 Histogram theHistogram;
 GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
-SliderWidget scroll;
+SliderWidget slider;
 CheckBox checkBoxesAirlines;
 CheckBox checkBoxesDataSet;
+CheckBox airportChecks;
+ScrollWidget pages;
 
 Movie movie;
 Boolean enableVideo = false;
@@ -25,7 +32,7 @@ ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
 ScreenFilter screenFilter;
-String[] dataSets={"flights_full","flights_100k","flights10k","flights2k"};
+String[] dataSets={"flights_full", "flights_100k", "flights10k", "flights2k"};
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
@@ -40,17 +47,20 @@ void setup() {
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
-  
-  
+
+
+
   screenFilter = new ScreenFilter(this);
-  scroll = new SliderWidget(width-650, width-100, 80, color(#F29AE8), 31, 5095, "Distance");
-  checkBoxesAirlines = new CheckBox(50,50,10,color(#F29AE8),"Airlines",screenFBD.airlines[1],true);
-  checkBoxesDataSet = new CheckBox(width-400,400,4,color(#F29AE8),"Data Set",dataSets,false);
+  slider = new SliderWidget(width-650, width-100, 80, color(244, 144, 185), 31, 5095, "Distance");
+  pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
+  checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true);
+  checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false);
 
   movie = new Movie(this, "movie.mp4");
   movie.loop();
   movie.volume(0);
   toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
+  rectMode(CORNER);
 }
 
 void draw() {
@@ -201,6 +211,11 @@ void mousePressed() {
         default:
         }
       }
+      slider.runMousePressed(mouseX, mouseY);
+      checkBoxesAirlines.runMousePressed(mouseX, mouseY);
+      checkBoxesDataSet.runMousePressed(mouseX, mouseY);
+      airportChecks.runMousePressed(mouseX, mouseY);
+      pages.needMousePressed(mouseX, mouseY);
     }
   case "FDist":
     {

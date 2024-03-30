@@ -18,6 +18,7 @@ class Widget {
     this.widgetFont=widgetFont;
     labelColor= color(0);
     textAlign(CENTER);
+    rectMode(CORNER);
   }
   void draw() {
     fill(widgetColor);

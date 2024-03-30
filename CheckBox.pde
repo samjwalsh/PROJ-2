@@ -9,6 +9,7 @@ class CheckBox {
   String title;
   String[] lables;
   int[] xValues;
+  int countTrue;
 
 
   CheckBox(int x, int y, int count, color selectedColour, String title, String[] lables, boolean multiSelect) {
@@ -27,6 +28,7 @@ class CheckBox {
         selected[i] = true;
       } else {
         selected[i] = false;
+        selected[0] = true;
       }
       xValues[i] = changingY;
       changingY+=30;
@@ -42,9 +44,15 @@ class CheckBox {
     } else {
       selectAllXPos = x+125;
     }
+    countTrue = count;
   }
 
   void draw() {
+    if (countTrue == count) {
+      selectAll = true;
+    } else {
+      selectAll = false;
+    }
     fill(255);
     if (multiSelect) {
       ellipse(selectAllXPos+80, y-5, 15, 15);
@@ -73,45 +81,33 @@ class CheckBox {
     }
   }
 
-  void selected(int mx, int my) {
-    for (int i = 0; i<selected.length; i++) {
-      if (mousePressed) {
 
-        if (dist(mx, my, x, xValues[i])<8) {
-          if (!multiSelect) {
-            for (int j = 0; j<selected.length; j++) {
-              selected[j] = false;
-            }
-          }
-          if (selected[i] && multiSelect) {
-            selected[i]=false;
-          } else {
-            selected[i]=true;
-          }
+
+  void runMousePressed(int mx, int my) {
+    if (multiSelect) {
+      if (dist(mx, my, selectAllXPos+80, y-5)<8) {
+        countTrue = count;
+        for (int i = 0; i<selected.length; i++) {
+          selected[i] = true;
         }
       }
     }
-  }
+    for (int i = 0; i<selected.length; i++) {
 
-  void selectAll(int mx, int my) {
-    if (multiSelect) {
-      if (mousePressed) {
-        if (dist(mx, my, selectAllXPos+80, y-5)<8) {
-          for (int i = 0; i<selected.length; i++) {
-            selected[i] = true;
+      if (dist(mx, my, x, xValues[i])<8) {
+        if (!multiSelect) {
+          for (int j = 0; j<selected.length; j++) {
+            selected[j] = false;
+            countTrue--;
           }
         }
-      }
-      int counter=0;
-      for (int i = 0; i<selected.length; i++) {
-        if (selected[i] == true) {
-          counter++;
+        if (selected[i] && multiSelect) {
+          selected[i]=false;
+          countTrue--;
+        } else {
+          selected[i]=true;
+          countTrue++;
         }
-      }
-      if (counter == count) {
-        selectAll = true;
-      } else {
-        selectAll = false;
       }
     }
   }

@@ -11,17 +11,17 @@ class ScreenFilter extends Screen {
   }
   
   void draw() {
-    background(255);
+    background(255, 212, 229);
     drawWidgets();
     
-    scroll.draw();
-    scroll.update(mouseX,mouseY);
-    checkBoxesAirlines.draw();
-    checkBoxesAirlines.selected(mouseX,mouseY);
-    checkBoxesAirlines.selectAll(mouseX,mouseY);
+    slider.draw();
+    slider.update(mouseX,mouseY);
     
-    checkBoxesDataSet.selectAll(mouseX,mouseY);
+    checkBoxesAirlines.draw();
+    
     checkBoxesDataSet.draw();
-    checkBoxesDataSet.selected(mouseX,mouseY);
+    
+
+    pages.draw();
   }
 }
