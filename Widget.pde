@@ -24,7 +24,7 @@ class Widget {
     fill(widgetColor);
     rect(x, y, width, height);
     fill(labelColor);
-    text(label, x, y);
+    text(label, x+(width/2), y+(height/2));
   }
   String getEvent(int mX, int mY) {
     if (mX>x && mX < x+width && mY >y && mY <y+height) {
