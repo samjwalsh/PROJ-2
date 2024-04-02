@@ -12,6 +12,7 @@ class ScreenFilter extends Screen {
   
   void draw() {
     background(255, 212, 229);
+    pages.draw();
     drawWidgets();
     
     slider.draw();
@@ -22,6 +23,6 @@ class ScreenFilter extends Screen {
     checkBoxesDataSet.draw();
     
 
-    pages.draw();
+    
   }
 }

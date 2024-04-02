@@ -57,6 +57,9 @@ class CheckBox {
     if (multiSelect) {
       ellipse(selectAllXPos+80, y-5, 15, 15);
       if (selectAll) {
+        if (dist(mouseX, mouseY, selectAllXPos+80, y-5)<15) {
+          stroke(255);
+        } else stroke(0);
         fill(selectedColour);
         ellipse(selectAllXPos+80, y-5, 10, 10);
       }
@@ -71,12 +74,17 @@ class CheckBox {
     }
     for (int i = 0; i<selected.length; i++) {
       fill(255);
+      stroke(0);
       ellipse(x, xValues[i], 15, 15);
       fill(0);
       text(lables[i], x+20, xValues[i]+4);
       if (selected[i]) {
+        if (dist(mouseX, mouseY, x, xValues[i])<15) {
+          stroke(255);
+        } else stroke(0);
         fill(selectedColour);
         ellipse(x, xValues[i], 10, 10);
+        stroke(0);
       }
     }
   }

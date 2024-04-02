@@ -247,3 +247,9 @@ void mousePressed() {
     }
   }
 }
+
+
+void mouseWheel(MouseEvent event) {
+  float e = event.getCount();
+  pages.needMouseWheel(e);
+}

@@ -11,6 +11,7 @@ class ScreenHome extends Screen {
     add(new Widget(850, 750, 100, 40,
       "Filters", color(255), font, "Filter"));
   }
+  
   void draw() {
     background(255, 212, 229);
     drawWidgets();
