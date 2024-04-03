@@ -86,6 +86,8 @@ class ScrollWidget {
     noStroke();
     fill(255, 212, 229);
     rect(0, 0, width, 425);
+    fill(255, 212, 229);
+    rect(0, 680, width, 120);//rectangles to cover lsit
     textSize(20);
     fill(0); // Text color
     text(title, xpos, ypos-15);

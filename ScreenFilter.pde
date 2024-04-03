@@ -8,7 +8,7 @@ class ScreenFilter extends Screen {
     super(parent);
     add(new Widget(20, height-60, 100, 40,
       "Home", color(255), font, "Home"));
-    startDateInput = new InputBox(500, 200, 200, 50); // Example positioning
+    startDateInput = new InputBox(500, 200, 200, 50); 
     endDateInput = new InputBox(500, 280, 200, 50);
     
   }
