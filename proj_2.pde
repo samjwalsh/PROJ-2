@@ -22,6 +22,7 @@ CheckBox checkBoxesDataSet;
 CheckBox airportChecks;
 ScrollWidget pages;
 
+PImage background;
 Movie movie;
 Boolean enableVideo = false;
 ToggleBox toggleVideo;
@@ -42,14 +43,15 @@ void setup() {
   textFont(font);
   DataReader dataReader = new DataReader("flights10k.csv");
   data = dataReader.readFile();
-
+  
   screenHome = new ScreenHome(this);
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
+  
 
-
-
+  // C. Quinn, created instance of the classes, 11:30, 29/03/2024
+  background = loadImage("background.PNG");
   screenFilter = new ScreenFilter(this);
   slider = new SliderWidget(width-650, width-100, 80, color(244, 144, 185), 31, 5095, "Distance");
   pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
@@ -248,7 +250,7 @@ void mousePressed() {
   }
 }
 
-
+// C. Quinn, added mouse wheel function to add scroll functionality to airpot slection, 3:30pm, 03/04/2024
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
   pages.needMouseWheel(e);

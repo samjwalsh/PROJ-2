@@ -13,7 +13,8 @@ class ScreenHome extends Screen {
   }
   
   void draw() {
-    background(255, 212, 229);
+    //background(255, 212, 229);
+    image(background,0,0,width,height);
     drawWidgets();
   }
 }
