@@ -71,6 +71,10 @@ class SliderWidget {
     //constrain the sliders to the length of the slider
     return min(max(val, minv), maxv);
   }
+  
+  int[] getBounds() {
+    return new int[]{int(displayText1), int(displayText2)};
+  }
 
   void runMousePressed(int mx, int my) {
     // check if each slider is being held

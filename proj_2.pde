@@ -214,6 +214,9 @@ void mousePressed() {
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
         case "Home":
+        println(slider.getBounds()[0]);
+                println(slider.getBounds()[1]);
+
           currentScreen = "Home";
           return;
         default:
