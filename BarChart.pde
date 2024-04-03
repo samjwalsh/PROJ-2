@@ -52,7 +52,7 @@ class BarChart {
 
     plot.startHistograms(GPlot.VERTICAL);
     plot.getHistogram().setDrawLabels(true);
-    plot.getHistogram().setBgColors(new int[] {color(244, 144, 185)});
+    plot.getHistogram().setBgColors(new int[] {color(100, 120, 220)});
     plot.getTitle().setText(chartTitle);
 
 
