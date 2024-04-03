@@ -22,6 +22,15 @@ class Filter {
   //  }
   //  return filteredData;
   //}
+    ArrayList<DataPoint> onlySelectStates(ArrayList<DataPoint> data, ArrayList<String> states) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (states.contains(dataPoint.getOriginState())) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
 
   ArrayList<DataPoint> onlySelectAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
