@@ -10,7 +10,7 @@ class ScreenFBD extends Screen {
   ScreenFBD(PApplet parent) {
     super(parent);
 
-    Table table = query.flightsByDoW(data);
+    Table table = query.flightsByDoW(selectedData);
 
     barChart = new BarChart(parent, 700, width - 800, 0);
     barChart.setData(table, "Flights by day of week", "Day", "Flights")  ;
@@ -26,6 +26,10 @@ class ScreenFBD extends Screen {
         airlines[1][i], color(173, 245, 185), font, airlines[0][i], color(245, 173, 173)));
       initY += 50;
     }
+  }
+  void update() {
+    Table table = query.flightsByDoW(selectedData);
+    barChart.setData(table, "Flights by day of week", "Day", "Flights")  ;
   }
   void draw() {
     background(255, 212, 229);
@@ -46,7 +50,7 @@ class ScreenFBD extends Screen {
           if (airlines[2][j].equals("t")) allowedAirlines.add(airlines[0][j]);
         }
         ArrayList<DataPoint> filteredData;
-        filteredData = Filter.onlySelectAirports(data, allowedAirlines);
+        filteredData = Filter.onlySelectAirports(selectedData, allowedAirlines);
         Table table = query.flightsByDoW(filteredData);
         barChart.setData(table, "Flights by day of week", "Day", "Flights");
 

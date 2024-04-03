@@ -7,8 +7,13 @@ class ScreenMShare extends Screen {
     add(new Widget(100, 20, 100, 40,
       "Home", color(255), font, "Home"));
 
-    Table table = query.marketShare(data);
+    Table table = query.marketShare(selectedData);
     pieChart = new PieChart(height/2, width/2, 50, 50);
+    pieChart.setData(table, "MarketShare");
+  }
+
+  void update() {
+    Table table = query.marketShare(selectedData);
     pieChart.setData(table, "MarketShare");
   }
 

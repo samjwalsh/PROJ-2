@@ -47,6 +47,13 @@ class CheckBox {
     countTrue = count;
   }
 
+ArrayList<String> getSelected() {
+  ArrayList<String> selectedAL = new ArrayList<String>();
+  for (int item = 0; item < lables.length; item++) {
+    if (selected[item]) selectedAL.add(lables[item]);
+  }
+  return selectedAL;
+}
   void draw() {
     if (countTrue == count) {
       selectAll = true;

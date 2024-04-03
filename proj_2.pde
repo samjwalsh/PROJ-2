@@ -38,6 +38,8 @@ ScreenFilter screenFilter;
 String[] dataSets={"flights_full", "flights_100k", "flights10k", "flights2k"};
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
+ArrayList<DataPoint> selectedData = new ArrayList<DataPoint>();
+
 PFont font;
 void setup() {
   size(1000, 800);
@@ -45,12 +47,13 @@ void setup() {
   textFont(font);
   DataReader dataReader = new DataReader("flights10k.csv");
   data = dataReader.readFile();
-  
+  selectedData = data;
+
   screenHome = new ScreenHome(this);
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
-  
+
 
   // C. Quinn, created instance of the classes, 11:30, 29/03/2024
   background = loadImage("background.PNG");
@@ -116,8 +119,8 @@ void draw() {
 
 void mousePressed() {
   String event;
-  
-   screenFilter.mousePressed();
+
+  screenFilter.mousePressed();
 
   if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
     toggleVideo.toggle();
@@ -139,15 +142,16 @@ void mousePressed() {
           return;
         case "FBD":
           currentScreen = "FBD";
+          screenFBD.update();
           return;
         case "FDist":
           currentScreen = "FDist";
+          screenFDist.update();
           return;
         case "MShare":
-          {
-            currentScreen = "MShare";
-            return;
-          }
+          currentScreen = "MShare";
+          screenMShare.update();
+          return;
         default:
         }
       }
@@ -214,8 +218,28 @@ void mousePressed() {
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
         case "Home":
-        println(slider.getBounds()[0]);
-                println(slider.getBounds()[1]);
+
+          // Set data set
+          println(checkBoxesDataSet.getSelected());
+          DataReader dataReader = new DataReader(checkBoxesDataSet.getSelected().get(0) + ".csv");
+          data = dataReader.readFile();
+  // TODO update so data is only read again if the filename has changed since last time
+          // Filter distancess
+          selectedData = Filter.distanceBetween(data, slider.getBounds()[0], slider.getBounds()[1]);
+          println(selectedData.size());
+
+          // Filter airlines
+          ArrayList<String> airports = checkBoxesAirlines.getSelected();
+          for (int k = 0; k < airports.size(); k++) {
+            for (int j = 0; j < screenFBD.airlines[0].length; j++) {
+              if (screenFBD.airlines[1][j].equals(airports.get(k))) {
+                airports.set(k, screenFBD.airlines[0][j]);
+              }
+            }
+          }
+          selectedData = Filter.onlySelectAirports(selectedData, airports);
+          println(selectedData.size());
+
 
           currentScreen = "Home";
           return;
