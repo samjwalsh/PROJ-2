@@ -21,6 +21,8 @@ CheckBox checkBoxesAirlines;
 CheckBox checkBoxesDataSet;
 CheckBox airportChecks;
 ScrollWidget pages;
+InputBox startDateInput;
+InputBox endDateInput;
 
 PImage background;
 Movie movie;
@@ -110,8 +112,12 @@ void draw() {
   toggleVideo.draw();
 }
 
+
+
 void mousePressed() {
   String event;
+  
+   screenFilter.mousePressed();
 
   if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
     toggleVideo.toggle();
@@ -254,4 +260,7 @@ void mousePressed() {
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
   pages.needMouseWheel(e);
+}
+void keyPressed() {
+  screenFilter.keyPressed();
 }

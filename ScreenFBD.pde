@@ -23,12 +23,12 @@ class ScreenFBD extends Screen {
     int initY = 100;
     for (int i = 0; i < airlines[0].length; i++) {
       add(new ToggleBox(initX, initY, 100, 40,
-        airlines[1][i], color(0, 255, 0), font, airlines[0][i], color(255, 0, 0)));
+        airlines[1][i], color(173, 245, 185), font, airlines[0][i], color(245, 173, 173)));
       initY += 50;
     }
   }
   void draw() {
-    background(200);
+    background(255, 212, 229);
     drawWidgets();
     barChart.draw();
   }
