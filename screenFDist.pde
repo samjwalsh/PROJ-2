@@ -7,7 +7,7 @@ class ScreenFDist extends Screen {
     add(new Widget(100, 20, 100, 40,
       "Home", color(255), font, "Home"));
 
-    String airport = "JFK";
+    String airport = "SEA";
     data = Filter.isLateLeaving(data);
     int[] flightDistances = query.flightDistances(data, airport);
     histogram = new Histogram(250, 10, 600, 600, parent);
