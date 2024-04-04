@@ -29,6 +29,8 @@ class Widget {
       stroke(255);
     }
     fill(widgetColor);
+    textAlign(CENTER);
+    rectMode(CORNER);
     rect(x, y, width, height);
     fill(labelColor);
     text(label, x+(width/2), y+(height/2));
