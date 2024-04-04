@@ -1,8 +1,10 @@
 // S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
 // Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
+// M.Murphy created query for creating int array of flights by date, 5:00, 04/04/2024
 
 class Query {
+  
 
   int[] flightDistances(ArrayList<DataPoint> data, String airport) {
     ArrayList<Integer> distancesAL = new ArrayList<Integer>();
@@ -23,7 +25,8 @@ class Query {
 
     return array;
   }
-
+  
+  
   Table flightsByDoW(ArrayList<DataPoint> data) {
 
     int mon = 0;
@@ -210,5 +213,34 @@ class Query {
     WNRow.setInt("No. Flights", WN);
 
     return tableTwo;
+  }
+    
+  
+  public class DatesInRange {
+    private int[] dates;
+    private int[] range;
+    
+    public DatesInRange(int[] dates, int[] range) {
+      this.dates = dates;
+      this.range = range;
+    }
+    public int[] getDates() {return dates;}
+    public int[] getRange() {return range;}
+  }
+      
+  
+  public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) { //<>//
+    //println(range[0]); println(range[1]);
+    int[] dates = new int[range[1]-(range[0]-1)];
+    String date = "";
+    for(DataPoint dataPoint : data) {
+      for(int i = range[0]  ; i <= dates.length; i++) {
+        date = dataPoint.getFlightDate();
+        if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+3)) == i) {
+          dates[i-1] += 1;
+        }
+      }   
+    }
+    return new DatesInRange(dates, range);
   }
 }

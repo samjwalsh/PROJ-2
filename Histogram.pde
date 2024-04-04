@@ -70,7 +70,7 @@ class Histogram {
     histogram.drawBox();
     histogram.drawXAxis();
     histogram.drawYAxis();
-    histogram.drawXAxis();
+    //histogram.drawXAxis();
     histogram.drawTitle();
     histogram.drawHistograms();
     histogram.endDraw();
