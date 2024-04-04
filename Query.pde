@@ -229,15 +229,22 @@ class Query {
   }
       
   
-  public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) { //<>//
+  public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) { //<>// //<>//
     //println(range[0]); println(range[1]);
     int[] dates = new int[range[1]-(range[0]-1)];
     String date = "";
     for(DataPoint dataPoint : data) {
       for(int i = range[0]  ; i <= dates.length; i++) {
         date = dataPoint.getFlightDate();
-        if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+3)) == i) {
-          dates[i-1] += 1;
+        if(date.indexOf('/'+3) == '/') {
+          if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+3)) == i) {
+            dates[i-1] += 1;
+          }
+        }
+        else {
+          if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+2)) == i) {
+            dates[i-1] += 1;
+          }    
         }
       }   
     }

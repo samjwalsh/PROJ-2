@@ -8,7 +8,7 @@ class ScreenFDates extends Screen {
       "Home", color(255), font, "Home"));
       
   Query.DatesInRange datesInRange;
-  int[] range = {1,6}; // change range here
+  int[] range = {1,31}; // change range here
   datesInRange =  query.flightsByDate(data, range);
   
   linePlot = new LinePlot(250, 10, 600, 600, parent);
