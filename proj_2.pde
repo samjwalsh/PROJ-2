@@ -39,10 +39,11 @@ String[] dataSets={"flights_full", "flights_100k", "flights10k", "flights2k"};
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
+
 void setup() {
   size(1000, 800);
-  font = createFont("AlTarikh-48.vlw", 15);
-  textFont(font);
+  font = loadFont("Helvetica-48.vlw");
+  textFont(font,20);
   DataReader dataReader = new DataReader("flights10k.csv");
   data = dataReader.readFile();
   

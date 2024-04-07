@@ -48,6 +48,7 @@ class CheckBox {
   }
 
   void draw() {
+    textFont(font);
     if (countTrue == count) {
       selectAll = true;
     } else {
