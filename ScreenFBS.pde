@@ -58,7 +58,7 @@ class ScreenFBS extends Screen {
           if (States[1][j].equals("t")) allowedStates.add(States[0][j]);
         }
         ArrayList<DataPoint> filteredData;
-        filteredData = Filter.onlySelectStates(data, allowedStates);
+        filteredData = Filter.onlySelectStates(selectedData, allowedStates);
         Table table = query.flightsByState(filteredData);
         barChart.setData(table, "Flights by State", "State", "Flights");
         return;
