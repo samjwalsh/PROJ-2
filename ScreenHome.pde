@@ -8,6 +8,8 @@ class ScreenHome extends Screen {
       "Flights By Distance", color(255), font, "FDist"));
     add(new Widget(100, 140, 100, 40,
       "Marketshare", color(255), font, "MShare"));
+    add(new Widget(100, 200, 100, 40,
+      "Flights By Date", color(255), font, "FBDt"));
   }
   void draw() {
     background(120, 0, 255);

@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import grafica.*;
 import java.util.Random;
 import javax.swing.JOptionPane;
-import java.util.Arrays;
 
 import processing.video.*;
 
@@ -12,6 +11,7 @@ Histogram theHistogram;
 GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
+GPlot linePlot;
 
 Movie movie;
 Boolean enableVideo = false;
@@ -22,6 +22,7 @@ ScreenHome screenHome;
 ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
+ScreenFDates screenFDates;
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
@@ -35,6 +36,7 @@ void setup() {
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
+  screenFDates = new ScreenFDates(this);
 
   movie = new Movie(this, "movie.mp4");
   movie.loop();
@@ -63,6 +65,11 @@ void draw() {
   case "MShare":
     {
       screenMShare.draw();
+      break;
+    }
+  case "FBDt":
+    {
+      screenFDates.draw();
       break;
     }
   default:
@@ -111,6 +118,11 @@ void mousePressed() {
             currentScreen = "MShare";
             return;
           }
+        case "FBDt":
+          {
+            currentScreen = "FBDt";
+            return;
+          }  
         default:
         }
       }
@@ -192,6 +204,20 @@ void mousePressed() {
         switch(event) {
         case "Home":
 currentScreen = "Home";
+          return;
+        default:
+        }
+      }
+    }
+    case "FBDt":
+    {
+      ArrayList myWidgets = screenFDates.getWidgets();
+      for (int i = 0; i < myWidgets.size(); i++) {
+        Widget theWidget = (Widget)myWidgets.get(i);
+        event = theWidget.getEvent(mouseX, mouseY);
+        switch(event) {
+        case "Home":
+          currentScreen = "Home";
           return;
         default:
         }
