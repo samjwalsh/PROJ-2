@@ -127,6 +127,29 @@ class Query {
     return table;
   }
 
+  Table cancelledFlights(ArrayList<DataPoint> data) {
+    int notCancelled = 0;
+    int cancelled = 0;
+    
+    for (DataPoint dataPoint : data) {
+      
+      if (dataPoint.getCancelled()) cancelled++;
+      else notCancelled++;
+    }
+    
+    Table table = new Table();
+    
+    TableRow cancelledRow = table.addRow();
+    cancelledRow.setString("State", "Count");
+    cancelledRow.setInt("Cancelled", cancelled);
+    
+    TableRow notCancelledRow = table.addRow();
+    notCancelledRow.setString("State", "Count");
+    notCancelledRow.setInt("Not Cancelled", notCancelled);
+
+  return table;
+  }  
+
 
   Table marketShare(ArrayList<DataPoint> data) {
 

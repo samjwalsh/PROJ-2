@@ -6,7 +6,7 @@ class ScreenFBS extends Screen {
       , "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA"
     , "WI", "WV", "WY"},
     {"t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t"
-    , "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t"}
+    , "t", "t", "t", "t", "t", "t", "t", "t", "t","t","t"}
     }
     ;
 
@@ -23,15 +23,15 @@ class ScreenFBS extends Screen {
       "Home", color(255), font, "Home"));
 
 
-    int initX = 20;
-    int initY = 70;
+    int initX = 50;
+    int initY = 100;
     for (int i = 0; i < States[0].length; i++) {
       add(new ToggleBox(initX, initY, 20, 40, States[0][i], color(0,100, 0), font, States[0][i], color(255, 0, 0)));
       if (initY >= 600) {
         initX += 50;
         initY = 20;
       }
-
+      
       initY += 50;
     }
   }
@@ -58,7 +58,7 @@ class ScreenFBS extends Screen {
           if (States[1][j].equals("t")) allowedStates.add(States[0][j]);
         }
         ArrayList<DataPoint> filteredData;
-        filteredData = Filter.onlySelectStates(selectedData, allowedStates);
+        filteredData = Filter.onlySelectStates(data, allowedStates);
         Table table = query.flightsByState(filteredData);
         barChart.setData(table, "Flights by State", "State", "Flights");
         return;

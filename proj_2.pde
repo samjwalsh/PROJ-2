@@ -1,4 +1,5 @@
 // S. Walsh, Implemented screens and widgets in main file, 22:00 26/03/2024
+// S. Walsh, connected UI data filter to data arrays in program, 13:00, 08/04/2024
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import grafica.*;
@@ -37,6 +38,7 @@ ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
 ScreenFilter screenFilter;
+ScreenCancelled screenCancelled;
 String[] dataSets = {"flights_full", "flights100k", "flights10k", "flights2k"};
 
 ArrayList<DataPoint> data_full = new ArrayList<DataPoint>();
@@ -54,9 +56,9 @@ void setup() {
   font = createFont("AlTarikh-48.vlw", 15);
   textFont(font);
   DataReader flights_full = new DataReader("flights_full.csv");
-    DataReader flights100k = new DataReader("flights100k.csv");
-    DataReader flights10k = new DataReader("flights10k.csv");
-    DataReader flights2k = new DataReader("flights2k.csv");
+  DataReader flights100k = new DataReader("flights100k.csv");
+  DataReader flights10k = new DataReader("flights10k.csv");
+  DataReader flights2k = new DataReader("flights2k.csv");
 
 
   data_full =flights_full.readFile();
@@ -71,6 +73,7 @@ void setup() {
   screenMShare = new ScreenMShare(this);
   screenFDates = new ScreenFDates(this);
   screenFBS = new ScreenFBS(this);
+  screenCancelled = new ScreenCancelled(this);
 
 
   //C. Quinn, created instance of the classes, 11:30, 29/03/2024
@@ -261,19 +264,19 @@ void mousePressed() {
           // Set data set
           String currentDataSet = checkBoxesDataSet.getSelected().get(0);
           switch (currentDataSet) {
-            case "flights_full":
+          case "flights_full":
             selectedData = data_full;
             break;
-            case "flights100k":
+          case "flights100k":
             selectedData = data100k;
             break;
-            case "flights10k" :
+          case "flights10k" :
             selectedData = data10k;
             break;
-            case "flights2k" : 
+          case "flights2k" :
             selectedData = data2k;
             break;
-            default:
+          default:
           }
 
           // TODO update so datais only read again if the filename has changed since last time
