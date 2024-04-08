@@ -6,7 +6,7 @@ class ScreenFBS extends Screen {
       , "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA"
     , "WI", "WV", "WY"},
     {"t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t"
-    , "t", "t", "t", "t", "t", "t", "t", "t", "t","t","t"}
+    , "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t"}
     }
     ;
 
@@ -23,16 +23,16 @@ class ScreenFBS extends Screen {
       "Home", color(255), font, "Home"));
 
 
-    int initX = 50;
-    int initY = 100;
+    int initX = 20;
+    int initY = 70;
     for (int i = 0; i < States[0].length; i++) {
       add(new ToggleBox(initX, initY, 20, 40,
         States[0][i], color(0, 255, 0), font, States[0][i], color(255, 0, 0)));
-      if(initY <= 600){
+      if (initY >= 600) {
         initX += 50;
         initY = 20;
       }
-      
+
       initY += 50;
     }
   }
