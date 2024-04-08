@@ -48,6 +48,7 @@ class PieChart {
     totalVals = 0;
     for (int i = 0; i < table.getRowCount(); i++) {
       values[i] = table.getFloat(i, 1);
+
       totalVals += values[i];
       //println(totalVals);
     }
@@ -64,7 +65,7 @@ class PieChart {
     float legendHeight = values.length * 30;
     float legendX = width - legendWidth - 100;
     float legendY = (height - legendHeight) / 2;
-    background(255);
+    background(255); 
 
     textAlign(CENTER);
     textSize(30);
@@ -72,24 +73,19 @@ class PieChart {
     text("Market Share per Airline", width / 2, 30);
     textAlign(LEFT);
 
+      colorMode(HSB, 360, 100, 100);
 
     float lastAngle = 0;
-    float totalPercent = 0;
-    colorMode(HSB, 360, 100, 100);
+    float sat = 65;
+    float bri = 100;
     for (int i = 0; i < values.length; i++) {
-
-      float percent = values[i] / totalVals;
-      totalPercent += percent;
-
-      float currentH = ((float)(i + 1)/values.length) * 360 ;
-      int currentS = 50;
-      int currentB = 100;
-      color colour = color(currentH, currentS, currentB);
+      float hue = ((float)(i+1)/(float)values.length)*360;
+      println(i);
+      println(hue);
+      color colour = color(hue, sat, bri);
       fill(colour);
-
-      float newAngle = (values[i] * 360.0) / totalVals;
-      arc(width / 2 - 100, height / 2, diameter, diameter, radians(lastAngle), radians(lastAngle + newAngle));
-      lastAngle += newAngle;
+      float newAngle = radians((values[i] * 360 )/(totalVals));
+      arc(width/2 - 100, height/2, diameter, diameter, lastAngle, lastAngle + newAngle);
 
       textSize(12);
       fill(colour);
@@ -97,7 +93,9 @@ class PieChart {
       fill(0);
       text(labels[i], legendX + 45, legendY + 20);
       legendY += 30;
+      lastAngle += newAngle;
     }
-    colorMode(RGB);
+    colorMode(RGB, 255,255,255);
+
   }
 }

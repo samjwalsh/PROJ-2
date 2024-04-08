@@ -14,7 +14,7 @@ class ScreenFBS extends Screen {
   ScreenFBS(PApplet parent) {
     super(parent);
 
-    Table table = query.flightsByState(data);
+    Table table = query.flightsByState(selectedData);
 
     barChart = new BarChart(parent, 700, width - 800, 0);
     barChart.setData(table, "Flights by State", "State", "Flights")  ;
@@ -26,8 +26,12 @@ class ScreenFBS extends Screen {
     int initX = 50;
     int initY = 100;
     for (int i = 0; i < States[0].length; i++) {
-      add(new ToggleBox(initX, initY, 100, 40,
-        States[0][i], color(0, 255, 0), font, States[0][i], color(255, 0, 0)));
+      add(new ToggleBox(initX, initY, 20, 40, States[0][i], color(0,100, 0), font, States[0][i], color(255, 0, 0)));
+      if (initY >= 600) {
+        initX += 50;
+        initY = 20;
+      }
+      
       initY += 50;
     }
   }
@@ -36,7 +40,10 @@ class ScreenFBS extends Screen {
     drawWidgets();
     barChart.draw();
   }
-
+  void update() {
+   Table table = query.flightsByState(selectedData);
+   barChart.setData(table,"Flights by State", "State", "Flights");
+}
   void toggleState(String state) {
     for (int i = 0; i < States[0].length; i++) {
       if (States[0][i].equals(state)) {
@@ -51,7 +58,7 @@ class ScreenFBS extends Screen {
           if (States[1][j].equals("t")) allowedStates.add(States[0][j]);
         }
         ArrayList<DataPoint> filteredData;
-        filteredData = Filter.onlySelectStates(data, allowedStates);
+        filteredData = Filter.onlySelectStates(selectedData, allowedStates);
         Table table = query.flightsByState(filteredData);
         barChart.setData(table, "Flights by State", "State", "Flights");
         return;

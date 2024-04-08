@@ -9,7 +9,7 @@ class ScreenFDates extends Screen {
       
   Query.DatesInRange datesInRange;
   int[] range = {1,31}; // change range here
-  datesInRange =  query.flightsByDate(data, range);
+  datesInRange =  query.flightsByDate(selectedData, range);
   
   linePlot = new LinePlot(250, 10, 600, 600, parent);
   linePlot.setData(datesInRange.dates, datesInRange.range, "FLights By Date", "Date", "Number of Flights");
