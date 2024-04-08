@@ -24,7 +24,15 @@ class CheckBox {
     initalY = y;
     selected = new boolean[count];
     yValues = new int[count];
-    
+    //changingY = y+20;
+    for (int i = 0; i < selected.length; i++) {
+      if (multiSelect) {
+        selected[i] = true;
+      } else {
+        selected[i] = false;
+        selected[0] = true;
+      }
+    }
 
     if (multiSelect) {
       selectAll = true;
@@ -43,12 +51,6 @@ class CheckBox {
   void draw() {
     changingY = y+20;
     for (int i = 0; i < selected.length; i++) {
-      if (multiSelect) {
-        selected[i] = true;
-      } else {
-        selected[i] = false;
-        selected[0] = true;
-      }
       yValues[i] = changingY;
       changingY+=30;
     }
@@ -60,13 +62,13 @@ class CheckBox {
     }
     fill(255);
     if (multiSelect) {
-      ellipse(selectAllXPos+80, y-5, 15, 15);
+      ellipse(selectAllXPos+80, initalY+5, 15, 15);
       if (selectAll) {
-        if (dist(mouseX, mouseY, selectAllXPos+80, y-5)<15) {
+        if (dist(mouseX, mouseY, selectAllXPos+80, initalY+5)<15) {
           stroke(255);
         } else stroke(0);
         fill(selectedColour);
-        ellipse(selectAllXPos+80, y-5, 10, 10);
+        ellipse(selectAllXPos+80, initalY+5, 10, 10);
       }
     }
     textAlign(LEFT);
@@ -75,7 +77,11 @@ class CheckBox {
     text(title, x, y);
     textSize(15);
     if (multiSelect) {
-      text("Select All", selectAllXPos, y);
+      if (scroll) {
+        text("Select All", selectAllXPos, initalY+10);
+      } else {
+        text("Select All", selectAllXPos, y);
+      }
     }
     for (int i = 0; i<selected.length; i++) {
       fill(255);
@@ -98,10 +104,17 @@ class CheckBox {
 
   void mousePressed(int mx, int my) {
     if (multiSelect) {
-      if (dist(mx, my, selectAllXPos+80, y-5)<8) {
-        countTrue = count;
-        for (int i = 0; i<selected.length; i++) {
-          selected[i] = true;
+      if (dist(mx, my, selectAllXPos+80, initalY+5)<8) {
+        if (countTrue == count) {
+          countTrue = 0;
+          for (int i = 0; i<selected.length; i++) {
+            selected[i] = false;
+          }
+        } else {
+          countTrue = count;
+          for (int i = 0; i<selected.length; i++) {
+            selected[i] = true;
+          }
         }
       }
     }

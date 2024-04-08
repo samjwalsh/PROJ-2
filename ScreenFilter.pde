@@ -36,6 +36,7 @@ class ScreenFilter extends Screen {
   void mousePressed() {
     startDateInput.mousePressed(mouseX, mouseY);
     endDateInput.mousePressed(mouseX, mouseY);
+    pages.mousePressed();
   }
   void keyPressed() {
     startDateInput.keyPressed();
