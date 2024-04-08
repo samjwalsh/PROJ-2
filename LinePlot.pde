@@ -45,10 +45,17 @@ class LinePlot {
       pPoints.add(i+1, yHeights[i]);
       if(maxHeight < yHeights[i]) maxHeight = yHeights[i];
     }   
+    float[] xAxisTicks = new float[ticks];
+    for(int i = min; i <= max; i++) {
+      xAxisTicks[-min+i] = i;  
+    }
+    
     linePlot.setPos(x,y);
     linePlot.setDim(pWidth,pHeight);
     linePlot.setXLim(min,max);
     linePlot.setYLim(0,maxHeight+(int)maxHeight/10);
+    linePlot.getXAxis().setTicks(xAxisTicks);
+    linePlot.getYAxis().setNTicks(10);
     linePlot.getTitle().setText(chartTitle);
     linePlot.getXAxis().getAxisLabel().setText(xTitle);
     linePlot.getYAxis().getAxisLabel().setText(yTitle);
@@ -62,8 +69,9 @@ class LinePlot {
     linePlot.drawXAxis();
     linePlot.drawYAxis();
     linePlot.drawTitle();
+    linePlot.drawGridLines(GPlot.BOTH);
     linePlot.drawPoints();
-    linePlot.drawLines();  
+    linePlot.drawLines();
     linePlot.endDraw();
   }
   

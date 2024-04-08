@@ -232,21 +232,32 @@ class Query {
   public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) { //<>// //<>//
     //println(range[0]); println(range[1]);
     int[] dates = new int[range[1]-(range[0]-1)];
-    String date = "";
+    String[] date = new String[3];
     for(DataPoint dataPoint : data) {
-      for(int i = range[0]  ; i <= dates.length; i++) {
-        date = dataPoint.getFlightDate();
-        if(date.indexOf('/'+3) == '/') {
-          if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+3)) == i) {
-            dates[i-1] += 1;
+      for(int i = 0; i <= dates.length; i++) {
+        date = dataPoint.getFlightDate().split("/");
+        for(int j = range[0]; j <= range[1]; j++) {
+          if(Integer.valueOf(date[1]) == j) {
+            dates[j-1] += 1;  
           }
         }
-        else {
-          if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+2)) == i) {
-            dates[i-1] += 1;
-          }    
-        }
-      }   
+        
+      }
+      
+      
+      //for(int i = range[0]  ; i <= dates.length; i++) {
+      //  date = dataPoint.getFlightDate();
+      //  if(date.indexOf('/'+3) == '/') {
+      //    if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+3)) == i) {
+      //      dates[i-1] += 1;
+      //    }
+      //  }
+      //  else {
+      //    if(Integer.valueOf(date.substring(date.indexOf('/')+1,date.indexOf('/')+2)) == i) {
+      //      dates[i-1] += 1;
+      //    }    
+      //  }
+      //}   
     }
     return new DatesInRange(dates, range);
   }
