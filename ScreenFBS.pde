@@ -26,8 +26,7 @@ class ScreenFBS extends Screen {
     int initX = 20;
     int initY = 70;
     for (int i = 0; i < States[0].length; i++) {
-      add(new ToggleBox(initX, initY, 20, 40,
-        States[0][i], color(0, 255, 0), font, States[0][i], color(255, 0, 0)));
+      add(new ToggleBox(initX, initY, 20, 40, States[0][i], color(0,100, 0), font, States[0][i], color(255, 0, 0)));
       if (initY >= 600) {
         initX += 50;
         initY = 20;
@@ -42,8 +41,6 @@ class ScreenFBS extends Screen {
     barChart.draw();
   }
   void update() {
-     //   Table table = query.flightsByDoW(selectedData);
-   // barChart.setData(table, "Flights by day of week", "Day", "Flights")  ;
    Table table = query.flightsByState(selectedData);
    barChart.setData(table,"Flights by State", "State", "Flights");
 }
