@@ -47,7 +47,7 @@ class PieChart {
 
     totalVals = 0;
     for (int i = 0; i < table.getRowCount(); i++) {
-      values[i] = degreesEach * table.getInt(i, 1);
+      values[i] = table.getInt(i, 1);
 
       totalVals += values[i];
       //println(totalVals);

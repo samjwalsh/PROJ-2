@@ -188,6 +188,7 @@ void mousePressed() {
         case "FState":
           {
             currentScreen = "FState";
+            screenFBS.update();
             return;
           }
         default:
