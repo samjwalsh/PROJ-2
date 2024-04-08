@@ -1,11 +1,11 @@
 // S. Walsh, skeleton for pie chart class, 11:00, 21/03/2024
 // Mitchell Ashmore filled pie chart class 24/3/2024
-import java.util.Arrays;
+// S. Walsh, Simplified calculation of degrees and addred percentage calculations, 12:00, 28/03/2024
 
 
 // Table argument must be in following format
 /*
- Day,Flights
+Day,Flights
  Mon,401
  Tue,339
  Wed,339
@@ -42,16 +42,20 @@ class PieChart {
   void setData(Table table, String chartTitle) {
     values = new float[table.getRowCount()];
     labels = new String[table.getRowCount()];
-    float degreesEach = (float(360) / float(2000));
-    //println("degrees each"+degreesEach);
+
+
+
     totalVals = 0;
     for (int i = 0; i < table.getRowCount(); i++) {
       values[i] = degreesEach * table.getInt(i, 1);
+
       totalVals += values[i];
+      //println(totalVals);
     }
     for (int i = 0; i < table.getRowCount(); i++) {
       labels[i] = table.getString(i, 0);
     }
+
     //println(Arrays.toString(values));
     //println(Arrays.toString(labels));
   }
@@ -66,7 +70,7 @@ class PieChart {
     textAlign(CENTER);
     textSize(30);
     fill(0);
-    text("Market Share per Airline", width/2, 30);
+    text("Market Share per Airline", width / 2, 30);
     textAlign(LEFT);
 
       colorMode(HSB, 360, 100, 100);
@@ -82,6 +86,7 @@ class PieChart {
       fill(colour);
       float newAngle = radians((values[i] * 360 )/(totalVals));
       arc(width/2 - 100, height/2, diameter, diameter, lastAngle, lastAngle + newAngle);
+
       textSize(12);
       fill(colour);
       rect(legendX, legendY, 30, 30);
@@ -91,5 +96,6 @@ class PieChart {
       lastAngle += newAngle;
     }
     colorMode(RGB, 255,255,255);
+
   }
 }

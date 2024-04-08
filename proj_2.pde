@@ -23,6 +23,8 @@ CheckBox airportChecks;
 ScrollWidget pages;
 InputBox startDateInput;
 InputBox endDateInput;
+GPlot linePlot;
+
 
 PImage background;
 //Movie movie;
@@ -43,6 +45,7 @@ ArrayList<DataPoint> data10k = new ArrayList<DataPoint>();
 ArrayList<DataPoint> data2k = new ArrayList<DataPoint>();
 
 ArrayList<DataPoint> selectedData = new ArrayList<DataPoint>();
+ScreenFDates screenFDates;
 
 PFont font;
 void setup() {
@@ -65,6 +68,7 @@ void setup() {
   screenFBD = new ScreenFBD(this);
   screenFDist = new ScreenFDist(this);
   screenMShare = new ScreenMShare(this);
+  screenFDates = new ScreenFDates(this);
 
 
   //C. Quinn, created instance of the classes, 11:30, 29/03/2024
@@ -108,6 +112,11 @@ void draw() {
   case "MShare":
     {
       screenMShare.draw();
+      break;
+    }
+  case "FBDt":
+    {
+      screenFDates.draw();
       break;
     }
   default:
@@ -164,6 +173,11 @@ void mousePressed() {
           currentScreen = "MShare";
           screenMShare.update();
           return;
+        case "FBDt":
+          {
+            currentScreen = "FBDt";
+            return;
+          }  
         default:
         }
       }
@@ -296,6 +310,20 @@ void mousePressed() {
     {
       ArrayList myWidgets = screenMShare.getWidgets();
       for (int i= 0; i < myWidgets.size(); i++) {
+        Widget theWidget = (Widget)myWidgets.get(i);
+        event = theWidget.getEvent(mouseX, mouseY);
+        switch(event) {
+        case "Home":
+          currentScreen = "Home";
+          return;
+        default:
+        }
+      }
+    }
+    case "FBDt":
+    {
+      ArrayList myWidgets = screenFDates.getWidgets();
+      for (int i = 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
