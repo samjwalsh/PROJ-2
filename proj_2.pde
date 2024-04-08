@@ -35,7 +35,7 @@ ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
 ScreenFilter screenFilter;
-String[] dataSets={"flights_full", "flights_100k", "flights10k", "flights2k"};
+String[] dataSets = {"flights_full", "flights_100k", "flights10k", "flights2k"};
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 ArrayList<DataPoint> selectedData = new ArrayList<DataPoint>();
@@ -55,13 +55,13 @@ void setup() {
   screenMShare = new ScreenMShare(this);
 
 
-  // C. Quinn, created instance of the classes, 11:30, 29/03/2024
+  //C. Quinn, created instance of the classes, 11:30, 29/03/2024
   background = loadImage("background.PNG");
   screenFilter = new ScreenFilter(this);
-  slider = new SliderWidget(width-650, width-100, 80, color(244, 144, 185), 31, 5095, "Distance");
+  slider = new SliderWidget(width - 650, width - 100, 80, color(244, 144, 185), 31, 5095, "Distance");
   pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true);
-  checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false);
+  checkBoxesDataSet = new CheckBox(width - 400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false);
 
   movie = new Movie(this, "movie.mp4");
   movie.loop();
@@ -72,7 +72,7 @@ void setup() {
 
 void draw() {
 
-  switch (currentScreen) {
+  switch(currentScreen) {
   case "Home":
     {
       screenHome.draw();
@@ -129,11 +129,11 @@ void mousePressed() {
     else movie.volume(0);
   }
 
-  switch (currentScreen) {
+  switch(currentScreen) {
   case "Home":
     {
       ArrayList myWidgets = screenHome.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
@@ -159,7 +159,7 @@ void mousePressed() {
   case "FBD" :
     {
       ArrayList myWidgets = screenFBD.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
@@ -213,7 +213,7 @@ void mousePressed() {
   case "Filter":
     {
       ArrayList myWidgets = screenFilter.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
@@ -223,7 +223,7 @@ void mousePressed() {
           println(checkBoxesDataSet.getSelected());
           DataReader dataReader = new DataReader(checkBoxesDataSet.getSelected().get(0) + ".csv");
           data = dataReader.readFile();
-  // TODO update so data is only read again if the filename has changed since last time
+          // TODO update so datais only read again if the filename has changed since last time
           // Filter distancess
           selectedData = Filter.distanceBetween(data, slider.getBounds()[0], slider.getBounds()[1]);
           println(selectedData.size());
@@ -255,7 +255,7 @@ void mousePressed() {
   case "FDist":
     {
       ArrayList myWidgets = screenFDist.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
@@ -269,7 +269,7 @@ void mousePressed() {
   case "MShare":
     {
       ArrayList myWidgets = screenMShare.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
