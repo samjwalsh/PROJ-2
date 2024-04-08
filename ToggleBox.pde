@@ -18,6 +18,7 @@ class ToggleBox extends Widget {
     this.disabledColor = disabledColor;
     this.widgetFont=font;
     labelColor=color(0);
+    rectMode(CORNER);
   }
   void draw() {
     fill(widgetColor);

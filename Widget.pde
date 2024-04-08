@@ -17,12 +17,22 @@ class Widget {
     this.widgetColor=widgetColor;
     this.widgetFont=widgetFont;
     labelColor= color(0);
+    textAlign(CENTER);
+    rectMode(CORNER);
   }
   void draw() {
+    if(mouseX>x && mouseX<(x+width) && mouseY>y && mouseY<(y+height)){
+      //strokeWeight(2);
+      stroke(4);
+    }
+    else{
+      stroke(255);
+    }
     fill(widgetColor);
     rect(x, y, width, height);
     fill(labelColor);
-    text(label, x+10, y+height-10);
+    text(label, x+(width/2), y+(height/2));
+    stroke(255);
   }
   String getEvent(int mX, int mY) {
     if (mX>x && mX < x+width && mY >y && mY <y+height) {
