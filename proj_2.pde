@@ -6,32 +6,64 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import processing.video.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import processing.data.Table;
+import processing.data.TableRow;
+import java.util.Collections;
 
 Histogram theHistogram;
 GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
+SliderWidget slider;
+CheckBox checkBoxesAirlines;
+CheckBox checkBoxesDataSet;
+CheckBox airportChecks;
+ScrollWidget pages;
+InputBox startDateInput;
+InputBox endDateInput;
 GPlot linePlot;
 
-Movie movie;
-Boolean enableVideo = false;
-ToggleBox toggleVideo;
+
+PImage background;
+//Movie movie;
+//Boolean enableVideo = false;
+//ToggleBox toggleVideo;
 
 String currentScreen = "Home";
 ScreenHome screenHome;
 ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
+ScreenFilter screenFilter;
+String[] dataSets = {"flights_full", "flights100k", "flights10k", "flights2k"};
+
+ArrayList<DataPoint> data_full = new ArrayList<DataPoint>();
+ArrayList<DataPoint> data100k = new ArrayList<DataPoint>();
+ArrayList<DataPoint> data10k = new ArrayList<DataPoint>();
+ArrayList<DataPoint> data2k = new ArrayList<DataPoint>();
+
+ArrayList<DataPoint> selectedData = new ArrayList<DataPoint>();
 ScreenFDates screenFDates;
 ScreenFBS screenFBS;
 
-ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
 void setup() {
   size(1000, 800);
-  font = createFont("", 99);
-  DataReader dataReader = new DataReader("flights10k.csv");
-  data = dataReader.readFile();
+  font = createFont("AlTarikh-48.vlw", 15);
+  textFont(font);
+  DataReader flights_full = new DataReader("flights_full.csv");
+    DataReader flights100k = new DataReader("flights100k.csv");
+    DataReader flights10k = new DataReader("flights10k.csv");
+    DataReader flights2k = new DataReader("flights2k.csv");
+
+
+  data_full =flights_full.readFile();
+  data100k = flights100k.readFile();
+  data10k = flights10k.readFile();
+  data2k = flights2k.readFile();
+  selectedData = data_full;
 
   screenHome = new ScreenHome(this);
   screenFBD = new ScreenFBD(this);
@@ -40,18 +72,33 @@ void setup() {
   screenFDates = new ScreenFDates(this);
   screenFBS = new ScreenFBS(this);
 
-  movie = new Movie(this, "movie.mp4");
-  movie.loop();
-  movie.volume(0);
-  toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
+
+  //C. Quinn, created instance of the classes, 11:30, 29/03/2024
+  background = loadImage("background.PNG");
+  screenFilter = new ScreenFilter(this);
+  slider = new SliderWidget(width - 650, width - 100, 80, color(244, 144, 185), 31, 5095, "Distance");
+  pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
+  checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true);
+  checkBoxesDataSet = new CheckBox(width - 400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false);
+
+  //movie = new Movie(this, "movie.mp4");
+  //movie.loop();
+  //movie.volume(0);
+  //toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
+  rectMode(CORNER);
 }
 
 void draw() {
 
-  switch (currentScreen) {
+  switch(currentScreen) {
   case "Home":
     {
       screenHome.draw();
+      break;
+    }
+  case "Filter":
+    {
+      screenFilter.draw();
       break;
     }
   case "FBD":
@@ -85,46 +132,54 @@ void draw() {
       break;
     }
   }
-  if (movie.available() && enableVideo) {
-    movie.read();
-  }
-  if (enableVideo) {
-    int movW = 200;
-    int movH = 356;
-    image(movie, width - movW, height - movH, movW, movH);
-  }
-  toggleVideo.draw();
+  //if (movie.available() && enableVideo) {
+  //  movie.read();
+  //}
+  //if (enableVideo) {
+  //  int movW = 200;
+  //  int movH = 356;
+  //  image(movie, width - movW, height - movH, movW, movH);
+  //}
+  //toggleVideo.draw();
 }
+
+
 
 void mousePressed() {
   String event;
 
-  if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
-    toggleVideo.toggle();
-    enableVideo = !enableVideo;
-    if (enableVideo) movie.volume(100);
-    else movie.volume(0);
-  }
+  screenFilter.mousePressed();
 
-  switch (currentScreen) {
+  //if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
+  //  toggleVideo.toggle();
+  //  enableVideo = !enableVideo;
+  //  if (enableVideo) movie.volume(100);
+  //  else movie.volume(0);
+  //}
+
+  switch(currentScreen) {
   case "Home":
     {
       ArrayList myWidgets = screenHome.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
+        case "Filter":
+          currentScreen = "Filter";
+          return;
         case "FBD":
           currentScreen = "FBD";
+          screenFBD.update();
           return;
         case "FDist":
           currentScreen = "FDist";
+          screenFDist.update();
           return;
         case "MShare":
-          {
-            currentScreen = "MShare";
-            return;
-          }
+          currentScreen = "MShare";
+          screenMShare.update();
+          return;
         case "FBDt":
           {
             currentScreen = "FBDt";
@@ -142,7 +197,7 @@ void mousePressed() {
   case "FBD" :
     {
       ArrayList myWidgets = screenFBD.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
@@ -193,10 +248,66 @@ void mousePressed() {
         }
       }
     }
+  case "Filter":
+    {
+      ArrayList myWidgets = screenFilter.getWidgets();
+      for (int i= 0; i < myWidgets.size(); i++) {
+        Widget theWidget = (Widget)myWidgets.get(i);
+        event = theWidget.getEvent(mouseX, mouseY);
+        switch(event) {
+        case "Home":
+
+          // Set data set
+          String currentDataSet = checkBoxesDataSet.getSelected().get(0);
+          switch (currentDataSet) {
+            case "flights_full":
+            selectedData = data_full;
+            break;
+            case "flights100k":
+            selectedData = data100k;
+            break;
+            case "flights10k" :
+            selectedData = data10k;
+            break;
+            case "flights2k" : 
+            selectedData = data2k;
+            break;
+            default:
+          }
+
+          // TODO update so datais only read again if the filename has changed since last time
+          // Filter distancess
+          selectedData = Filter.distanceBetween(selectedData, slider.getBounds()[0], slider.getBounds()[1]);
+          println(selectedData.size());
+
+          // Filter airlines
+          ArrayList<String> airports = checkBoxesAirlines.getSelected();
+          for (int k = 0; k < airports.size(); k++) {
+            for (int j = 0; j < screenFBD.airlines[0].length; j++) {
+              if (screenFBD.airlines[1][j].equals(airports.get(k))) {
+                airports.set(k, screenFBD.airlines[0][j]);
+              }
+            }
+          }
+          selectedData = Filter.onlySelectAirports(selectedData, airports);
+          println(selectedData.size());
+
+
+          currentScreen = "Home";
+          return;
+        default:
+        }
+      }
+      slider.runMousePressed(mouseX, mouseY);
+      checkBoxesAirlines.runMousePressed(mouseX, mouseY);
+      checkBoxesDataSet.runMousePressed(mouseX, mouseY);
+      airportChecks.runMousePressed(mouseX, mouseY);
+      pages.needMousePressed(mouseX, mouseY);
+    }
   case "FDist":
     {
       ArrayList myWidgets = screenFDist.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
@@ -210,7 +321,7 @@ void mousePressed() {
   case "MShare":
     {
       ArrayList myWidgets = screenMShare.getWidgets();
-      for (int i = 0; i < myWidgets.size(); i++) {
+      for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
@@ -450,4 +561,13 @@ void mousePressed() {
       }
     }
   }
+}
+
+// C. Quinn, added mouse wheel function to add scroll functionality to airpot slection, 3:30pm, 03/04/2024
+void mouseWheel(MouseEvent event) {
+  float e = event.getCount();
+  pages.needMouseWheel(e);
+}
+void keyPressed() {
+  screenFilter.keyPressed();
 }

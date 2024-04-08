@@ -27,6 +27,24 @@ class Query {
   }
 
 
+  int[] flightDistancesAllData(ArrayList<DataPoint> data) {
+    ArrayList<Integer> distancesAL = new ArrayList<Integer>();
+
+    for (DataPoint dataPoint : data) {
+      distancesAL.add(dataPoint.getDistance());
+    }
+
+    println(distancesAL.size());
+
+    int[] array = new int[distancesAL.size()];
+    for (int i = 0; i < distancesAL.size(); i++ ) {
+      array[i] = distancesAL.get(i);
+    }
+
+
+    return array;
+  }
+
   Table flightsByDoW(ArrayList<DataPoint> data) {
 
     int mon = 0;
