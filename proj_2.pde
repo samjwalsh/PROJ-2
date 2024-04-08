@@ -35,14 +35,14 @@ ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
 ScreenFilter screenFilter;
-String[] dataSets={"flights_full", "flights_100k", "flights10k", "flights2k"};
+String[] dataSets={"flights_full", "flights100k", "flights10k", "flights2k"};
 
 ArrayList<DataPoint> data = new ArrayList<DataPoint>();
 PFont font;
 
 void setup() {
   size(1000, 800);
-  font = loadFont("Helvetica-48.vlw");
+  font = loadFont("AlNile-48.vlw");
   textFont(font,20);
   DataReader dataReader = new DataReader("flights10k.csv");
   data = dataReader.readFile();
@@ -58,8 +58,8 @@ void setup() {
   screenFilter = new ScreenFilter(this);
   slider = new SliderWidget(width-650, width-100, 80, color(244, 144, 185), 31, 5095, "Distance");
   pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
-  checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true);
-  checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false);
+  checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true, false);
+  checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false,false);
 
   movie = new Movie(this, "movie.mp4");
   movie.loop();
@@ -220,11 +220,11 @@ void mousePressed() {
         default:
         }
       }
-      slider.runMousePressed(mouseX, mouseY);
-      checkBoxesAirlines.runMousePressed(mouseX, mouseY);
-      checkBoxesDataSet.runMousePressed(mouseX, mouseY);
-      airportChecks.runMousePressed(mouseX, mouseY);
-      pages.needMousePressed(mouseX, mouseY);
+      slider.mousePressed(mouseX, mouseY);
+      checkBoxesAirlines.mousePressed(mouseX, mouseY);
+      checkBoxesDataSet.mousePressed(mouseX, mouseY);
+      //airportChecks.mousePressed(mouseX, mouseY);
+      //pages.mousePressed(mouseX, mouseY);
     }
   case "FDist":
     {
@@ -260,7 +260,7 @@ void mousePressed() {
 // C. Quinn, added mouse wheel function to add scroll functionality to airpot slection, 3:30pm, 03/04/2024
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
-  pages.needMouseWheel(e);
+  airportChecks.needMouseWheel(e);
 }
 void keyPressed() {
   screenFilter.keyPressed();

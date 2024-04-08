@@ -4,15 +4,15 @@ class CheckBox {
   int x, y, count, changingY, selectAllXPos;
   color selectedColour;
   boolean selectAll;
-  boolean multiSelect;
+  boolean multiSelect, scroll;
   boolean[] selected;
   String title;
   String[] lables;
-  int[] xValues;
-  int countTrue;
+  int[] yValues;
+  int countTrue, initalY;
 
 
-  CheckBox(int x, int y, int count, color selectedColour, String title, String[] lables, boolean multiSelect) {
+  CheckBox(int x, int y, int count, color selectedColour, String title, String[] lables, boolean multiSelect, boolean scroll) {
     this.x = x;
     this.y = y;
     this.count = count;
@@ -20,19 +20,12 @@ class CheckBox {
     this.title = title;
     this.lables = lables;
     this.multiSelect =multiSelect;
+    this.scroll = scroll;
+    initalY = y;
     selected = new boolean[count];
-    xValues = new int[count];
-    changingY = y+20;
-    for (int i = 0; i < selected.length; i++) {
-      if (multiSelect) {
-        selected[i] = true;
-      } else {
-        selected[i] = false;
-        selected[0] = true;
-      }
-      xValues[i] = changingY;
-      changingY+=30;
-    }
+    yValues = new int[count];
+    
+
     if (multiSelect) {
       selectAll = true;
     } else {
@@ -48,6 +41,17 @@ class CheckBox {
   }
 
   void draw() {
+    changingY = y+20;
+    for (int i = 0; i < selected.length; i++) {
+      if (multiSelect) {
+        selected[i] = true;
+      } else {
+        selected[i] = false;
+        selected[0] = true;
+      }
+      yValues[i] = changingY;
+      changingY+=30;
+    }
     textFont(font);
     if (countTrue == count) {
       selectAll = true;
@@ -76,15 +80,15 @@ class CheckBox {
     for (int i = 0; i<selected.length; i++) {
       fill(255);
       stroke(0);
-      ellipse(x, xValues[i], 15, 15);
+      ellipse(x, yValues[i], 15, 15);
       fill(0);
-      text(lables[i], x+20, xValues[i]+4);
+      text(lables[i], x+20, yValues[i]+4);
       if (selected[i]) {
-        if (dist(mouseX, mouseY, x, xValues[i])<15) {
+        if (dist(mouseX, mouseY, x, yValues[i])<15) {
           stroke(255);
         } else stroke(0);
         fill(selectedColour);
-        ellipse(x, xValues[i], 10, 10);
+        ellipse(x, yValues[i], 10, 10);
         stroke(0);
       }
     }
@@ -92,7 +96,7 @@ class CheckBox {
 
 
 
-  void runMousePressed(int mx, int my) {
+  void mousePressed(int mx, int my) {
     if (multiSelect) {
       if (dist(mx, my, selectAllXPos+80, y-5)<8) {
         countTrue = count;
@@ -103,7 +107,7 @@ class CheckBox {
     }
     for (int i = 0; i<selected.length; i++) {
 
-      if (dist(mx, my, x, xValues[i])<8) {
+      if (dist(mx, my, x, yValues[i])<8) {
         if (!multiSelect) {
           for (int j = 0; j<selected.length; j++) {
             selected[j] = false;
@@ -117,6 +121,16 @@ class CheckBox {
           selected[i]=true;
           countTrue++;
         }
+      }
+    }
+  }
+  void needMouseWheel(float e) {
+    if (scroll) {
+      if (e>0) {
+        y-=30;
+      }
+      if (e<0 && y<initalY) {
+        y+=30;
       }
     }
   }
