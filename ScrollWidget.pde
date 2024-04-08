@@ -26,7 +26,7 @@ class ScrollWidget {
     yposChange = ypos+4;
 
     // C. O'Brien, moved from made from void setup into constructor, 21:50, 29/03/2024
-    
+
     textAlign(CENTER);
     DataReader1 reader = new DataReader1("flights_full.csv");
     HashSet<String> uniqueOriginAirports = reader.readOriginAirports();
@@ -34,17 +34,14 @@ class ScrollWidget {
     Collections.sort(originAirportsList);
     airports = originAirportsList.toArray(new String[0]);
     totalPages = ceil((float)airports.length / airportsPerPage);
-    
+    airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
   }
   //+(25/2)-3
   void draw() {
     //background(255, 212, 229);
     drawUI();
     noStroke();
-
-    
     displayCurrentPageAirports();
-    
   }
 
   void drawUI() {
@@ -67,7 +64,7 @@ class ScrollWidget {
   }
 
   void displayCurrentPageAirports() {
-    airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true);
+
     textSize(12);
     fill(0);
 
@@ -93,26 +90,11 @@ class ScrollWidget {
     text(title, xpos, ypos-15);
   }
 
-  void needMousePressed(int mx, int my) {
-    if (mx >= nextBtnXPos && mx <= nextBtnXPos+50 && my >= btnYPos && my <= btnYPos+15) {
-      if (currentPage < totalPages - 1) {
-        currentPage++;
-      }
-    }
-
-    if (mx >= prevBtnXPos && mx <= prevBtnXPos+50 && my >= btnYPos && my <= btnYPos+15) {
-      if (currentPage > 0) {
-        currentPage--;
-      }
-    }
+  void mousePressed() {
+    airportChecks.mousePressed(mouseX, mouseY);
   }
-  
-  void needMouseWheel(float e){
-    if(e>0){
-      yposChange-=30;
-    }
-    if (e<0&&(yposChange>ypos+4)){
-      yposChange+=30;
-    }
+  void mouseWheel(MouseEvent event) {
+    float e = event.getCount();
+    airportChecks.needMouseWheel(e);
   }
 }
