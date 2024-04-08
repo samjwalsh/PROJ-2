@@ -25,9 +25,9 @@ InputBox startDateInput;
 InputBox endDateInput;
 
 PImage background;
-Movie movie;
-Boolean enableVideo = false;
-ToggleBox toggleVideo;
+//Movie movie;
+//Boolean enableVideo = false;
+//ToggleBox toggleVideo;
 
 String currentScreen = "Home";
 ScreenHome screenHome;
@@ -35,9 +35,13 @@ ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
 ScreenFilter screenFilter;
-String[] dataSets = {"flights_full", "flights_100k", "flights10k", "flights2k"};
+String[] dataSets = {"flights_full", "flights100k", "flights10k", "flights2k"};
 
-ArrayList<DataPoint> data = new ArrayList<DataPoint>();
+ArrayList<DataPoint> data_full = new ArrayList<DataPoint>();
+ArrayList<DataPoint> data100k = new ArrayList<DataPoint>();
+ArrayList<DataPoint> data10k = new ArrayList<DataPoint>();
+ArrayList<DataPoint> data2k = new ArrayList<DataPoint>();
+
 ArrayList<DataPoint> selectedData = new ArrayList<DataPoint>();
 
 PFont font;
@@ -45,9 +49,17 @@ void setup() {
   size(1000, 800);
   font = createFont("AlTarikh-48.vlw", 15);
   textFont(font);
-  DataReader dataReader = new DataReader("flights10k.csv");
-  data = dataReader.readFile();
-  selectedData = data;
+  DataReader flights_full = new DataReader("flights_full.csv");
+    DataReader flights100k = new DataReader("flights100k.csv");
+    DataReader flights10k = new DataReader("flights10k.csv");
+    DataReader flights2k = new DataReader("flights2k.csv");
+
+
+  data_full =flights_full.readFile();
+  data100k = flights100k.readFile();
+  data10k = flights10k.readFile();
+  data2k = flights2k.readFile();
+  selectedData = data_full;
 
   screenHome = new ScreenHome(this);
   screenFBD = new ScreenFBD(this);
@@ -63,10 +75,10 @@ void setup() {
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true);
   checkBoxesDataSet = new CheckBox(width - 400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false);
 
-  movie = new Movie(this, "movie.mp4");
-  movie.loop();
-  movie.volume(0);
-  toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
+  //movie = new Movie(this, "movie.mp4");
+  //movie.loop();
+  //movie.volume(0);
+  //toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
   rectMode(CORNER);
 }
 
@@ -104,15 +116,15 @@ void draw() {
       break;
     }
   }
-  if (movie.available() && enableVideo) {
-    movie.read();
-  }
-  if (enableVideo) {
-    int movW = 200;
-    int movH = 356;
-    image(movie, width - movW, height - movH, movW, movH);
-  }
-  toggleVideo.draw();
+  //if (movie.available() && enableVideo) {
+  //  movie.read();
+  //}
+  //if (enableVideo) {
+  //  int movW = 200;
+  //  int movH = 356;
+  //  image(movie, width - movW, height - movH, movW, movH);
+  //}
+  //toggleVideo.draw();
 }
 
 
@@ -122,12 +134,12 @@ void mousePressed() {
 
   screenFilter.mousePressed();
 
-  if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
-    toggleVideo.toggle();
-    enableVideo = !enableVideo;
-    if (enableVideo) movie.volume(100);
-    else movie.volume(0);
-  }
+  //if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
+  //  toggleVideo.toggle();
+  //  enableVideo = !enableVideo;
+  //  if (enableVideo) movie.volume(100);
+  //  else movie.volume(0);
+  //}
 
   switch(currentScreen) {
   case "Home":
@@ -220,12 +232,26 @@ void mousePressed() {
         case "Home":
 
           // Set data set
-          println(checkBoxesDataSet.getSelected());
-          DataReader dataReader = new DataReader(checkBoxesDataSet.getSelected().get(0) + ".csv");
-          data = dataReader.readFile();
+          String currentDataSet = checkBoxesDataSet.getSelected().get(0);
+          switch (currentDataSet) {
+            case "flights_full":
+            selectedData = data_full;
+            break;
+            case "flights100k":
+            selectedData = data100k;
+            break;
+            case "flights10k" :
+            selectedData = data10k;
+            break;
+            case "flights2k" : 
+            selectedData = data2k;
+            break;
+            default:
+          }
+
           // TODO update so datais only read again if the filename has changed since last time
           // Filter distancess
-          selectedData = Filter.distanceBetween(data, slider.getBounds()[0], slider.getBounds()[1]);
+          selectedData = Filter.distanceBetween(selectedData, slider.getBounds()[0], slider.getBounds()[1]);
           println(selectedData.size());
 
           // Filter airlines
