@@ -76,7 +76,7 @@ class SliderWidget {
     return new int[]{int(displayText1), int(displayText2)};
   }
 
-  void runMousePressed(int mx, int my) {
+  void mousePressed(int mx, int my) {
     // check if each slider is being held
     if (dist(mx, my, slider1Xpos, barY)<5) {
       //stroke(255);

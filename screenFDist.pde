@@ -16,7 +16,7 @@ class ScreenFDist extends Screen {
     histogram.setData(flightDistances, "Flights", "Distance Flown", "Number of Flights");
   }
   void draw() {
-    background(120, 0, 255);
+    background(255, 212, 229);
     drawWidgets();
     histogram.draw();
   }
