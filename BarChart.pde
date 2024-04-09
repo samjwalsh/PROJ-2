@@ -20,15 +20,20 @@ class BarChart {
   //int bWidth;
   String chartTitle;
   GPlot plot;
+  float barGap;
 
-  BarChart(PApplet parent, int size, int positionX, int positionY) {
+  BarChart(PApplet parent, int size, int positionX, int positionY, String title) {
 
 
     x = positionX;
     y = positionY;
     plot = new GPlot(parent);
     plot.setPos(x, y);
-    plot.setDim(size, size);
+    if (title.equals("State")){
+      plot.setDim(size+260, size);
+    } else {
+      plot.setDim(size, size);  // size+300, size
+    }
     rectMode(CORNER);
   }
 

@@ -60,7 +60,6 @@ void setup() {
   DataReader flights10k = new DataReader("flights10k.csv");
   DataReader flights2k = new DataReader("flights2k.csv");
 
-
   data_full =flights_full.readFile();
   data100k = flights100k.readFile();
   data10k = flights10k.readFile();
