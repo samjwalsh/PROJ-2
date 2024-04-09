@@ -22,6 +22,26 @@ class Filter {
   //  }
   //  return filteredData;
   //}
+    ArrayList<DataPoint> onlySelectStates(ArrayList<DataPoint> data, ArrayList<String> states) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (states.contains(dataPoint.getOriginState())) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
+
+  ArrayList<DataPoint> distanceBetween(ArrayList<DataPoint> data, int min, int max) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (dataPoint.getDistance() <= max && dataPoint.getDistance() >= min) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
+
 
   ArrayList<DataPoint> onlySelectAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
@@ -32,6 +52,16 @@ class Filter {
     }
     return filteredData;
   }
+  
+    //ArrayList<DataPoint> FILTERNAME(ArrayList<DataPoint> data, EXTRAPARAMS) {
+  //  ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+  //  for (DataPoint dataPoint : data) {
+  //    if (CONDITION) {
+  //      filteredData.add(dataPoint);
+  //    }
+  //  }
+  //  return filteredData;
+  //}
 
   ArrayList<DataPoint> distanceGreaterThan(ArrayList<DataPoint> data, int distance) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();

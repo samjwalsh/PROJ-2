@@ -1,11 +1,11 @@
 // S. Walsh, skeleton for pie chart class, 11:00, 21/03/2024
 // Mitchell Ashmore filled pie chart class 24/3/2024
-import java.util.Arrays;
+// S. Walsh, Simplified calculation of degrees and addred percentage calculations, 12:00, 28/03/2024
 
 
 // Table argument must be in following format
 /*
- Day,Flights
+Day,Flights
  Mon,401
  Tue,339
  Wed,339
@@ -42,17 +42,20 @@ class PieChart {
   void setData(Table table, String chartTitle) {
     values = new float[table.getRowCount()];
     labels = new String[table.getRowCount()];
-    float degreesEach = (float(360) / float(2000));
-    //println("degrees each"+degreesEach);
+
+
+
     totalVals = 0;
     for (int i = 0; i < table.getRowCount(); i++) {
-      values[i] = degreesEach * table.getInt(i, 1);
-      println(values[i]);
+      values[i] = table.getFloat(i, 1);
+
       totalVals += values[i];
+      //println(totalVals);
     }
     for (int i = 0; i < table.getRowCount(); i++) {
       labels[i] = table.getString(i, 0);
     }
+
     //println(Arrays.toString(values));
     //println(Arrays.toString(labels));
   }
@@ -62,25 +65,25 @@ class PieChart {
     float legendHeight = values.length * 30;
     float legendX = width - legendWidth - 100;
     float legendY = (height - legendHeight) / 2;
-    background(255);
+    background(255); 
 
     textAlign(CENTER);
     textSize(30);
     fill(0);
-    text("Market Share per Airline", width/2, 30);
+    text("Market Share per Airline", width / 2, 30);
     textAlign(LEFT);
-  
+
+      colorMode(HSB, 360, 100, 100);
 
     float lastAngle = 0;
-    color[] colours = genColors(values.length);
+    float sat = 65;
+    float bri = 100;
     for (int i = 0; i < values.length; i++) {
-      float currentR = random(255);
-      float currentG = random(255);
-      float currentB = random(255);
-      color colour = colours[i];
+      float hue = ((float)(i+1)/(float)values.length)*360;
+      println(i);
+      println(hue);
+      color colour = color(hue, sat, bri);
       fill(colour);
-      println(totalVals);
-      println(radians((values[i] * 360 )/(totalVals)));
       float newAngle = radians((values[i] * 360 )/(totalVals));
       arc(width/2 - 100, height/2, diameter, diameter, lastAngle, lastAngle + newAngle);
 
@@ -92,30 +95,7 @@ class PieChart {
       legendY += 30;
       lastAngle += newAngle;
     }
-  }
-  int[] genColors(int len)
-  {
-    color[] colors = new int[len];
-    for (int i=0; i<len; i++)
-    {
-      colors[i] = randomPastel(0.3+0.25*i);    // random linear gen I've found works well
-    }
-    return colors;
-  }
-  int randomPastel(float seed)
-  {
-    float r = 255*pow(sin(seed), 2);
-    float g = 255*pow(sin(seed+PI/3), 2);
-    float b = 255*pow(sin(seed+TAU/3), 2);
+    colorMode(RGB, 255,255,255);
 
-    float gray = (float) min(r, g, b);
-    float saturation_amt = 0.8;
-    float rm = gray*saturation_amt;
-
-    return color(channelToPastel(r, rm), channelToPastel(g, rm), channelToPastel(b, rm));
-  }
-  int channelToPastel(float orig, float rm)
-  {
-    return (int)(orig-rm+255)/2;
   }
 }

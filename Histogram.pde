@@ -27,10 +27,10 @@ class Histogram {
     for(int i = 0; i<data.length; i++) {
       if(data[i]>max) max = data[i];
     }
-    max = (int)(Math.ceil(max/1000)*1000);
-    int buckets = 0;
-    if((max/1000) % 2 == 1) buckets = 5;
-    else buckets = 4;
+    max = (int)(Math.ceil(max/100)*100);
+    int buckets = 20;
+    //if((max/1000) % 2 == 1) buckets = 5;
+    //else buckets = 4;
     float interval = (int)(max/buckets);
     int[] barHeights = new int[buckets];
     hPoints = new GPointsArray(buckets);
@@ -49,6 +49,10 @@ class Histogram {
     for(int i= 0; i < buckets; i++) {
       if(barHeights[i] > maxBarHeight) maxBarHeight = barHeights[i];
     }
+    float[] ticks = new float[buckets+1];
+    for(int i = 0; i < ticks.length; i++) {
+      ticks[i] = (max/buckets)*i;  
+    }
      
     histogram.setPos(x,y);
     histogram.setDim(hWidth,hHeight);
@@ -56,7 +60,10 @@ class Histogram {
     histogram.setYLim(min,maxBarHeight+(int)maxBarHeight/10);
     histogram.getTitle().setText(chartTitle);
     histogram.getXAxis().getAxisLabel().setText(xTitle);
-    histogram.getYAxis().getAxisLabel().setText(yTitle);    
+    histogram.getYAxis().getAxisLabel().setText(yTitle);
+    histogram.getXAxis().setTicks(ticks);
+    //histogram.getXAxis().setNTicks(buckets);
+    //histogram.getXAxis().setDrawTickLabels(true);
     histogram.setPoints(hPoints);
     histogram.setHistType(GPlot.VERTICAL);
     histogram.setHistVisible(true);
@@ -70,7 +77,7 @@ class Histogram {
     histogram.drawBox();
     histogram.drawXAxis();
     histogram.drawYAxis();
-    histogram.drawXAxis();
+    //histogram.drawXAxis();
     histogram.drawTitle();
     histogram.drawHistograms();
     histogram.endDraw();

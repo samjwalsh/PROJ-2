@@ -1,8 +1,8 @@
-// S. Walsh, Created screen class for pie chart, 22:00 26/03/2024
-class ScreenMShare extends Screen {
+// S. Walsh, Created screen class for cancelled flights, 22:00 26/03/2024
+class ScreenCancelled extends Screen {
   PieChart pieChart;
 
-  ScreenMShare(PApplet parent) {
+  ScreenCancelled(PApplet parent) {
     super(parent);
     add(new Widget(100, 20, 100, 40,
       "Home", color(255), font, "Home"));
