@@ -12,7 +12,7 @@ class ScreenFBD extends Screen {
 
     Table table = query.flightsByDoW(selectedData);
 
-    barChart = new BarChart(parent, 700, width - 800, 0);
+    barChart = new BarChart(parent, 700, width - 800, 0, "date");
     barChart.setData(table, "Flights by day of week", "Day", "Flights")  ;
 
     add(new Widget(100, 20, 100, 40,

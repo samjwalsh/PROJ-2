@@ -1,4 +1,4 @@
-// M.Murphy, cated screen class for showing flights by dates, 6:00, 04/04/2024
+// M.Murphy, created screen class for showing flights by dates, 6:00, 04/04/2024
 
 class ScreenFDates extends Screen {
   LinePlot linePlot;

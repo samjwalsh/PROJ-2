@@ -69,6 +69,7 @@ void setup() {
   cutScreen.draw();
   data_full = flights_full.readFile();
   cutScreen.draw();
+
   data100k = flights100k.readFile();
   cutScreen.draw();
   data10k = flights10k.readFile();

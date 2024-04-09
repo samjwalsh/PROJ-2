@@ -6,7 +6,7 @@ class ScreenFBS extends Screen {
       , "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA"
     , "WI", "WV", "WY"},
     {"t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t"
-    , "t", "t", "t", "t", "t", "t", "t", "t", "t","t","t"}
+    , "t", "t", "t", "t", "t", "t", "t", "t", "t", "t", "t"}
     }
     ;
 
@@ -16,34 +16,36 @@ class ScreenFBS extends Screen {
 
     Table table = query.flightsByState(selectedData);
 
-    barChart = new BarChart(parent, 700, width - 800, 0);
+    barChart = new BarChart(parent, 740,0, 0,"State"); // title , size , x ,  y 
     barChart.setData(table, "Flights by State", "State", "Flights")  ;
 
-    add(new Widget(100, 20, 100, 40,
-      "Home", color(255), font, "Home"));
 
 
-    int initX = 50;
-    int initY = 100;
-    for (int i = 0; i < States[0].length; i++) {
-      add(new ToggleBox(initX, initY, 20, 40, States[0][i], color(0,100, 0), font, States[0][i], color(255, 0, 0)));
-      if (initY >= 600) {
-        initX += 50;
-        initY = 20;
-      }
-      
-      initY += 50;
-    }
+
+    //int initX = 20;
+    //int initY = 70;
+    //for (int i = 0; i < States[0].length; i++) {
+    //  //add(new ToggleBox(initX, initY, 20, 40, States[0][i], color(0, 255, 0), font, States[0][i], color(255, 0, 0)));
+    //  if (initY >= 600) {
+    //    initX += 50;
+    //    initY = 20;
+    //  }
+
+    //  initY += 50;
+    //}
+  }
+    void update() {
+    Table table = query.flightsByState(selectedData);
+    barChart.setData(table, "Flights by State", "State", "Flights");
   }
   void draw() {
-    background(200);
+    background(255, 212, 229);
     drawWidgets();
     barChart.draw();
+        add(new Widget(50, 20, 100, 40,
+      "Home", color(255), font, "Home"));
   }
-  void update() {
-   Table table = query.flightsByState(selectedData);
-   barChart.setData(table,"Flights by State", "State", "Flights");
-}
+
   void toggleState(String state) {
     for (int i = 0; i < States[0].length; i++) {
       if (States[0][i].equals(state)) {
