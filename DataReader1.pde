@@ -1,3 +1,4 @@
+// // C. O'Brien, created seperate data reader, 21:30 29/03/2024
 class DataReader1 {
   String filePath;
   Table csv;

@@ -1,7 +1,7 @@
 // S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024 //<>//
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
 // Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
-// M.Murphy created query for creating int array of flights by date, 5:00, 04/04/2024
+// M.Murphy created query for creating an object with int array of flights by date within a range, 5:00, 04/04/2024
 
 class Query {
 
@@ -257,21 +257,6 @@ class Query {
   }
 
 
-  public class DatesInRange {
-    private int[] dates;
-    private int[] range;
-
-    public DatesInRange(int[] dates, int[] range) {
-      this.dates = dates;
-      this.range = range;
-    }
-    public int[] getDates() {
-      return dates;
-    }
-    public int[] getRange() {
-      return range;
-    }
-  }
   Table flightsByState(ArrayList<DataPoint> data) {
     //int AK,AL,AR,AZ,CA,CO,CT,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY = 0;
     int AK = 0;
@@ -635,23 +620,36 @@ class Query {
   }
 
 
+  public class DatesInRange {
+    private int[] dates;
+    private int[] range;
+
+    public DatesInRange(int[] dates, int[] range) {
+      this.dates = dates;
+      this.range = range;
+    }
+    public int[] getDates() {
+      return dates;
+    }
+    public int[] getRange() {
+      return range;
+    }
+  }
+  
   public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) { //<>//
     //println(range[0]); println(range[1]);
     int[] dates = new int[range[1]-(range[0]-1)];
-    String date = "";
-    for (DataPoint dataPoint : data) {
-      for (int i = range[0]; i <= dates.length; i++) {
-        date = dataPoint.getFlightDate();
-        if (date.indexOf('/'+3) == '/') {
-          if (Integer.valueOf(date.substring(date.indexOf('/')+1, date.indexOf('/')+3)) == i) {
-            dates[i-1] += 1;
-          }
-        } else {
-          if (Integer.valueOf(date.substring(date.indexOf('/')+1, date.indexOf('/')+2)) == i) {
-            dates[i-1] += 1;
+    String[] date = new String[3];
+    for(DataPoint dataPoint : data) {
+      for(int i = 0; i <= dates.length; i++) {
+        date = dataPoint.getFlightDate().split("/");
+        for(int j = range[0]; j <= range[1]; j++) {
+          if(Integer.valueOf(date[1]) == j) {
+            dates[j-1] += 1;  
           }
         }
-      }
+        
+      } 
     }
     return new DatesInRange(dates, range);
   }
