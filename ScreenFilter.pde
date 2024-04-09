@@ -1,7 +1,6 @@
 // C. Quinn, Created class for filter screen, 11:30, 29/03/2024
 
 class ScreenFilter extends Screen {
-  InputBox startDateInput, endDateInput;
 
 
   ScreenFilter(PApplet parent) {

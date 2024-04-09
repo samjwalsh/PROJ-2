@@ -7,14 +7,14 @@ class ScreenCancelled extends Screen {
     add(new Widget(100, 20, 100, 40,
       "Home", color(255), font, "Home"));
 
-    Table table = query.marketShare(selectedData);
+    Table table = query.cancelledFlights(selectedData);
     pieChart = new PieChart(height/2, width/2, 50, 50);
-    pieChart.setData(table, "MarketShare");
+    pieChart.setData(table, "Cancelled Flights");
   }
 
   void update() {
-    Table table = query.marketShare(selectedData);
-    pieChart.setData(table, "MarketShare");
+    Table table = query.cancelledFlights(selectedData);
+    pieChart.setData(table, "Cancelled Flights");
   }
 
   void draw() {

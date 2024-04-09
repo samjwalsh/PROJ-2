@@ -1,4 +1,4 @@
-// S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024 //<>//
+// S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024 //<>// //<>//
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
 // Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
 // M.Murphy created query for creating an object with int array of flights by date within a range, 5:00, 04/04/2024
@@ -130,25 +130,73 @@ class Query {
   Table cancelledFlights(ArrayList<DataPoint> data) {
     int notCancelled = 0;
     int cancelled = 0;
-    
+
     for (DataPoint dataPoint : data) {
-      
+
       if (dataPoint.getCancelled()) cancelled++;
       else notCancelled++;
     }
-    
-    Table table = new Table();
-    
-    TableRow cancelledRow = table.addRow();
-    cancelledRow.setString("State", "Count");
-    cancelledRow.setInt("Cancelled", cancelled);
-    
-    TableRow notCancelledRow = table.addRow();
-    notCancelledRow.setString("State", "Count");
-    notCancelledRow.setInt("Not Cancelled", notCancelled);
 
-  return table;
-  }  
+    Table table = new Table();
+    table.addColumn("State");
+    table.addColumn("Count");
+
+    TableRow cancelledRow = table.addRow();
+    cancelledRow.setString("State", "Cancelled");
+    cancelledRow.setInt("Count", cancelled);
+
+    TableRow notCancelledRow = table.addRow();
+    notCancelledRow.setString("State", "Not Cancelled");
+    notCancelledRow.setInt("Count", notCancelled);
+
+    return table;
+  }
+
+  Table delayedFlights(ArrayList<DataPoint> data) {
+
+  int delayed = 0;
+  int onTime = 0;
+  int early = 0;
+    for (DataPoint flight : data) {
+      int sched = flight.getSchedArrTime();
+      int acc = flight.getArrTime();
+      // Add 24 hours to weird flights
+      if (Math.abs(sched - acc) > 2000) {
+        if (sched < acc) sched+= 2400;
+        else acc += 2400;
+      }
+      
+      if (sched < acc) {
+        // Flight may be delayed
+        delayed++;
+      } else if (sched > acc) {
+        // Flight may be early
+        early++;
+      } else {
+        // Flight is early (or took 24 hrs?)
+        onTime++;
+      }
+    }
+
+    Table table = new Table();
+    table.addColumn("State");
+    table.addColumn("Count");
+    TableRow earlyRow = table.addRow();
+    earlyRow.setString("State", "Early");
+    earlyRow.setInt("Count", early);
+        TableRow onTimeRow = table.addRow();
+    onTimeRow.setString("State", "On Time");
+    onTimeRow.setInt("Count", onTime);
+
+    TableRow delayedRow = table.addRow();
+    delayedRow.setString("State", "Delayed");
+    delayedRow.setInt("Count", delayed);
+
+
+
+
+    return table;
+  }
 
 
   Table marketShare(ArrayList<DataPoint> data) {
@@ -635,21 +683,20 @@ class Query {
       return range;
     }
   }
-  
-  public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) { //<>//
+
+  public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) {
     //println(range[0]); println(range[1]);
     int[] dates = new int[range[1]-(range[0]-1)];
     String[] date = new String[3];
-    for(DataPoint dataPoint : data) {
-      for(int i = 0; i <= dates.length; i++) {
+    for (DataPoint dataPoint : data) {
+      for (int i = 0; i <= dates.length; i++) {
         date = dataPoint.getFlightDate().split("/");
-        for(int j = range[0]; j <= range[1]; j++) {
-          if(Integer.valueOf(date[1]) == j) {
-            dates[j-1] += 1;  
+        for (int j = range[0]; j <= range[1]; j++) {
+          if (Integer.valueOf(date[1]) == j) {
+            dates[j-1] += 1;
           }
         }
-        
-      } 
+      }
     }
     return new DatesInRange(dates, range);
   }

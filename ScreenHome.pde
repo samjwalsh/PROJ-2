@@ -14,11 +14,15 @@ class ScreenHome extends Screen {
       "Flights By Date", color(255), font, "FBDt"));
     add(new Widget(100, 260, 100, 40,
       "Flights By State", color(255), font, "FState"));
+    add(new Widget(100, 320, 100, 40,
+      "Cancelled Flights", color(255), font, "Cancelled"));
+    add(new Widget(100, 380, 100, 40,
+      "Delayed Flights", color(255), font, "Delays"));
   }
-  
+
   void draw() {
     //background(255, 212, 229);
-    image(background,0,0,width,height);
+    image(background, 0, 0, width, height);
     drawWidgets();
   }
 }

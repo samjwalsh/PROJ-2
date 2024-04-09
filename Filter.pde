@@ -22,7 +22,7 @@ class Filter {
   //  }
   //  return filteredData;
   //}
-    ArrayList<DataPoint> onlySelectStates(ArrayList<DataPoint> data, ArrayList<String> states) {
+  ArrayList<DataPoint> onlySelectStates(ArrayList<DataPoint> data, ArrayList<String> states) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
     for (DataPoint dataPoint : data) {
       if (states.contains(dataPoint.getOriginState())) {
@@ -42,8 +42,22 @@ class Filter {
     return filteredData;
   }
 
+  ArrayList<DataPoint> dateBetween(ArrayList<DataPoint> data, int min, int max) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    if (min == 0) min = 1;
+    if (max == 0) max = 31;
+    for (DataPoint dataPoint : data) {
+      int date = parseInt(dataPoint.getFlightDate().split("/")[1]);
 
-  ArrayList<DataPoint> onlySelectAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
+      if (date <= max && date >= min) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
+
+
+  ArrayList<DataPoint> onlySelectAirlines(ArrayList<DataPoint> data, ArrayList<String> airports) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
     for (DataPoint dataPoint : data) {
       if (airports.contains(dataPoint.getAirlineCode())) {
@@ -52,8 +66,17 @@ class Filter {
     }
     return filteredData;
   }
-  
-    //ArrayList<DataPoint> FILTERNAME(ArrayList<DataPoint> data, EXTRAPARAMS) {
+  ArrayList<DataPoint> onlySelectAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (airports.contains(dataPoint.getOriginAirport())) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
+
+  //ArrayList<DataPoint> FILTERNAME(ArrayList<DataPoint> data, EXTRAPARAMS) {
   //  ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
   //  for (DataPoint dataPoint : data) {
   //    if (CONDITION) {

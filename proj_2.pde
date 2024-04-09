@@ -32,13 +32,14 @@ PImage background;
 //Boolean enableVideo = false;
 //ToggleBox toggleVideo;
 
-String currentScreen = "Home";
+String currentScreen = "Filter";
 ScreenHome screenHome;
 ScreenFBD screenFBD;
 ScreenFDist screenFDist;
 ScreenMShare screenMShare;
 ScreenFilter screenFilter;
 ScreenCancelled screenCancelled;
+ScreenDelays screenDelays;
 String[] dataSets = {"flights_full", "flights100k", "flights10k", "flights2k"};
 
 ArrayList<DataPoint> data_full = new ArrayList<DataPoint>();
@@ -55,19 +56,31 @@ PFont font;
 void setup() {
   size(1000, 800);
   font = loadFont("AlNile-48.vlw");
-  textFont(font,20);
-  
+  textFont(font, 20);
+  Cutscreen cutScreen = new Cutscreen(8);
+  cutScreen.draw();
   DataReader flights_full = new DataReader("flights_full.csv");
+  cutScreen.draw();
   DataReader flights100k = new DataReader("flights100k.csv");
+  cutScreen.draw();
   DataReader flights10k = new DataReader("flights10k.csv");
+  cutScreen.draw();
   DataReader flights2k = new DataReader("flights2k.csv");
-
-
-  data_full =flights_full.readFile();
+  cutScreen.draw();
+  data_full = flights_full.readFile();
+  cutScreen.draw();
   data100k = flights100k.readFile();
+  cutScreen.draw();
   data10k = flights10k.readFile();
+  cutScreen.draw();
   data2k = flights2k.readFile();
+  cutScreen.draw();
+
+
   selectedData = data_full;
+
+  textSize(14);
+
 
   screenHome = new ScreenHome(this);
   screenFBD = new ScreenFBD(this);
@@ -76,6 +89,7 @@ void setup() {
   screenFDates = new ScreenFDates(this);
   screenFBS = new ScreenFBS(this);
   screenCancelled = new ScreenCancelled(this);
+  screenDelays = new ScreenDelays(this);
 
 
   //C. Quinn, created instance of the classes, 11:30, 29/03/2024
@@ -84,7 +98,7 @@ void setup() {
   slider = new SliderWidget(width - 650, width - 100, 80, color(244, 144, 185), 31, 5095, "Distance");
   pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true, false);
-  checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false,false);
+  checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false, false);
 
 
   //movie = new Movie(this, "movie.mp4");
@@ -130,6 +144,16 @@ void draw() {
   case "FState":
     {
       screenFBS.draw();
+      break;
+    }
+  case "Cancelled":
+    {
+      screenCancelled.draw();
+      break;
+    }
+  case "Delays" :
+    {
+      screenDelays.draw();
       break;
     }
   default:
@@ -189,12 +213,25 @@ void mousePressed() {
         case "FBDt":
           {
             currentScreen = "FBDt";
+            screenFDates.update();
             return;
           }
         case "FState":
           {
             currentScreen = "FState";
             screenFBS.update();
+            return;
+          }
+        case "Cancelled":
+          {
+            currentScreen = "Cancelled";
+            screenCancelled.update();
+            return;
+          }
+        case "Delays":
+          {
+            currentScreen = "Delays";
+            screenDelays.update();
             return;
           }
         default:
@@ -288,16 +325,23 @@ void mousePressed() {
           println(selectedData.size());
 
           // Filter airlines
-          ArrayList<String> airports = checkBoxesAirlines.getSelected();
-          for (int k = 0; k < airports.size(); k++) {
+          ArrayList<String> airlines = checkBoxesAirlines.getSelected();
+          for (int k = 0; k < airlines.size(); k++) {
             for (int j = 0; j < screenFBD.airlines[0].length; j++) {
-              if (screenFBD.airlines[1][j].equals(airports.get(k))) {
-                airports.set(k, screenFBD.airlines[0][j]);
+              if (screenFBD.airlines[1][j].equals(airlines.get(k))) {
+                airlines.set(k, screenFBD.airlines[0][j]);
               }
             }
           }
+          selectedData = Filter.onlySelectAirlines(selectedData, airlines);
+
+          // Filter airports
+          ArrayList<String> airports = airportChecks.getSelected();
           selectedData = Filter.onlySelectAirports(selectedData, airports);
-          println(selectedData.size());
+
+          // Filter dates
+
+          selectedData = Filter.dateBetween(selectedData, parseInt(startDateInput.getText()), parseInt(endDateInput.getText()));
 
 
           currentScreen = "Home";
@@ -328,6 +372,35 @@ void mousePressed() {
   case "MShare":
     {
       ArrayList myWidgets = screenMShare.getWidgets();
+      for (int i= 0; i < myWidgets.size(); i++) {
+        Widget theWidget = (Widget)myWidgets.get(i);
+        event = theWidget.getEvent(mouseX, mouseY);
+        switch(event) {
+        case "Home":
+          currentScreen = "Home";
+          return;
+        default:
+        }
+      }
+    }
+
+  case "Cancelled":
+    {
+      ArrayList myWidgets = screenCancelled.getWidgets();
+      for (int i= 0; i < myWidgets.size(); i++) {
+        Widget theWidget = (Widget)myWidgets.get(i);
+        event = theWidget.getEvent(mouseX, mouseY);
+        switch(event) {
+        case "Home":
+          currentScreen = "Home";
+          return;
+        default:
+        }
+      }
+    }
+  case "Delays":
+    {
+      ArrayList myWidgets = screenDelays.getWidgets();
       for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);

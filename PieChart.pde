@@ -42,7 +42,7 @@ class PieChart {
   void setData(Table table, String chartTitle) {
     values = new float[table.getRowCount()];
     labels = new String[table.getRowCount()];
-
+    this.chartTitle = chartTitle;
 
 
     totalVals = 0;
@@ -70,7 +70,7 @@ class PieChart {
     textAlign(CENTER);
     textSize(30);
     fill(0);
-    text("Market Share per Airline", width / 2, 30);
+    text(chartTitle, width / 2, 30);
     textAlign(LEFT);
 
       colorMode(HSB, 360, 100, 100);
