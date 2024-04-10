@@ -181,13 +181,6 @@ void mousePressed() {
 
   screenFilter.mousePressed();
 
-  //if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
-  //  toggleVideo.toggle();
-  //  enableVideo = !enableVideo;
-  //  if (enableVideo) movie.volume(100);
-  //  else movie.volume(0);
-  //}
-
   switch(currentScreen) {
   case "Home":
     {
