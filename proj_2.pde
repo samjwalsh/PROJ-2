@@ -28,9 +28,6 @@ GPlot linePlot;
 
 
 PImage background;
-//Movie movie;
-//Boolean enableVideo = false;
-//ToggleBox toggleVideo;
 
 String currentScreen = "Filter";
 ScreenHome screenHome;
@@ -101,16 +98,11 @@ void setup() {
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true, false);
   checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false, false);
 
-
-  //movie = new Movie(this, "movie.mp4");
-  //movie.loop();
-  //movie.volume(0);
-  //toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
   rectMode(CORNER);
 }
 
 void draw() {
-
+  // Switch statement to determine which screen to draw
   switch(currentScreen) {
   case "Home":
     {
@@ -163,15 +155,6 @@ void draw() {
       break;
     }
   }
-  //if (movie.available() && enableVideo) {
-  //  movie.read();
-  //}
-  //if (enableVideo) {
-  //  int movW = 200;
-  //  int movH = 356;
-  //  image(movie, width - movW, height - movH, movW, movH);
-  //}
-  //toggleVideo.draw();
 }
 
 
@@ -179,15 +162,8 @@ void draw() {
 void mousePressed() {
   String event;
 
-  screenFilter.mousePressed();
-
-  //if (toggleVideo.getEvent(mouseX, mouseY).equals("Toggle Video")) {
-  //  toggleVideo.toggle();
-  //  enableVideo = !enableVideo;
-  //  if (enableVideo) movie.volume(100);
-  //  else movie.volume(0);
-  //}
-
+  // Switch statement to give mouse event to relevant screen
+  // Each screen contains a switch statement which checks which event was called and runs the relevant code
   switch(currentScreen) {
   case "Home":
     {
@@ -238,6 +214,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "FBD" :
     {
@@ -292,16 +269,18 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "Filter":
     {
+      screenFilter.mousePressed();
       ArrayList myWidgets = screenFilter.getWidgets();
       for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
         case "Home":
-
+          // Upon leaving the filter page this code will run to apply the filters the user selected to the underlying data
           // Set data set
           String currentDataSet = checkBoxesDataSet.getSelected().get(0);
           switch (currentDataSet) {
@@ -320,7 +299,6 @@ void mousePressed() {
           default:
           }
 
-          // TODO update so datais only read again if the filename has changed since last time
           // Filter distancess
           selectedData = Filter.distanceBetween(selectedData, slider.getBounds()[0], slider.getBounds()[1]);
           println("Filtered Data Size - " + selectedData.size());
@@ -353,8 +331,7 @@ void mousePressed() {
       slider.mousePressed(mouseX, mouseY);
       checkBoxesAirlines.mousePressed(mouseX, mouseY);
       checkBoxesDataSet.mousePressed(mouseX, mouseY);
-      //airportChecks.mousePressed(mouseX, mouseY);
-      //pages.mousePressed(mouseX, mouseY);
+      break;
     }
   case "FDist":
     {
@@ -369,6 +346,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "MShare":
     {
@@ -383,6 +361,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
 
   case "Cancelled":
@@ -398,6 +377,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "Delays":
     {
@@ -412,6 +392,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "FBDt":
     {
@@ -426,6 +407,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "FState":
     {
@@ -640,6 +622,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   }
 }

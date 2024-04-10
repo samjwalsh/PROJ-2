@@ -105,6 +105,7 @@ ArrayList<String> getSelected() {
         stroke(0);
       }
     }
+        // textAlign(CENTER);
   }
 
 

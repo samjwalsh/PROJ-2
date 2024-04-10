@@ -5,13 +5,13 @@ class DataReader {
   String[] data;
   Table csv;
   DataReader(String filePath) {
+    // Read the file into memory
     data = loadStrings(filePath);
-
     csv = loadTable(filePath, "header" );
-    //printData(data);
   }
 
   ArrayList<DataPoint> readFile() {
+    // Converts the table of data into an array list of datapoints where each datapoint represents a flight
     ArrayList<DataPoint> dataList = new ArrayList<DataPoint>();
 
 
@@ -21,11 +21,6 @@ class DataReader {
       dataList.add(newDP);
     }
 
-
-    //for (int dPIndex = 1; dPIndex < data.length ; dPIndex++ ) {
-    //  String currDP = data[dPIndex];
-    //  dataList.add(lineToDP(currDP));
-    //}
     return dataList;
   }
 
@@ -71,6 +66,7 @@ class DataReader {
 
 
 DataPoint lineToDP(String line) {
+  // Old method from when the csv was read manually, instead of using the Table datatype
   String[] data = line.split(",");
   for (int valIndex = 0; valIndex < data.length; valIndex++) {
   }

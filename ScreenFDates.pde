@@ -23,7 +23,7 @@ class ScreenFDates extends Screen {
     linePlot.setData(datesInRange.dates, datesInRange.range, "FLights By Date", "Date", "Number of Flights");
   }
   void draw() {
-    background(120, 0, 255);
+    background(221,212,232);
     drawWidgets();
     linePlot.draw();
   }
