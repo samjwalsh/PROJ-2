@@ -2,7 +2,7 @@
 // M. Murphy, Histogram class completed for distances, 19:00, 26/03/2024
 
 
-// 
+
 class Histogram {
   int x;
   int y;
@@ -23,6 +23,8 @@ class Histogram {
     this.histogram = new GPlot(parent);
   }
   
+  // Takes data chosen based on filters and creates a histogram that takes the datapoints in corresponding ranges to increase the height of the bars in the histogram.
+  // The ranges are based on the maximum value divided by a set number of buckets.
   void setData(int[] data, String chartTitle, String xTitle, String yTitle) {
     float min = 0; float max = 0;
     for(int i = 0; i<data.length; i++) {
@@ -30,8 +32,6 @@ class Histogram {
     }
     max = (int)(Math.ceil(max/100)*100);
     int buckets = 20;
-    //if((max/1000) % 2 == 1) buckets = 5;
-    //else buckets = 4;
     float interval = (int)(max/buckets);
     int[] barHeights = new int[buckets];
     hPoints = new GPointsArray(buckets);
@@ -63,8 +63,6 @@ class Histogram {
     histogram.getXAxis().getAxisLabel().setText(xTitle);
     histogram.getYAxis().getAxisLabel().setText(yTitle);
     histogram.getXAxis().setTicks(ticks);
-    //histogram.getXAxis().setNTicks(buckets);
-    //histogram.getXAxis().setDrawTickLabels(true);
     histogram.setPoints(hPoints);
     histogram.setHistType(GPlot.VERTICAL);
     histogram.setHistVisible(true);
@@ -78,7 +76,6 @@ class Histogram {
     histogram.drawBox();
     histogram.drawXAxis();
     histogram.drawYAxis();
-    //histogram.drawXAxis();
     histogram.drawTitle();
     histogram.drawHistograms();
     histogram.endDraw();

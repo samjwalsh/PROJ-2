@@ -21,6 +21,9 @@ class LinePlot {
     this.linePlot = new GPlot(parent);
   }
   
+  // Takes data filtered in range that was counted in data[] to create the line plot.
+  // Uses data[] to set the Y values of the points and dataRange[] to set the x axis.
+  // The grafica library was used in the creation of the graph
   void setData(int[] data, int[] dataRange, String chartTitle, String xTitle, String yTitle) {
     int max = dataRange[1]; int min = dataRange[0];
     int ticks = data.length;

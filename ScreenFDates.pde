@@ -8,12 +8,13 @@ class ScreenFDates extends Screen {
       "Home", color(255), font, "Home"));
   }
   
+  // Updates the data used for the lineplot based on the filters chosen.
   void update() {
     Query.DatesInRange datesInRange;
     datesInRange =  query.flightsByDate(selectedData);
 
     linePlot = new LinePlot(250, 10, 600, 600, parent);
-    linePlot.setData(datesInRange.dates, datesInRange.range, "FLights By Date", "Date", "Number of Flights");
+    linePlot.setData(datesInRange.dates, datesInRange.range, "Flights By Date", "Date", "Number of Flights");
   }
   void draw() {
     background(221,212,232);
