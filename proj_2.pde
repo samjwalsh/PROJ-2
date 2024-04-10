@@ -97,7 +97,7 @@ void setup() {
   background = loadImage("background.PNG");
   screenFilter = new ScreenFilter(this);
   slider = new SliderWidget(width - 650, width - 100, 80, color(244, 144, 185), 31, 5095, "Distance");
-  pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
+  pages = new ScrollWidget(50, 425, 200, 250, "Select Airport");
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true, false);
   checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false, false);
 
