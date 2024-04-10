@@ -21,7 +21,7 @@ SliderWidget slider;
 CheckBox checkBoxesAirlines;
 CheckBox checkBoxesDataSet;
 CheckBox airportChecks;
-ScrollWidget pages;
+ScrollWidget origin,destination;
 InputBox startDateInput;
 InputBox endDateInput;
 GPlot linePlot;
@@ -97,7 +97,8 @@ void setup() {
   background = loadImage("background.PNG");
   screenFilter = new ScreenFilter(this);
   slider = new SliderWidget(width - 650, width - 100, 80, color(244, 144, 185), 31, 5095, "Distance");
-  pages = new ScrollWidget(50, 425, 200, 250, "Select Airport");
+  origin = new ScrollWidget(50, 425, 200, 250, "Select Origin Airport");
+  destination = new ScrollWidget(250, 425, 200, 250, "Select Destinatoin Airport");
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true, false);
   checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false, false);
 

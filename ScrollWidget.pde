@@ -9,7 +9,7 @@ class ScrollWidget {
   int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos;
   String title;
 
-
+  //CheckBox airportChecks;
 
   // C. Quinn, added constructor, 21:50, 29/03/2024
   ScrollWidget(int xpos, int ypos, int rectW, int rectH, String title) {
