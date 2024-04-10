@@ -10,6 +10,7 @@ class DataReader1 {
 
   HashSet<String> readOriginAirports() {
     HashSet<String> uniqueAirports = new HashSet<String>();
+    //HashSet used to eliminate duplicate airporst.
 
     for (TableRow row : csv.rows()) {
       String originAirport = row.getString("ORIGIN");

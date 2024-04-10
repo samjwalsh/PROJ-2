@@ -18,6 +18,7 @@ class InputBox {
   
   void draw() {
     fill(selected ? BackgroundSelected : Background);
+    // change colours based on if user selected box.
     if (BorderEnable) {
       stroke(Border);
       strokeWeight(BorderWeight);
@@ -32,6 +33,7 @@ class InputBox {
   
   void keyPressed() {
     if (!selected) return;
+    // check if user has deleted and delete the text based on it.
     if (key == BACKSPACE && Text.length() > 0) {
       Text = Text.substring(0, Text.length() - 1);
     } else if (key >= ' ' && key <= '~') {

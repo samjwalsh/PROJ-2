@@ -17,6 +17,7 @@ class ScreenFilter extends Screen {
     destination.draw();
     startDateInput.draw();
     endDateInput.draw();
+    //C.O'Brien, text to label text boxes
     fill(0);
     textSize(16);
     textAlign(LEFT, CENTER);
@@ -40,6 +41,7 @@ class ScreenFilter extends Screen {
     destination.mousePressed();
   }
   void keyPressed() {
+    //user input is printed into the text box
     startDateInput.keyPressed();
     endDateInput.keyPressed();
   }
