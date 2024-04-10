@@ -60,6 +60,7 @@ class SliderWidget {
     text(int(displayText1), slider1Xpos-5, barY+15);
     text(int(displayText2), slider2Xpos-5, barY+15);
 
+    // use constrain function so cannot be dragged off the line
     if (hold1) {
       slider1Xpos = constrain(mx, barX1, slider2Xpos-10);
     }

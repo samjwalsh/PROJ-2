@@ -25,6 +25,8 @@ class CheckBox {
     selected = new boolean[count];
     yValues = new int[count];
     //changingY = y+20;
+    
+    // set values of initial boolean array
     for (int i = 0; i < selected.length; i++) {
       if (multiSelect) {
         selected[i] = true;
@@ -39,7 +41,7 @@ class CheckBox {
     } else {
       selectAll = true;
     }
-
+    // position select all button
     if (title.equals("Airlines")) {
       selectAllXPos = x+115;
     } else {
@@ -57,6 +59,7 @@ ArrayList<String> getSelected() {
 }
   void draw() {
     changingY = y+20;
+    // array of y positions of list items
     for (int i = 0; i < selected.length; i++) {
       yValues[i] = changingY;
       changingY+=30;
@@ -68,6 +71,7 @@ ArrayList<String> getSelected() {
       selectAll = false;
     }
     fill(255);
+    // multi select & select all buttons
     if (multiSelect) {
       ellipse(selectAllXPos+80, initalY+5, 15, 15);
       if (selectAll) {
@@ -81,8 +85,11 @@ ArrayList<String> getSelected() {
     textAlign(LEFT);
     textSize(30);
     fill(0);
+    // write title
     text(title, x, y);
     textSize(15);
+    
+    // if widget can scroll, select all button is fixed
     if (multiSelect) {
       if (scroll) {
         text("Select All", selectAllXPos, initalY+10);
@@ -90,6 +97,8 @@ ArrayList<String> getSelected() {
         text("Select All", selectAllXPos, y);
       }
     }
+    
+    // print checkbox with label
     for (int i = 0; i<selected.length; i++) {
       fill(255);
       stroke(0);

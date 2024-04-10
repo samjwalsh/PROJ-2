@@ -101,7 +101,7 @@ class ScrollWidget {
   }
 
   void mousePressed() { 
-    // 
+    //  only relevant mouse pressed
     if (title.contains("Origin")) {
       originAirportChecks.mousePressed(mouseX, mouseY);
     } else {
@@ -110,7 +110,7 @@ class ScrollWidget {
   }
   void mouseWheel(MouseEvent event) {
     // scrolling
-    if (mouseX> xpos && mouseX < xpos+rectW && mouseY > ypos && mouseY < ypos+rectH) {
+    if (mouseX> xpos && mouseX < xpos+rectW && mouseY > ypos && mouseY < ypos+rectH) { // hover doesent work?
       float e = event.getCount();
       if (title.contains("Origin")) {
         originAirportChecks.needMouseWheel(e);
