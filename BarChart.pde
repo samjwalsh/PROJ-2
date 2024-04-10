@@ -27,7 +27,7 @@ class BarChart {
 
     x = positionX;
     y = positionY;
-    plot = new GPlot(parent);
+    plot = new GPlot(parent); // connects to data from setup and main (i.e. screen size)
     plot.setPos(x, y);
     if (title.equals("State")){
       plot.setDim(size+260, size);
@@ -42,20 +42,20 @@ class BarChart {
 
     GPointsArray points = new GPointsArray();
 
-
+    //takes data from table and converts it into grafica points
     for (int i = 0; i < table.getRowCount(); i++)
     {
       TableRow row = table.getRow(i);
       String category = row.getString(row.getColumnTitle(0));
       float value = row.getFloat(row.getColumnTitle(1));
 
-      points.add(new GPoint(i, value, category));
+      points.add(new GPoint(i, value, category)); 
     }
-
+    //grafica points take in data point and label
     plot.setPoints(points);
 
 
-    plot.startHistograms(GPlot.VERTICAL);
+    plot.startHistograms(GPlot.VERTICAL); //turns graph type to histogram
     plot.getHistogram().setDrawLabels(true);
     plot.getHistogram().setBgColors(new int[] {color(100, 120, 220)});
     plot.getTitle().setText(chartTitle);
@@ -68,8 +68,8 @@ class BarChart {
       {
         maxOfY = points.getY(i);
       }
-
-      plot.setYLim(0, 1.1 * maxOfY);
+      //finds max barchart height
+      plot.setYLim(0, 1.1 * maxOfY); // makes graph makes height 1.1 times the heighest point
       plot.getYAxis().setAxisLabelText(headerTwo);
       plot.getXAxis().setAxisLabelText(headerOne);
     }
@@ -78,7 +78,7 @@ class BarChart {
   void draw() {
 
     // Draw the plot
-    plot.beginDraw();
+    plot.beginDraw(); //draws graph
     //plot.drawBackground();
     plot.drawBox();
     //plot.drawXAxis();

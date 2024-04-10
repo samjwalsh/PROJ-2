@@ -1,5 +1,6 @@
 
 //ben bryce 8th april
+//no longer used to be more comprehensive. Deleted as ran out of time.
 class Cutscreen {
   int bars;
   int currentBars = 0;

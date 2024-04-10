@@ -114,7 +114,7 @@ class DataPoint {
   int getDistance () {
     return distance;
   }
-
+  //ben and micheal outputs string
   void stringToText(String dataString){
     PFont font;
     font = createFont("AppleSDGothicNeo-Medium-18", 128);
@@ -122,9 +122,11 @@ class DataPoint {
     //size(100, 100);
     textSize(15);
     text(dataString, 40, 120); 
+    
   }
 
-
+  //ben and michael 
+   //converts string of data into readable form
   String toString() {
     String longString = "";
     longString = "Flight Date: "+flightDate+", Airline: "+airlineCode+", Flight Number: "+
