@@ -21,14 +21,14 @@ class LinePlot {
     this.linePlot = new GPlot(parent);
   }
 
-  // Takes data filtered in range that was counted in data[] to create the line plot.
-  // Uses data[] to set the Y values of the points and dataRange[] to set the x axis.
-  // The grafica library was used in the creation of the graph
+// Takes data filtered in range that was counted in data[] to create the line plot.
   void setData(int[] data, int[] dataRange, String chartTitle, String xTitle, String yTitle) {
     int max = dataRange[1];
     int min = dataRange[0];
+// Ticks on x-axis chosen based on points     
     int ticks = data.length;
     String[] days = new String[ticks];
+// Ticks changed to String in date format    
     for (int i = 0; i < ticks; i++) {
       if (dataRange[0]+i < 10) {
         days[i] = "0"+String.valueOf(dataRange[0]+i);
@@ -36,15 +36,17 @@ class LinePlot {
     }
     pPoints = new GPointsArray(ticks);
     int maxHeight = 0;
+// Points added using grafica and the already counted data array    
     for (int i = 0; i < ticks; i++) {
       pPoints.add(dataRange[0]+i, data[i]);
       if (maxHeight < data[i]) maxHeight = data[i];
     }
+// Ticks reformatted so they can be used by .setTicks(float[]) function later    
     float[] xAxisTicks = new float[ticks];
     for (int i = min; i <= max; i++) {
       xAxisTicks[-min+i] = i;
     }
-
+// grafica used to set points and format line plot
     linePlot.setPos(x, y);
     linePlot.setDim(pWidth, pHeight);
     linePlot.setXLim(min, max);

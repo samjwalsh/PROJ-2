@@ -23,8 +23,7 @@ class Histogram {
     this.histogram = new GPlot(parent);
   }
   
-  // Takes data chosen based on filters and creates a histogram that takes the datapoints in corresponding ranges to increase the height of the bars in the histogram.
-  // The ranges are based on the maximum value divided by a set number of buckets.
+// Data chosen based on user-selected filters
   void setData(int[] data, String chartTitle, String xTitle, String yTitle) {
     float min = 0; float max = 0;
     for(int i = 0; i<data.length; i++) {
@@ -32,9 +31,11 @@ class Histogram {
     }
     max = (int)(Math.ceil(max/100)*100);
     int buckets = 20;
+// Ranges/interval based on the maximum value divided by a set number of buckets.    
     float interval = (int)(max/buckets);
     int[] barHeights = new int[buckets];
     hPoints = new GPointsArray(buckets);
+// Occurrences are counted from data array into corresponding barHeights array   
     for(int i = 0; i<data.length; i++) {
       for(int j = 0; j < buckets; j++) {
         if(data[i]<=interval+(interval*j)) {
@@ -43,6 +44,7 @@ class Histogram {
         }
       }
     }
+// Points/buckets are added using grafica based on barHeights array and interval    
     int maxBarHeight = 0;
     for(double i = 0; i < barHeights.length; i++) {
       hPoints.add((int)(max*((i+(i+1.0))/(buckets*2))),barHeights[(int)i]);
@@ -50,11 +52,12 @@ class Histogram {
     for(int i= 0; i < buckets; i++) {
       if(barHeights[i] > maxBarHeight) maxBarHeight = barHeights[i];
     }
+// Ticks on the x-axis are decided based on the number of points/buckets    
     float[] ticks = new float[buckets+1];
     for(int i = 0; i < ticks.length; i++) {
       ticks[i] = (max/buckets)*i;  
     }
-     
+// grafica used to set points and format histogram      
     histogram.setPos(x,y);
     histogram.setDim(hWidth,hHeight);
     histogram.setXLim(min,max);
