@@ -29,7 +29,7 @@ class BarChart {
     y = positionY;
     plot = new GPlot(parent); // connects to data from setup and main (i.e. screen size)
     plot.setPos(x, y);
-    if (title.equals("State")){
+    if (title.equals("State")) {
       plot.setDim(size+260, size);
     } else {
       plot.setDim(size, size);  // size+300, size
@@ -49,7 +49,7 @@ class BarChart {
       String category = row.getString(row.getColumnTitle(0));
       float value = row.getFloat(row.getColumnTitle(1));
 
-      points.add(new GPoint(i, value, category)); 
+      points.add(new GPoint(i, value, category));
     }
     //grafica points take in data point and label
     plot.setPoints(points);

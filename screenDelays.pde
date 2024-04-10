@@ -18,7 +18,7 @@ class ScreenDelays extends Screen {
   }
 
   void draw() {
-    background(221,212,232);
+    background(221, 212, 232);
 
     pieChart.draw();
     drawWidgets();

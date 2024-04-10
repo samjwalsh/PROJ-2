@@ -25,7 +25,7 @@ class CheckBox {
     selected = new boolean[count];
     yValues = new int[count];
     //changingY = y+20;
-    
+
     // set values of initial boolean array
     for (int i = 0; i < selected.length; i++) {
       if (multiSelect) {
@@ -50,13 +50,13 @@ class CheckBox {
     countTrue = count;
   }
 
-ArrayList<String> getSelected() {
-  ArrayList<String> selectedAL = new ArrayList<String>();
-  for (int item = 0; item < lables.length; item++) {
-    if (selected[item]) selectedAL.add(lables[item]);
+  ArrayList<String> getSelected() {
+    ArrayList<String> selectedAL = new ArrayList<String>();
+    for (int item = 0; item < lables.length; item++) {
+      if (selected[item]) selectedAL.add(lables[item]);
+    }
+    return selectedAL;
   }
-  return selectedAL;
-}
   void draw() {
     changingY = y+20;
     // array of y positions of list items
@@ -88,7 +88,7 @@ ArrayList<String> getSelected() {
     // write title
     text(title, x, y);
     textSize(15);
-    
+
     // if widget can scroll, select all button is fixed
     if (multiSelect) {
       if (scroll) {
@@ -97,7 +97,7 @@ ArrayList<String> getSelected() {
         text("Select All", selectAllXPos, y);
       }
     }
-    
+
     // print checkbox with label
     for (int i = 0; i<selected.length; i++) {
       fill(255);
@@ -114,12 +114,12 @@ ArrayList<String> getSelected() {
         stroke(0);
       }
     }
-        // textAlign(CENTER);
+    // textAlign(CENTER);
   }
 
 
 
-  void mousePressed(int mx, int my) { 
+  void mousePressed(int mx, int my) {
     // change the boolean array if airport is selected or deselected
     if (multiSelect) { // select all button
       if (dist(mx, my, selectAllXPos+80, initalY+5)<8) {

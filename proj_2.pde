@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import processing.video.*;
-import java.util.ArrayList;  
+import java.util.ArrayList;
 import java.util.HashSet;
 import processing.data.Table;
 import processing.data.TableRow;
@@ -22,7 +22,7 @@ CheckBox checkBoxesAirlines;
 CheckBox checkBoxesDataSet;
 CheckBox originAirportChecks;
 CheckBox destinationAirportChecks;
-ScrollWidget origin,destination;
+ScrollWidget origin, destination;
 
 InputBox startDateInput;
 InputBox endDateInput;

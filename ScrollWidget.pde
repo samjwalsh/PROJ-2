@@ -100,7 +100,7 @@ class ScrollWidget {
     text(title, xpos, ypos-15);
   }
 
-  void mousePressed() { 
+  void mousePressed() {
     //  only relevant mouse pressed
     if (title.contains("Origin")) {
       originAirportChecks.mousePressed(mouseX, mouseY);

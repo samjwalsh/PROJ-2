@@ -53,7 +53,6 @@ class PieChart {
     for (int i = 0; i < table.getRowCount(); i++) {
       labels[i] = table.getString(i, 0);
     }
-
   }
 
   void draw() {
@@ -61,7 +60,7 @@ class PieChart {
     float legendHeight = values.length * 30;
     float legendX = width - legendWidth - 100;
     float legendY = (height - legendHeight) / 2;
-    //background(255); 
+    //background(255);
 
     textAlign(CENTER);
     textSize(30);
@@ -91,7 +90,7 @@ class PieChart {
       legendY += 30;
       lastAngle += newAngle;
     }
-    colorMode(RGB, 255,255,255);
+    colorMode(RGB, 255, 255, 255);
     textAlign(CENTER);
   }
 }

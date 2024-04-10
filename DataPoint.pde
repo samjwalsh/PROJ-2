@@ -115,27 +115,25 @@ class DataPoint {
     return distance;
   }
   //ben and micheal outputs string
-  void stringToText(String dataString){
+  void stringToText(String dataString) {
     PFont font;
     font = createFont("AppleSDGothicNeo-Medium-18", 128);
     textFont(font);
     //size(100, 100);
     textSize(15);
-    text(dataString, 40, 120); 
-    
+    text(dataString, 40, 120);
   }
 
-  //ben and michael 
-   //converts string of data into readable form
+  //ben and michael
+  //converts string of data into readable form
   String toString() {
     String longString = "";
     longString = "Flight Date: "+flightDate+", Airline: "+airlineCode+", Flight Number: "+
-    String.valueOf(flightNum)+"\nOrigin Airport: "+originAirport+", Origin City: "+originCity+", Origin State: "+
-    originState+", Origin WAC: "+String.valueOf(originWAC)+"\nDestination Airport: "+destAirport+", Destination City: "+
-    destCity+", Destination State: "+destState+", Destination WAC: "+String.valueOf(destWAC)+"\nScheduled Departure Time: "+ 
-    schedDeptTime+", Departure Time: "+deptTime+", Scheduled Arrival: "+schedArrTime+", Arrival Time: "+arrTime+
-    "\nFlight Cancelled: "+cancelled+ ", Flight Diverted: "+diverted+", Flight Distance: "+String.valueOf(distance)+"\n";
+      String.valueOf(flightNum)+"\nOrigin Airport: "+originAirport+", Origin City: "+originCity+", Origin State: "+
+      originState+", Origin WAC: "+String.valueOf(originWAC)+"\nDestination Airport: "+destAirport+", Destination City: "+
+      destCity+", Destination State: "+destState+", Destination WAC: "+String.valueOf(destWAC)+"\nScheduled Departure Time: "+
+      schedDeptTime+", Departure Time: "+deptTime+", Scheduled Arrival: "+schedArrTime+", Arrival Time: "+arrTime+
+      "\nFlight Cancelled: "+cancelled+ ", Flight Diverted: "+diverted+", Flight Distance: "+String.valueOf(distance)+"\n";
     return longString;
   }
-  
 }

@@ -1,7 +1,7 @@
 // S. Walsh, Created screen class for showing flights by day of week, 22:00 26/03/2024
 
 class ScreenFBD extends Screen {
-  String [][] airlines = new String[][]{{
+  String[][] airlines = new String[][]{{
     "AA", "AS", "B6", "DL", "F9", "G4", "HA", "NK", "UA", "WN"},
     {"American Airlines", "Alaska Airlines", "Jet Blue", "Delta Airlines", "Frontier Airlines", "Allegiant Air", "Hawaiian Airlines", "Spirit Airlines", "United Airlines", "Southwest Airlines"},
     {"t", "t", "t", "t", "t", "t", "t", "t", "t", "t"}
@@ -34,7 +34,7 @@ class ScreenFBD extends Screen {
     barChart.setData(table, "Flights by day of week", "Day", "Flights")  ;
   }
   void draw() {
-    background(221,212,232);
+    background(221, 212, 232);
     drawWidgets();
     barChart.draw();
   }

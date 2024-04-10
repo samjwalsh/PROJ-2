@@ -76,8 +76,8 @@ class Filter {
     }
     return filteredData;
   }
-  
-    ArrayList<DataPoint> onlySelectDestAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
+
+  ArrayList<DataPoint> onlySelectDestAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
     for (DataPoint dataPoint : data) {
       if (airports.contains(dataPoint.getDestAirport())) {

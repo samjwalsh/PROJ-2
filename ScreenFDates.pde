@@ -7,7 +7,7 @@ class ScreenFDates extends Screen {
     add(new Widget(100, 20, 100, 40,
       "Home", color(255), font, "Home"));
   }
-  
+
   // Updates the data used for the lineplot based on the filters chosen.
   void update() {
     Query.DatesInRange datesInRange;
@@ -17,7 +17,7 @@ class ScreenFDates extends Screen {
     linePlot.setData(datesInRange.dates, datesInRange.range, "Flights By Date", "Date", "Number of Flights");
   }
   void draw() {
-    background(221,212,232);
+    background(221, 212, 232);
     drawWidgets();
     linePlot.draw();
   }
