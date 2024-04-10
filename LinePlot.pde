@@ -1,7 +1,5 @@
 // M.Murphy, LinePlot class created to create and draw a Line Plot for flight dates, 23:00, 03/04/2024
 
-public static int JAN_DAYS = 31;
-
 class LinePlot {
   int x;
   int y;
@@ -25,22 +23,19 @@ class LinePlot {
   
   void setData(int[] data, int[] dataRange, String chartTitle, String xTitle, String yTitle) {
     int max = dataRange[1]; int min = dataRange[0];
-    int ticks = JAN_DAYS;
+    int ticks = data.length;
     String[] days = new String[ticks];
     for(int i = 0; i < ticks; i++) {
-      if(i < 9) days[i] = "0"+String.valueOf(i+1);
-      else days[i] = String.valueOf(i+1);
+      if(dataRange[0]+i < 10) {
+        days[i] = "0"+String.valueOf(dataRange[0]+i);
+      }
+      else days[i] = String.valueOf(dataRange[0]+i);
     }
     pPoints = new GPointsArray(ticks);
-    int[] yHeights = new int[ticks];
-    for(int i = 0; i < data.length; i++) {
-      yHeights[i] = data[i];  
-    }
-
     int maxHeight = 0;
     for(int i = 0; i < ticks; i++) {
-      pPoints.add(i+1, yHeights[i]);
-      if(maxHeight < yHeights[i]) maxHeight = yHeights[i];
+      pPoints.add(dataRange[0]+i, data[i]);
+      if(maxHeight < data[i]) maxHeight = data[i];
     }   
     float[] xAxisTicks = new float[ticks];
     for(int i = min; i <= max; i++) {
