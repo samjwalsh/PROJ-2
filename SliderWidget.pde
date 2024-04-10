@@ -68,10 +68,6 @@ class SliderWidget {
       slider2Xpos = constrain(mx, slider1Xpos+10, barX2);
     }
   }
-  //float constrain(float val, float minv, float maxv) {
-  //  //constrain the sliders to the length of the slider
-  //  return min(max(val, minv), maxv);
-  //}
   
   int[] getBounds() {
     return new int[]{int(displayText1), int(displayText2)};
