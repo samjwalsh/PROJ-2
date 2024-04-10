@@ -67,10 +67,20 @@ class Filter {
     }
     return filteredData;
   }
-  ArrayList<DataPoint> onlySelectAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
+  ArrayList<DataPoint> onlySelectOriginAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
     for (DataPoint dataPoint : data) {
       if (airports.contains(dataPoint.getOriginAirport())) {
+        filteredData.add(dataPoint);
+      }
+    }
+    return filteredData;
+  }
+  
+    ArrayList<DataPoint> onlySelectDestAirports(ArrayList<DataPoint> data, ArrayList<String> airports) {
+    ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    for (DataPoint dataPoint : data) {
+      if (airports.contains(dataPoint.getDestAirport())) {
         filteredData.add(dataPoint);
       }
     }

@@ -21,7 +21,8 @@ class ScreenFBD extends Screen {
 
     int initX = 50;
     int initY = 100;
-    textMode(LEFT);
+    //textAlign(CENTER);
+    //rectMode(CENTER);
     for (int i = 0; i < airlines[0].length; i++) {
       add(new ToggleBox(initX, initY, 150, 40,
         airlines[1][i], color(173, 245, 185), font, airlines[0][i], color(245, 173, 173)));
