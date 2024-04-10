@@ -15,7 +15,6 @@ class Query {
       }
     }
 
-    println(distancesAL.size());
 
     int[] array = new int[distancesAL.size()];
     for (int i = 0; i < distancesAL.size(); i++ ) {
@@ -33,8 +32,6 @@ class Query {
     for (DataPoint dataPoint : data) {
       distancesAL.add(dataPoint.getDistance());
     }
-
-    println(distancesAL.size());
 
     int[] array = new int[distancesAL.size()];
     for (int i = 0; i < distancesAL.size(); i++ ) {
@@ -213,47 +210,35 @@ class Query {
     int WN = 0;
 
     for (DataPoint dataPoint : data) {
-      //println("MARKET SHARE DATAPOINT:"+dataPoint.getAirlineCode());
-
       if (dataPoint.getAirlineCode().equals("AA")) {
         AA++;
-        //println(AA);
       }
       if (dataPoint.getAirlineCode().equals("AS")) {
         AS++;
-        //println(AS);
       }
       if (dataPoint.getAirlineCode().equals("B6")) {
         B6++;
-        //println(B6);
       }
       if (dataPoint.getAirlineCode().equals("DL")) {
         DL++;
-        //println(DL);
       }
       if (dataPoint.getAirlineCode().equals("F9")) {
         F9++;
-        //println(F9);
       }
       if (dataPoint.getAirlineCode().equals("G4")) {
         G4++;
-        //println(G4);
       }
       if (dataPoint.getAirlineCode().equals("HA")) {
         HA++;
-        //println(HA);
       }
       if (dataPoint.getAirlineCode().equals("NK")) {
         NK++;
-        //println(NK);
       }
       if (dataPoint.getAirlineCode().equals("UA")) {
         UA++;
-        //println(UA);
       }
       if (dataPoint.getAirlineCode().equals("WN")) {
         WN++;
-        //println(WN);
       }
     }
 
@@ -685,7 +670,6 @@ class Query {
   }
 
   public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) {
-    //println(range[0]); println(range[1]);
     int[] dates = new int[range[1]-(range[0]-1)];
     String[] date = new String[3];
     for (DataPoint dataPoint : data) {

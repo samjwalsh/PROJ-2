@@ -33,12 +33,9 @@ class LinePlot {
     }
     pPoints = new GPointsArray(ticks);
     int[] yHeights = new int[ticks];
-    //println(data.length);
     for(int i = 0; i < data.length; i++) {
       yHeights[i] = data[i];  
-      /*println(data[i]);*/ println(yHeights[i]);
     }
-    println(data[0]);
 
     int maxHeight = 0;
     for(int i = 0; i < ticks; i++) {

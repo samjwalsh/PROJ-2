@@ -323,7 +323,7 @@ void mousePressed() {
           // TODO update so datais only read again if the filename has changed since last time
           // Filter distancess
           selectedData = Filter.distanceBetween(selectedData, slider.getBounds()[0], slider.getBounds()[1]);
-          println(selectedData.size());
+          println("Filtered Data Size - " + selectedData.size());
 
           // Filter airlines
           ArrayList<String> airlines = checkBoxesAirlines.getSelected();

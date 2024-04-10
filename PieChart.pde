@@ -50,14 +50,11 @@ class PieChart {
       values[i] = table.getFloat(i, 1);
 
       totalVals += values[i];
-      //println(totalVals);
     }
     for (int i = 0; i < table.getRowCount(); i++) {
       labels[i] = table.getString(i, 0);
     }
 
-    //println(Arrays.toString(values));
-    //println(Arrays.toString(labels));
   }
 
   void draw() {
@@ -80,8 +77,6 @@ class PieChart {
     float bri = 100;
     for (int i = 0; i < values.length; i++) {
       float hue = ((float)(i+1)/(float)values.length)*360;
-      println(i);
-      println(hue);
       color colour = color(hue, sat, bri);
       fill(colour);
       float newAngle = radians((values[i] * 360 )/(totalVals));
