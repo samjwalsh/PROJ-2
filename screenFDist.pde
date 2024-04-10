@@ -7,16 +7,17 @@ class ScreenFDist extends Screen {
     add(new Widget(100, 20, 100, 40,
       "Home", color(255), font, "Home"));
 
-    String airport = "SEA";
-    data = Filter.isLateLeaving(data);
-    int[] flightDistances = query.flightDistances(data, airport);
+    int[] flightDistances = query.flightDistancesAllData(selectedData);
     histogram = new Histogram(250, 10, 600, 600, parent);
-    histogram.setData(flightDistances, "Flight From "+airport, "Distance Flown", "Number of Flights");
+    histogram.setData(flightDistances, "Flights", "Distance Flown", "Number of Flights");
+  }
+  void update() {
+    int[] flightDistances = query.flightDistancesAllData(selectedData);
+    histogram.setData(flightDistances, "Flights", "Distance Flown", "Number of Flights");
   }
   void draw() {
-    background(120, 0, 255);
+    background(255, 212, 229);
     drawWidgets();
-          histogram.draw();
-
+    histogram.draw();
   }
 }
