@@ -34,7 +34,8 @@ class ScrollWidget {
     Collections.sort(originAirportsList);
     airports = originAirportsList.toArray(new String[0]);
     totalPages = ceil((float)airports.length / airportsPerPage);
-    airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    originAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    destinationAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
   }
   //+(25/2)-3
   void draw() {
@@ -79,7 +80,8 @@ class ScrollWidget {
       rect(xpos+(25/2), changingYPos, rectW-25, 30);
       changingYPos+=30;
     }
-    airportChecks.draw();
+    originAirportChecks.draw();
+    destinationAirportChecks.draw();
     noStroke();
     fill(255, 212, 229);
     rect(0, 0, width, 425);
@@ -91,10 +93,12 @@ class ScrollWidget {
   }
 
   void mousePressed() {
-    airportChecks.mousePressed(mouseX, mouseY);
+    originAirportChecks.mousePressed(mouseX, mouseY);
+    destinationAirportChecks.mousePressed(mouseX, mouseY); 
   }
   void mouseWheel(MouseEvent event) {
     float e = event.getCount();
-    airportChecks.needMouseWheel(e);
+    originAirportChecks.needMouseWheel(e);
+    destinationAirportChecks.needMouseWheel(e);
   }
 }
