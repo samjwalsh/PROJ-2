@@ -199,18 +199,8 @@ class Query {
 
 
   Table marketShare(ArrayList<DataPoint> data) {
-
-    int AA = 0;
-    int AS = 0;
-    int B6 = 0;
-    int DL = 0;
-    int F9 = 0;
-    int G4 = 0;
-    int HA = 0;
-    int NK = 0;
-    int UA = 0;
-    int WN = 0;
-
+    int AA, AS, B6, DL, F9, G4, HA, NK, UA, WN;
+    AA = AS = B6 = DL = F9 = G4 = HA = NK = UA =WN = 0;
     for (DataPoint dataPoint : data) {
       if (dataPoint.getAirlineCode().equals("AA")) {
         AA++;
@@ -245,6 +235,8 @@ class Query {
     }
 
     Table tableTwo = new Table();
+    // Creates a table with column 0 being "Airline" and column 1 being "No.Flights",
+    // where "No.Flights" is the count of each instance of an airline
     tableTwo.addColumn("Airline");
     tableTwo.addColumn("No. Flights");
 
@@ -293,59 +285,10 @@ class Query {
 
 
   Table flightsByState(ArrayList<DataPoint> data) {
-    //int AK,AL,AR,AZ,CA,CO,CT,DE,FL,GA,HI,IA,ID,IL,IN,KS,KY,LA,MA,MD,ME,MI,MN,MO,MS,MT,NC,ND,NE,NH,NJ,NM,NV,NY,OH,OK,OR,PA,RI,SC,SD,TN,TX,UT,VA,VT,WA,WI,WV,WY = 0;
-    int AK = 0;
-    int AL = 0;
-    int AR = 0;
-    int AZ = 0;
-    int CA = 0;
-    int CO = 0;
-    int CT = 0;
-    int DE = 0;
-    int FL = 0;
-    int GA = 0;
-    int HI = 0;
-    int IA = 0;
-    int ID = 0;
-    int IL = 0;
-    int IN = 0;
-    int KS = 0;
-    int KY = 0;
-    int LA = 0;
-    int MA = 0;
-    int MD = 0;
-    int ME = 0;
-    int MI = 0;
-    int MN = 0;
-    int MO = 0;
-    int MS = 0;
-    int MT = 0;
-    int NC = 0;
-    int ND = 0;
-    int NE = 0;
-    int NH = 0;
-    int NJ = 0;
-    int NM = 0;
-    int NV = 0;
-    int NY = 0;
-    int OH = 0;
-    int OK = 0;
-    int OR = 0;
-    int PA = 0;
-    int RI = 0;
-    int SC = 0;
-    int SD = 0;
-    int TN = 0;
-    int TX = 0;
-    int UT = 0;
-    int VA = 0;
-    int VT = 0;
-    int WA = 0;
-    int WI = 0;
-    int WV = 0;
-    int WY = 0;
+    int AK, AL, AR, AZ, CA, CO, CT, DE, FL, GA, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN, MO, MS, MT, NC, ND, NE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VA, VT, WA, WI, WV, WY;
+    AK=AL=AR=AZ=CA=CO=CT=DE=FL=GA=HI=IA=ID=IL=IN=KS=KY=LA=MA=MD=ME=MI=MN=MO=MS=MT=NC=ND=NE=NH=NJ=NM=NV=NY=OH=OK=OR=PA=RI=SC=SD=TN=TX=UT=VA=VT=WA=WI=WV=WY=0;
     for (DataPoint dataPoint : data) {
-      if (dataPoint.getOriginState().equals("AK")) {
+      if (dataPoint.getOriginState().equals("AK")) {  // Compares data from CSV to determine which state instance to increase count of
         AK++;
       }
       if (dataPoint.getOriginState().equals("AL")) {
@@ -497,7 +440,7 @@ class Query {
       }
     }
 
-    Table stateTable = new Table();
+    Table stateTable = new Table();    // Generates the table with column 0 being "State" and column 1 being "Flights", where "Flights" is the count from each State
     stateTable.addColumn("State");
     stateTable.addColumn("Flights");
 
