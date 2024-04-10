@@ -61,7 +61,7 @@ class PieChart {
     float legendHeight = values.length * 30;
     float legendX = width - legendWidth - 100;
     float legendY = (height - legendHeight) / 2;
-    background(255); 
+    //background(255); 
 
     textAlign(CENTER);
     textSize(30);
@@ -72,7 +72,7 @@ class PieChart {
     colorMode(HSB, 360, 100, 100);
 
     float lastAngle = 0;
-    float sat = 65;
+    float sat = 50;
     float bri = 100;
     for (int i = 0; i < values.length; i++) {
       // Generates a nice colour based off of index
