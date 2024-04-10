@@ -21,14 +21,15 @@ class Widget {
     rectMode(CORNER);
   }
   void draw() {
+    boolean mousedOver = false;
     if(mouseX>x && mouseX<(x+width) && mouseY>y && mouseY<(y+height)){
-      //strokeWeight(2);
-      stroke(4);
+mousedOver = true;
     }
     else{
       stroke(255);
     }
-    fill(widgetColor);
+    if (mousedOver) fill(255);
+    else fill(widgetColor);
     textAlign(CENTER);
     rectMode(CORNER);
     rect(x, y, width, height);

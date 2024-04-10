@@ -44,11 +44,10 @@ class PieChart {
     labels = new String[table.getRowCount()];
     this.chartTitle = chartTitle;
 
-
+    // Create an array of values and also record the total of the values so we can calculate the neccessary angles later
     totalVals = 0;
     for (int i = 0; i < table.getRowCount(); i++) {
       values[i] = table.getFloat(i, 1);
-
       totalVals += values[i];
     }
     for (int i = 0; i < table.getRowCount(); i++) {
@@ -62,7 +61,7 @@ class PieChart {
     float legendHeight = values.length * 30;
     float legendX = width - legendWidth - 100;
     float legendY = (height - legendHeight) / 2;
-    background(255); 
+    //background(255); 
 
     textAlign(CENTER);
     textSize(30);
@@ -70,15 +69,17 @@ class PieChart {
     text(chartTitle, width / 2, 30);
     textAlign(LEFT);
 
-      colorMode(HSB, 360, 100, 100);
+    colorMode(HSB, 360, 100, 100);
 
     float lastAngle = 0;
-    float sat = 65;
+    float sat = 50;
     float bri = 100;
     for (int i = 0; i < values.length; i++) {
+      // Generates a nice colour based off of index
       float hue = ((float)(i+1)/(float)values.length)*360;
       color colour = color(hue, sat, bri);
       fill(colour);
+      // Calculates the size of this slice
       float newAngle = radians((values[i] * 360 )/(totalVals));
       arc(width/2 - 100, height/2, diameter, diameter, lastAngle, lastAngle + newAngle);
 
@@ -91,6 +92,6 @@ class PieChart {
       lastAngle += newAngle;
     }
     colorMode(RGB, 255,255,255);
-
+    textAlign(CENTER);
   }
 }

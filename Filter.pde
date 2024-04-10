@@ -44,6 +44,7 @@ class Filter {
 
   ArrayList<DataPoint> dateBetween(ArrayList<DataPoint> data, int min, int max) {
     ArrayList<DataPoint> filteredData = new ArrayList<DataPoint>();
+    // Fix min and max values if not specified
     if (min == 0) min = 1;
     if (max == 0) max = 31;
     for (DataPoint dataPoint : data) {

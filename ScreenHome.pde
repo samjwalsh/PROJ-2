@@ -2,27 +2,29 @@
 class ScreenHome extends Screen {
   ScreenHome(PApplet parent) {
     super(parent);
-    add(new Widget(100, 20, 100, 40,
-      "Flights By Day Of Week", color(255), font, "FBD"));
-    add(new Widget(100, 80, 100, 40,
-      "Flights By Distance", color(255), font, "FDist"));
-    add(new Widget(100, 140, 100, 40,
-      "Marketshare", color(255), font, "MShare"));
+    add(new Widget(552, 230, 391, 70,
+      "Flights By Day Of Week", color(254,235,201), font, "FBD"));
+    add(new Widget(552, 300, 196, 70,
+      "Flights By Distance", color(224,243,176), font, "FDist"));
+    add(new Widget(552, 370, 196, 70,
+      "Marketshare", color(179,226,221), font, "MShare"));
+    add(new Widget(552, 440, 196, 70,
+      "Flights By Date", color(191,213,232), font, "FBDt"));
+    add(new Widget(748, 300, 196, 70,
+      "Flights By State", color(253,222,238), font, "FState"));
+    add(new Widget(748, 370, 196, 70,
+      "Cancelled Flights", color(134,207,190), font, "Cancelled"));
+    add(new Widget(748, 440, 196, 70,
+      "Delayed Flights", color(255,255,176), font, "Delays"));
+
     add(new Widget(850, 750, 100, 40,
       "Filters", color(255), font, "Filter"));
-    add(new Widget(100, 200, 100, 40,
-      "Flights By Date", color(255), font, "FBDt"));
-    add(new Widget(100, 260, 100, 40,
-      "Flights By State", color(255), font, "FState"));
-    add(new Widget(100, 320, 100, 40,
-      "Cancelled Flights", color(255), font, "Cancelled"));
-    add(new Widget(100, 380, 100, 40,
-      "Delayed Flights", color(255), font, "Delays"));
   }
 
   void draw() {
     //background(255, 212, 229);
     image(background, 0, 0, width, height);
+    rect(552, 230, 391, 280);
     drawWidgets();
   }
 }

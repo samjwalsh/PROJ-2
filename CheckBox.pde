@@ -105,6 +105,7 @@ ArrayList<String> getSelected() {
         stroke(0);
       }
     }
+        // textAlign(CENTER);
   }
 
 
@@ -145,6 +146,7 @@ ArrayList<String> getSelected() {
     }
   }
   void needMouseWheel(float e) {
+    
     if (scroll) {
       if (e>0) {
         y-=30;
