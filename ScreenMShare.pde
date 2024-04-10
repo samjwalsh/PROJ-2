@@ -18,7 +18,7 @@ class ScreenMShare extends Screen {
   }
 
   void draw() {
-    background(120, 0, 255);
+    background(221,212,232);
 
     pieChart.draw();
     drawWidgets();

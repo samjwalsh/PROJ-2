@@ -2,6 +2,8 @@
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
 // Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
 // M.Murphy created query for creating an object with int array of flights by date within a range, 5:00, 04/04/2024
+// S.Walsh creates query for getting cancelled and not cancelled flights, 14:00, 8/04/2024
+// S.Walsh created query for getting early and late flights, 15:00, 8/04/2024
 
 class Query {
 
@@ -9,13 +11,14 @@ class Query {
   int[] flightDistances(ArrayList<DataPoint> data, String airport) {
     ArrayList<Integer> distancesAL = new ArrayList<Integer>();
 
+    // Only keeps selected airports
     for (DataPoint dataPoint : data) {
       if (dataPoint.getOriginAirport().equals(airport)) {
         distancesAL.add(dataPoint.getDistance());
       }
     }
 
-
+    // Creates an array of the distances
     int[] array = new int[distancesAL.size()];
     for (int i = 0; i < distancesAL.size(); i++ ) {
       array[i] = distancesAL.get(i);
@@ -125,6 +128,7 @@ class Query {
   }
 
   Table cancelledFlights(ArrayList<DataPoint> data) {
+    //
     int notCancelled = 0;
     int cancelled = 0;
 
@@ -151,9 +155,9 @@ class Query {
 
   Table delayedFlights(ArrayList<DataPoint> data) {
 
-  int delayed = 0;
-  int onTime = 0;
-  int early = 0;
+    int delayed = 0;
+    int onTime = 0;
+    int early = 0;
     for (DataPoint flight : data) {
       int sched = flight.getSchedArrTime();
       int acc = flight.getArrTime();
@@ -162,12 +166,10 @@ class Query {
         if (sched < acc) sched+= 2400;
         else acc += 2400;
       }
-      
+
       if (sched < acc) {
-        // Flight may be delayed
         delayed++;
       } else if (sched > acc) {
-        // Flight may be early
         early++;
       } else {
         // Flight is early (or took 24 hrs?)
@@ -181,7 +183,7 @@ class Query {
     TableRow earlyRow = table.addRow();
     earlyRow.setString("State", "Early");
     earlyRow.setInt("Count", early);
-        TableRow onTimeRow = table.addRow();
+    TableRow onTimeRow = table.addRow();
     onTimeRow.setString("State", "On Time");
     onTimeRow.setInt("Count", onTime);
 

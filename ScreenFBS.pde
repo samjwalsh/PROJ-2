@@ -16,7 +16,7 @@ class ScreenFBS extends Screen {
 
     Table table = query.flightsByState(selectedData);
 
-    barChart = new BarChart(parent, 740,0, 0,"State"); // title , size , x ,  y 
+    barChart = new BarChart(parent, 740, 0, 0, "State"); // title , size , x ,  y
     barChart.setData(table, "Flights by State", "State", "Flights")  ;
 
 
@@ -34,15 +34,15 @@ class ScreenFBS extends Screen {
     //  initY += 50;
     //}
   }
-    void update() {
+  void update() {
     Table table = query.flightsByState(selectedData);
     barChart.setData(table, "Flights by State", "State", "Flights");
   }
   void draw() {
-    background(255, 212, 229);
+    background(221,212,232);
     drawWidgets();
     barChart.draw();
-        add(new Widget(50, 20, 100, 40,
+    add(new Widget(50, 20, 100, 40,
       "Home", color(255), font, "Home"));
   }
 

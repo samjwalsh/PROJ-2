@@ -16,7 +16,7 @@ class Cutscreen {
     fill(0);
     textAlign(CENTER);
 
-    text("Loading..", width/2, height/2);
+    text("Loading...", width/2, height/2);
 
     for (int i=0; i <= currentBars; i++)
     {
