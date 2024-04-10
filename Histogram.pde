@@ -1,6 +1,8 @@
 // S. Walsh, skeleton for histogram class, 11:00, 21/03/2024
 // M. Murphy, Histogram class completed for distances, 19:00, 26/03/2024
 
+
+// 
 class Histogram {
   int x;
   int y;
@@ -19,7 +21,6 @@ class Histogram {
     this.hWidth = hWidth;
     this.hHeight = hHeight;
     this.histogram = new GPlot(parent);
-
   }
   
   void setData(int[] data, String chartTitle, String xTitle, String yTitle) {

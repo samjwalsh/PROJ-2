@@ -671,16 +671,22 @@ class Query {
     }
   }
 
-  public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) {
+  public DatesInRange flightsByDate(ArrayList<DataPoint> data) {
+    int min = parseInt(data.get(0).getFlightDate().split("/")[1]);
+    int max = parseInt(data.get(data.size()-1).getFlightDate().split("/")[1]);
+    println(min+" "+max);
+    int[] range = {min, max};
     int[] dates = new int[range[1]-(range[0]-1)];
-    String[] date = new String[3];
+    int baseDate = range[0];
+    int date; int index = 0;
     for (DataPoint dataPoint : data) {
-      for (int i = 0; i <= dates.length; i++) {
-        date = dataPoint.getFlightDate().split("/");
-        for (int j = range[0]; j <= range[1]; j++) {
-          if (Integer.valueOf(date[1]) == j) {
-            dates[j-1] += 1;
-          }
+      date = parseInt(dataPoint.getFlightDate().split("/")[1]);
+      if(0 == baseDate - date) dates[index] += 1;
+      else {        
+        index += 1;
+        baseDate += 1;
+        if(index >= 0 && index <= range[1]-range[0]) {
+          dates[index] += 1;
         }
       }
     }
