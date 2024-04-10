@@ -25,21 +25,20 @@ class ScreenFilter extends Screen {
     text("End Date:", endDateInput.XPos - 80,
       endDateInput.YPos + endDateInput.height / 2);
     drawWidgets();
-
     slider.draw();
     slider.update(mouseX, mouseY);
-
     checkBoxesAirlines.draw();
-
     checkBoxesDataSet.draw();
   }
-  void mousePressed() {
+  
+  void mousePressed() { // call all mouse pressed functions
     startDateInput.mousePressed(mouseX, mouseY);
     endDateInput.mousePressed(mouseX, mouseY);
     origin.mousePressed();
     destination.mousePressed();
   }
-  void keyPressed() {
+  
+  void keyPressed() { // call key pressed functions
     startDateInput.keyPressed();
     endDateInput.keyPressed();
   }
