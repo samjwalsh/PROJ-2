@@ -34,7 +34,9 @@ class ScrollWidget {
     Collections.sort(originAirportsList);
     airports = originAirportsList.toArray(new String[0]);
     totalPages = ceil((float)airports.length / airportsPerPage);
-    airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    if (title.contains("Destination")) {
+      airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    }
   }
   //+(25/2)-3
   void draw() {
@@ -51,15 +53,15 @@ class ScrollWidget {
     rect(xpos+(25/2), ypos+(25/2), rectW-25, rectH-25);
 
 
-    fill(149, 199, 194);
-    rect(prevBtnXPos, btnYPos, 50, 30);
-    fill(0);
-    textSize(10);
-    text("BACK", xpos+10, btnYPos+20);
-    fill(149, 199, 194);
-    rect(nextBtnXPos, btnYPos, 50, 30);
-    fill(0);
-    text("NEXT", nextBtnXPos+10, btnYPos+20);
+    //fill(149, 199, 194);
+    //rect(prevBtnXPos, btnYPos, 50, 30);
+    //fill(0);
+    //textSize(10);
+    //text("BACK", xpos+10, btnYPos+20);
+    //fill(149, 199, 194);
+    //rect(nextBtnXPos, btnYPos, 50, 30);
+    //fill(0);
+    //text("NEXT", nextBtnXPos+10, btnYPos+20);
     stroke(150);
   }
 
@@ -79,12 +81,14 @@ class ScrollWidget {
       rect(xpos+(25/2), changingYPos, rectW-25, 30);
       changingYPos+=30;
     }
-    airportChecks.draw();
+    if (title.contains("Destination")) {
+      airportChecks.draw();
+    }
     noStroke();
     fill(255, 212, 229);
-    rect(0, 0, width, 425);
+    rect(xpos, 0, rectW, 425);
     fill(255, 212, 229);
-    rect(0, 680, width, 120);//rectangles to cover lsit
+    rect(xpos, 680, rectW, 120);//rectangles to cover lsit
     textSize(20);
     fill(0); // Text color
     text(title, xpos, ypos-15);
