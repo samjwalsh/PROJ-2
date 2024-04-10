@@ -52,11 +52,11 @@ class SliderWidget {
   }
 
   void update(int mx, int my) {
-    //find the distance value that corresponds to the slider
+    //math for finding the distance value that corresponds to the slider pos
     displayText1 = startRange+dist(barX1, barY, slider1Xpos, barY)*((endRange-startRange)/dist(barX1, barY, barX2, barY));
     displayText2 =startRange+dist(barX1, barY, slider2Xpos, barY)*((endRange-startRange)/dist(barX1, barY, barX2, barY));
     textSize(10);
-
+    // display distance calculated from above
     text(int(displayText1), slider1Xpos-5, barY+15);
     text(int(displayText2), slider2Xpos-5, barY+15);
 

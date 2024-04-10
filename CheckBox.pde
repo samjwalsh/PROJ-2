@@ -24,8 +24,7 @@ class CheckBox {
     initalY = y;
     selected = new boolean[count];
     yValues = new int[count];
-    //changingY = y+20;
-
+    
     // set values of initial boolean array
     for (int i = 0; i < selected.length; i++) {
       if (multiSelect) {

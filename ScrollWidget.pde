@@ -1,15 +1,10 @@
 // C. O'Brien, created code to implement scroll menu, 21:30 29/03/2024
 class ScrollWidget {
-  int currentPage = 0;
-  int airportsPerPage;
-  int totalPages;
-  String[] airports;
-  int xposChange, yposChange;
+  int currentPage = 0,airportsPerPage,totalPages;
   //C. Quinn, added more variables, 21:50, 29/03/2024
-  int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos;
+  int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos,xposChange, yposChange;
   String title;
-
-  //CheckBox airportChecks;
+  String[] airports;
 
   // C. Quinn, added constructor, 21:50, 29/03/2024
   ScrollWidget(int xpos, int ypos, int rectW, int rectH, String title) {
@@ -26,7 +21,6 @@ class ScrollWidget {
     yposChange = ypos+4;
 
     // C. O'Brien, moved from made from void setup into constructor, 21:50, 29/03/2024
-
     textAlign(CENTER);
     DataReader1 reader = new DataReader1("flights_full.csv");
     HashSet<String> uniqueOriginAirports = reader.readOriginAirports();
@@ -53,25 +47,12 @@ class ScrollWidget {
     rect(xpos, ypos, rectW, rectH);
     fill(255);
     rect(xpos+(25/2), ypos+(25/2), rectW-25, rectH-25);
-
-
-    //fill(149, 199, 194);
-    //rect(prevBtnXPos, btnYPos, 50, 30);
-    //fill(0);
-    //textSize(10);
-    //text("BACK", xpos+10, btnYPos+20);
-    //fill(149, 199, 194);
-    //rect(nextBtnXPos, btnYPos, 50, 30);
-    //fill(0);
-    //text("NEXT", nextBtnXPos+10, btnYPos+20);
     stroke(150);
   }
 
   void displayCurrentPageAirports() {
-
     textSize(12);
     fill(0);
-
     // C. Quinn, added for loop to draw background for table, 12:00 30/03/2024
     int changingYPos = ypos+(25/2)+2;
     for (int i = 0; i < airportsPerPage; i++) {
@@ -83,18 +64,17 @@ class ScrollWidget {
       rect(xpos+(25/2), changingYPos, rectW-25, 30);
       changingYPos+=30;
     }
+    // use checkbox class created previously for airports
     if (title.contains("Origin")) {
       originAirportChecks.draw();
     } else {
       destinationAirportChecks.draw();
     }
+    //rectangles to cover list
     noStroke();
-
     fill(255, 212, 229);
     rect(xpos, 0, rectW, 425);
-
-    //fill(255, 212, 229);
-    rect(xpos, 680, rectW, 120);//rectangles to cover lsit
+    rect(xpos, 680, rectW, 120);
     textSize(20);
     fill(0); // Text color
     text(title, xpos, ypos-15);

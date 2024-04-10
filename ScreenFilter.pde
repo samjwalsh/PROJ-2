@@ -1,8 +1,5 @@
 // C. Quinn, Created class for filter screen, 11:30, 29/03/2024
-
 class ScreenFilter extends Screen {
-
-
   ScreenFilter(PApplet parent) {
     super(parent);
     add(new Widget(20, height-60, 100, 40,
@@ -11,7 +8,7 @@ class ScreenFilter extends Screen {
     endDateInput = new InputBox(500, 280, 200, 50);
   }
 
-  void draw() {
+  void draw() { // call draw functions etc
     background(255, 212, 229);
     origin.draw();
     destination.draw();

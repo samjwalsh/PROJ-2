@@ -17,11 +17,10 @@ Histogram theHistogram;
 GPlot histogram;
 Query query = new Query();
 Filter Filter = new Filter();
+
+// objects for filters
 SliderWidget slider;
-CheckBox checkBoxesAirlines;
-CheckBox checkBoxesDataSet;
-CheckBox originAirportChecks;
-CheckBox destinationAirportChecks;
+CheckBox checkBoxesAirlines,checkBoxesDataSet,originAirportChecks,destinationAirportChecks;
 ScrollWidget origin, destination;
 
 InputBox startDateInput;
