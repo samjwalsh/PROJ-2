@@ -14,7 +14,7 @@ class ScreenFDates extends Screen {
     datesInRange =  query.flightsByDate(selectedData);
 
     linePlot = new LinePlot(250, 10, 600, 600, parent);
-    linePlot.setData(datesInRange.dates, datesInRange.range, "FLights By Date", "Date", "Number of Flights");
+    linePlot.setData(datesInRange.dates, datesInRange.range, "Flights By Date", "Date", "Number of Flights");
   }
   void draw() {
     background(221,212,232);
