@@ -6,7 +6,8 @@ class ScrollWidget {
   String[] airports;
   int xposChange, yposChange;
   //C. Quinn, added more variables, 21:50, 29/03/2024
-  int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos;
+  int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos;airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+  }
   String title;
 
   //CheckBox airportChecks;
@@ -34,10 +35,8 @@ class ScrollWidget {
     Collections.sort(originAirportsList);
     airports = originAirportsList.toArray(new String[0]);
     totalPages = ceil((float)airports.length / airportsPerPage);
-    if (title.contains("Destination")) {
-      airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
-    }
-  }
+    originAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    destinationAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
   //+(25/2)-3
   void draw() {
     //background(255, 212, 229);
@@ -81,9 +80,7 @@ class ScrollWidget {
       rect(xpos+(25/2), changingYPos, rectW-25, 30);
       changingYPos+=30;
     }
-    if (title.contains("Destination")) {
-      airportChecks.draw();
-    }
+    airportChecks.draw();
     noStroke();
     fill(255, 212, 229);
     rect(xpos, 0, rectW, 425);
@@ -95,10 +92,12 @@ class ScrollWidget {
   }
 
   void mousePressed() {
-    airportChecks.mousePressed(mouseX, mouseY);
+    originAirportChecks.mousePressed(mouseX, mouseY);
+    destinationAirportChecks.mousePressed(mouseX, mouseY); 
   }
   void mouseWheel(MouseEvent event) {
     float e = event.getCount();
-    airportChecks.needMouseWheel(e);
+    originAirportChecks.needMouseWheel(e);
+    destinationAirportChecks.needMouseWheel(e);
   }
 }
