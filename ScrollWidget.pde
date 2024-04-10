@@ -100,7 +100,8 @@ class ScrollWidget {
     text(title, xpos, ypos-15);
   }
 
-  void mousePressed() {
+  void mousePressed() { 
+    // 
     if (title.contains("Origin")) {
       originAirportChecks.mousePressed(mouseX, mouseY);
     } else {
@@ -108,6 +109,7 @@ class ScrollWidget {
     }
   }
   void mouseWheel(MouseEvent event) {
+    // scrolling
     if (mouseX> xpos && mouseX < xpos+rectW && mouseY > ypos && mouseY < ypos+rectH) {
       float e = event.getCount();
       if (title.contains("Origin")) {

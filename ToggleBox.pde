@@ -18,13 +18,16 @@ class ToggleBox extends Widget {
     this.disabledColor = disabledColor;
     this.widgetFont=font;
     labelColor=color(0);
+    textAlign(CENTER);
     rectMode(CORNER);
   }
   void draw() {
+    textAlign(CENTER);
+    rectMode(CORNER);
     fill(widgetColor);
     rect(x, y, width, height);
     fill(labelColor);
-    text(label, x+10, y+height-10);
+    text(label, x+(width/2), y+(height/2));
   }
   String getEvent(int mX, int mY) {
     if (mX>x && mX < x+width && mY >y && mY <y+height) {
