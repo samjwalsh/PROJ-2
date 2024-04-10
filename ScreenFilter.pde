@@ -13,7 +13,8 @@ class ScreenFilter extends Screen {
 
   void draw() {
     background(255, 212, 229);
-    pages.draw();
+    origin.draw();
+    destination.draw();
     startDateInput.draw();
     endDateInput.draw();
     fill(0);
@@ -35,7 +36,8 @@ class ScreenFilter extends Screen {
   void mousePressed() {
     startDateInput.mousePressed(mouseX, mouseY);
     endDateInput.mousePressed(mouseX, mouseY);
-    pages.mousePressed();
+    origin.mousePressed();
+    destination.mousePressed();
   }
   void keyPressed() {
     startDateInput.keyPressed();

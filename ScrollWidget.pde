@@ -9,7 +9,7 @@ class ScrollWidget {
   int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos;
   String title;
 
-
+  //CheckBox airportChecks;
 
   // C. Quinn, added constructor, 21:50, 29/03/2024
   ScrollWidget(int xpos, int ypos, int rectW, int rectH, String title) {
@@ -34,9 +34,13 @@ class ScrollWidget {
     Collections.sort(originAirportsList);
     airports = originAirportsList.toArray(new String[0]);
     totalPages = ceil((float)airports.length / airportsPerPage);
-    airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    if (title.contains("Origin")) {
+      originAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    } else {
+      destinationAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    }
   }
-  //+(25/2)-3
+
   void draw() {
     //background(255, 212, 229);
     drawUI();
@@ -51,15 +55,15 @@ class ScrollWidget {
     rect(xpos+(25/2), ypos+(25/2), rectW-25, rectH-25);
 
 
-    fill(149, 199, 194);
-    rect(prevBtnXPos, btnYPos, 50, 30);
-    fill(0);
-    textSize(10);
-    text("BACK", xpos+10, btnYPos+20);
-    fill(149, 199, 194);
-    rect(nextBtnXPos, btnYPos, 50, 30);
-    fill(0);
-    text("NEXT", nextBtnXPos+10, btnYPos+20);
+    //fill(149, 199, 194);
+    //rect(prevBtnXPos, btnYPos, 50, 30);
+    //fill(0);
+    //textSize(10);
+    //text("BACK", xpos+10, btnYPos+20);
+    //fill(149, 199, 194);
+    //rect(nextBtnXPos, btnYPos, 50, 30);
+    //fill(0);
+    //text("NEXT", nextBtnXPos+10, btnYPos+20);
     stroke(150);
   }
 
@@ -79,22 +83,38 @@ class ScrollWidget {
       rect(xpos+(25/2), changingYPos, rectW-25, 30);
       changingYPos+=30;
     }
-    airportChecks.draw();
+    if (title.contains("Origin")) {
+      originAirportChecks.draw();
+    } else {
+      destinationAirportChecks.draw();
+    }
     noStroke();
+
     fill(255, 212, 229);
-    rect(0, 0, width, 425);
-    fill(255, 212, 229);
-    rect(0, 680, width, 120);//rectangles to cover lsit
+    rect(xpos, 0, rectW, 425);
+
+    //fill(255, 212, 229);
+    rect(xpos, 680, rectW, 120);//rectangles to cover lsit
     textSize(20);
     fill(0); // Text color
     text(title, xpos, ypos-15);
   }
 
   void mousePressed() {
-    airportChecks.mousePressed(mouseX, mouseY);
+    if (title.contains("Origin")) {
+      originAirportChecks.mousePressed(mouseX, mouseY);
+    } else {
+      destinationAirportChecks.mousePressed(mouseX, mouseY);
+    }
   }
   void mouseWheel(MouseEvent event) {
-    float e = event.getCount();
-    airportChecks.needMouseWheel(e);
+    if (mouseX> xpos && mouseX < xpos+rectW && mouseY > ypos && mouseY < ypos+rectH) {
+      float e = event.getCount();
+      if (title.contains("Origin")) {
+        originAirportChecks.needMouseWheel(e);
+      } else {
+        destinationAirportChecks.needMouseWheel(e);
+      }
+    }
   }
 }

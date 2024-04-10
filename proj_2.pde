@@ -20,8 +20,10 @@ Filter Filter = new Filter();
 SliderWidget slider;
 CheckBox checkBoxesAirlines;
 CheckBox checkBoxesDataSet;
-CheckBox airportChecks;
-ScrollWidget pages;
+CheckBox originAirportChecks;
+CheckBox destinationAirportChecks;
+ScrollWidget origin,destination;
+
 InputBox startDateInput;
 InputBox endDateInput;
 GPlot linePlot;
@@ -94,7 +96,8 @@ void setup() {
   background = loadImage("background.PNG");
   screenFilter = new ScreenFilter(this);
   slider = new SliderWidget(width - 650, width - 100, 80, color(244, 144, 185), 31, 5095, "Distance");
-  pages = new ScrollWidget(50, 425, 200, 250, "Select Airport");
+  origin = new ScrollWidget(50, 425, 200, 250, "Select Origin Airport");
+  destination = new ScrollWidget(300, 425, 200, 250, "Select Destinatoin Airport");
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true, false);
   checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false, false);
 
@@ -315,7 +318,7 @@ void mousePressed() {
           selectedData = Filter.onlySelectAirlines(selectedData, airlines);
 
           // Filter airports
-          ArrayList<String> airports = airportChecks.getSelected();
+          ArrayList<String> airports = originAirportChecks.getSelected();
           selectedData = Filter.onlySelectAirports(selectedData, airports);
 
           // Filter dates
@@ -630,7 +633,8 @@ void mousePressed() {
 // C. Quinn, added mouse wheel function to add scroll functionality to airpot slection, 3:30pm, 03/04/2024
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
-  airportChecks.needMouseWheel(e);
+  originAirportChecks.needMouseWheel(e);
+  destinationAirportChecks.needMouseWheel(e);
 }
 void keyPressed() {
   screenFilter.keyPressed();
