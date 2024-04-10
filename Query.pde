@@ -1,7 +1,9 @@
-// S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024 //<>// //<>//
+// S.Walsh, created query for creating int array of flight distances through a given airport, 11:00, 21/03/2024 //<>// //<>// //<>//
 // S.Walsh, created query for creating a table of flights by day of week, 11:00, 21/03/2024
 // Mitchell Ashmore query for creating a table of market shares by Airlines, 12:30 21/3/2024
 // M.Murphy created query for creating an object with int array of flights by date within a range, 5:00, 04/04/2024
+// S.Walsh creates query for getting cancelled and not cancelled flights, 14:00, 8/04/2024
+// S.Walsh created query for getting early and late flights, 15:00, 8/04/2024
 
 class Query {
 
@@ -9,14 +11,14 @@ class Query {
   int[] flightDistances(ArrayList<DataPoint> data, String airport) {
     ArrayList<Integer> distancesAL = new ArrayList<Integer>();
 
+    // Only keeps selected airports
     for (DataPoint dataPoint : data) {
       if (dataPoint.getOriginAirport().equals(airport)) {
         distancesAL.add(dataPoint.getDistance());
       }
     }
 
-    println(distancesAL.size());
-
+    // Creates an array of the distances
     int[] array = new int[distancesAL.size()];
     for (int i = 0; i < distancesAL.size(); i++ ) {
       array[i] = distancesAL.get(i);
@@ -33,8 +35,6 @@ class Query {
     for (DataPoint dataPoint : data) {
       distancesAL.add(dataPoint.getDistance());
     }
-
-    println(distancesAL.size());
 
     int[] array = new int[distancesAL.size()];
     for (int i = 0; i < distancesAL.size(); i++ ) {
@@ -128,6 +128,7 @@ class Query {
   }
 
   Table cancelledFlights(ArrayList<DataPoint> data) {
+    //
     int notCancelled = 0;
     int cancelled = 0;
 
@@ -167,10 +168,8 @@ class Query {
       }
 
       if (sched < acc) {
-        // Flight may be delayed
         delayed++;
       } else if (sched > acc) {
-        // Flight may be early
         early++;
       } else {
         // Flight is early (or took 24 hrs?)
@@ -599,6 +598,7 @@ class Query {
   }
 
 
+  // An object containing an int array of dates corresponding to a certain range, also an int array.
   public class DatesInRange {
     private int[] dates;
     private int[] range;
@@ -615,17 +615,23 @@ class Query {
     }
   }
 
-  public DatesInRange flightsByDate(ArrayList<DataPoint> data, int[] range) {
-    //println(range[0]); println(range[1]);
+  // Returns a DatesInRange object (above) based on the filtered data given passed as a parameter ArrayList
+  public DatesInRange flightsByDate(ArrayList<DataPoint> data) {
+    int min = parseInt(data.get(0).getFlightDate().split("/")[1]);
+    int max = parseInt(data.get(data.size()-1).getFlightDate().split("/")[1]);
+    println(min+" "+max);
+    int[] range = {min, max};
     int[] dates = new int[range[1]-(range[0]-1)];
-    String[] date = new String[3];
+    int baseDate = range[0];
+    int date; int index = 0;
     for (DataPoint dataPoint : data) {
-      for (int i = 0; i <= dates.length; i++) {
-        date = dataPoint.getFlightDate().split("/");
-        for (int j = range[0]; j <= range[1]; j++) {
-          if (Integer.valueOf(date[1]) == j) {
-            dates[j-1] += 1;
-          }
+      date = parseInt(dataPoint.getFlightDate().split("/")[1]);
+      if(0 == baseDate - date) dates[index] += 1;
+      else {        
+        index += 1;
+        baseDate += 1;
+        if(index >= 0 && index <= range[1]-range[0]) {
+          dates[index] += 1;
         }
       }
     }

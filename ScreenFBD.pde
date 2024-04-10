@@ -21,8 +21,10 @@ class ScreenFBD extends Screen {
 
     int initX = 50;
     int initY = 100;
+    //textAlign(CENTER);
+    //rectMode(CENTER);
     for (int i = 0; i < airlines[0].length; i++) {
-      add(new ToggleBox(initX, initY, 100, 40,
+      add(new ToggleBox(initX, initY, 150, 40,
         airlines[1][i], color(173, 245, 185), font, airlines[0][i], color(245, 173, 173)));
       initY += 50;
     }
@@ -32,7 +34,7 @@ class ScreenFBD extends Screen {
     barChart.setData(table, "Flights by day of week", "Day", "Flights")  ;
   }
   void draw() {
-    background(255, 212, 229);
+    background(221,212,232);
     drawWidgets();
     barChart.draw();
   }
@@ -50,7 +52,7 @@ class ScreenFBD extends Screen {
           if (airlines[2][j].equals("t")) allowedAirlines.add(airlines[0][j]);
         }
         ArrayList<DataPoint> filteredData;
-        filteredData = Filter.onlySelectAirports(selectedData, allowedAirlines);
+        filteredData = Filter.onlySelectAirlines(selectedData, allowedAirlines);
         Table table = query.flightsByDoW(filteredData);
         barChart.setData(table, "Flights by day of week", "Day", "Flights");
 

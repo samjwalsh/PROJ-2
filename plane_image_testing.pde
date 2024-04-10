@@ -14,16 +14,12 @@ class Cutscreen {
 
     textSize(25);
     fill(0);
-    println("new bar");
     textAlign(CENTER);
 
-    text("Loading..", width/2, height/2);
+    text("Loading...", width/2, height/2);
 
     for (int i=0; i <= currentBars; i++)
     {
-      println("d");
-      //rect(50*i, 200, 50, 50);
-      println(currentBars);
     }
     currentBars++;
   }

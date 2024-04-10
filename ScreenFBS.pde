@@ -29,7 +29,7 @@ class ScreenFBS extends Screen {
     drawWidgets();
     barChart.draw();
     add(new Widget(50, 20, 100, 40,
-      "Home", color(255), font, "Home"));        // Home button to go back 
+    "Home", color(255), font, "Home"));        // Home button to go back 
   }
 
   void toggleState(String state) {

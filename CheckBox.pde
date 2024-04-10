@@ -1,4 +1,4 @@
-// C. Quinn, Created class for filter screen, 11:30, 29/03/2024
+// C. Quinn, Created class for list with checkboxes, 11:30, 29/03/2024
 
 class CheckBox {
   int x, y, count, changingY, selectAllXPos;
@@ -105,12 +105,14 @@ ArrayList<String> getSelected() {
         stroke(0);
       }
     }
+        // textAlign(CENTER);
   }
 
 
 
-  void mousePressed(int mx, int my) {
-    if (multiSelect) {
+  void mousePressed(int mx, int my) { 
+    // change the boolean array if airport is selected or deselected
+    if (multiSelect) { // select all button
       if (dist(mx, my, selectAllXPos+80, initalY+5)<8) {
         if (countTrue == count) {
           countTrue = 0;
@@ -145,6 +147,7 @@ ArrayList<String> getSelected() {
     }
   }
   void needMouseWheel(float e) {
+    // scroll up or down
     if (scroll) {
       if (e>0) {
         y-=30;

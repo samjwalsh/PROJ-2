@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 
 import processing.video.*;
-import java.util.ArrayList;
+import java.util.ArrayList;  
 import java.util.HashSet;
 import processing.data.Table;
 import processing.data.TableRow;
@@ -20,17 +20,16 @@ Filter Filter = new Filter();
 SliderWidget slider;
 CheckBox checkBoxesAirlines;
 CheckBox checkBoxesDataSet;
-CheckBox airportChecks;
-ScrollWidget pages;
+CheckBox originAirportChecks;
+CheckBox destinationAirportChecks;
+ScrollWidget origin,destination;
+
 InputBox startDateInput;
 InputBox endDateInput;
 GPlot linePlot;
 
 
 PImage background;
-//Movie movie;
-//Boolean enableVideo = false;
-//ToggleBox toggleVideo;
 
 String currentScreen = "Filter";
 ScreenHome screenHome;
@@ -97,20 +96,16 @@ void setup() {
   background = loadImage("background.PNG");
   screenFilter = new ScreenFilter(this);
   slider = new SliderWidget(width - 650, width - 100, 80, color(244, 144, 185), 31, 5095, "Distance");
-  pages = new ScrollWidget(50, 425, 400, 250, "Select Airport");
+  origin = new ScrollWidget(50, 425, 200, 250, "Select Origin Airport");
+  destination = new ScrollWidget(300, 425, 200, 250, "Select Destination Airport");
   checkBoxesAirlines = new CheckBox(50, 50, 10, color(244, 144, 185), "Airlines", screenFBD.airlines[1], true, false);
   checkBoxesDataSet = new CheckBox(width-400, 400, 4, color(244, 144, 185), "Data Set", dataSets, false, false);
 
-
-  //movie = new Movie(this, "movie.mp4");
-  //movie.loop();
-  //movie.volume(0);
-  //toggleVideo =  new ToggleBox(100, height - 60, 100, 40, "Toggle Video", color(255, 0, 0), font, "Toggle Video", color(0, 255, 0));
   rectMode(CORNER);
 }
 
 void draw() {
-
+  // Switch statement to determine which screen to draw
   switch(currentScreen) {
   case "Home":
     {
@@ -163,15 +158,6 @@ void draw() {
       break;
     }
   }
-  //if (movie.available() && enableVideo) {
-  //  movie.read();
-  //}
-  //if (enableVideo) {
-  //  int movW = 200;
-  //  int movH = 356;
-  //  image(movie, width - movW, height - movH, movW, movH);
-  //}
-  //toggleVideo.draw();
 }
 
 
@@ -179,8 +165,8 @@ void draw() {
 void mousePressed() {
   String event;
 
-  screenFilter.mousePressed();
-
+  // Switch statement to give mouse event to relevant screen
+  // Each screen contains a switch statement which checks which event was called and runs the relevant code
   switch(currentScreen) {
   case "Home":
     {
@@ -231,6 +217,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "FBD" :
     {
@@ -285,16 +272,18 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "Filter":
     {
+      screenFilter.mousePressed();
       ArrayList myWidgets = screenFilter.getWidgets();
       for (int i= 0; i < myWidgets.size(); i++) {
         Widget theWidget = (Widget)myWidgets.get(i);
         event = theWidget.getEvent(mouseX, mouseY);
         switch(event) {
         case "Home":
-
+          // Upon leaving the filter page this code will run to apply the filters the user selected to the underlying data
           // Set data set
           String currentDataSet = checkBoxesDataSet.getSelected().get(0);
           switch (currentDataSet) {
@@ -313,10 +302,9 @@ void mousePressed() {
           default:
           }
 
-          // TODO update so datais only read again if the filename has changed since last time
           // Filter distancess
           selectedData = Filter.distanceBetween(selectedData, slider.getBounds()[0], slider.getBounds()[1]);
-          println(selectedData.size());
+          println("Filtered Data Size - " + selectedData.size());
 
           // Filter airlines
           ArrayList<String> airlines = checkBoxesAirlines.getSelected();
@@ -329,10 +317,13 @@ void mousePressed() {
           }
           selectedData = Filter.onlySelectAirlines(selectedData, airlines);
 
-          // Filter airports
-          ArrayList<String> airports = airportChecks.getSelected();
-          selectedData = Filter.onlySelectAirports(selectedData, airports);
+          // Filter origin airports
+          ArrayList<String> airports = originAirportChecks.getSelected();
+          selectedData = Filter.onlySelectOriginAirports(selectedData, airports);
 
+          // Filter destination airports
+          airports = destinationAirportChecks.getSelected();
+          selectedData = Filter.onlySelectDestAirports(selectedData, airports);
           // Filter dates
 
           selectedData = Filter.dateBetween(selectedData, parseInt(startDateInput.getText()), parseInt(endDateInput.getText()));
@@ -346,8 +337,7 @@ void mousePressed() {
       slider.mousePressed(mouseX, mouseY);
       checkBoxesAirlines.mousePressed(mouseX, mouseY);
       checkBoxesDataSet.mousePressed(mouseX, mouseY);
-      //airportChecks.mousePressed(mouseX, mouseY);
-      //pages.mousePressed(mouseX, mouseY);
+      break;
     }
   case "FDist":
     {
@@ -362,6 +352,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "MShare":
     {
@@ -376,6 +367,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
 
   case "Cancelled":
@@ -391,6 +383,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "Delays":
     {
@@ -405,6 +398,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "FBDt":
     {
@@ -419,6 +413,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   case "FState":
     {
@@ -633,6 +628,7 @@ void mousePressed() {
         default:
         }
       }
+      break;
     }
   }
 }
@@ -640,7 +636,8 @@ void mousePressed() {
 // C. Quinn, added mouse wheel function to add scroll functionality to airpot slection, 3:30pm, 03/04/2024
 void mouseWheel(MouseEvent event) {
   float e = event.getCount();
-  airportChecks.needMouseWheel(e);
+  originAirportChecks.needMouseWheel(e);
+  destinationAirportChecks.needMouseWheel(e);
 }
 void keyPressed() {
   screenFilter.keyPressed();
