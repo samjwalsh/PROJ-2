@@ -22,7 +22,7 @@ CheckBox checkBoxesAirlines;
 CheckBox checkBoxesDataSet;
 CheckBox originAirportChecks;
 CheckBox destinationAirportChecks;
-ScrollWidget pages;
+ScrollWidget origin,destination;
 
 InputBox startDateInput;
 InputBox endDateInput;

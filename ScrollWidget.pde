@@ -6,8 +6,7 @@ class ScrollWidget {
   String[] airports;
   int xposChange, yposChange;
   //C. Quinn, added more variables, 21:50, 29/03/2024
-  int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos;airportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
-  }
+  int xpos, ypos, rectW, rectH, nextBtnXPos, prevBtnXPos, btnYPos;
   String title;
 
   //CheckBox airportChecks;
@@ -35,9 +34,13 @@ class ScrollWidget {
     Collections.sort(originAirportsList);
     airports = originAirportsList.toArray(new String[0]);
     totalPages = ceil((float)airports.length / airportsPerPage);
-    originAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
-    destinationAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
-  //+(25/2)-3
+    if (title.contains("Origin")) {
+      originAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    } else {
+      destinationAirportChecks = new CheckBox(xpos+25, yposChange, airports.length, color(244, 144, 185), "", airports, true, true);
+    }
+  }
+
   void draw() {
     //background(255, 212, 229);
     drawUI();
@@ -80,11 +83,17 @@ class ScrollWidget {
       rect(xpos+(25/2), changingYPos, rectW-25, 30);
       changingYPos+=30;
     }
-    airportChecks.draw();
+    if (title.contains("Origin")) {
+      originAirportChecks.draw();
+    } else {
+      destinationAirportChecks.draw();
+    }
     noStroke();
+
     fill(255, 212, 229);
     rect(xpos, 0, rectW, 425);
-    fill(255, 212, 229);
+
+    //fill(255, 212, 229);
     rect(xpos, 680, rectW, 120);//rectangles to cover lsit
     textSize(20);
     fill(0); // Text color
@@ -92,12 +101,20 @@ class ScrollWidget {
   }
 
   void mousePressed() {
-    originAirportChecks.mousePressed(mouseX, mouseY);
-    destinationAirportChecks.mousePressed(mouseX, mouseY); 
+    if (title.contains("Origin")) {
+      originAirportChecks.mousePressed(mouseX, mouseY);
+    } else {
+      destinationAirportChecks.mousePressed(mouseX, mouseY);
+    }
   }
   void mouseWheel(MouseEvent event) {
-    float e = event.getCount();
-    originAirportChecks.needMouseWheel(e);
-    destinationAirportChecks.needMouseWheel(e);
+    if (mouseX> xpos && mouseX < xpos+rectW && mouseY > ypos && mouseY < ypos+rectH) {
+      float e = event.getCount();
+      if (title.contains("Origin")) {
+        originAirportChecks.needMouseWheel(e);
+      } else {
+        destinationAirportChecks.needMouseWheel(e);
+      }
+    }
   }
 }
